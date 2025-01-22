@@ -1,5 +1,7 @@
 package com.connectify.connectifyNow.repositories.Post
 
+import com.google.firebase.Timestamp
+
 class FireStorePostRepository {
 
     val apiManager = ApiManager()
@@ -52,6 +54,60 @@ class FireStorePostRepository {
             }
             .addOnFailureListener {
                 callback(null)
+            }
+    }
+
+    fun getPostsByOwnerId(ownerId: String, callback: (List<Post>) -> Unit) {
+        apiManager.db.collection(POSTS_COLLECTION_PATH)
+            .whereEqualTo(Post.OWNER_ID_KEY, ownerId)
+            .get().addOnCompleteListener {
+                when (it.isSuccessful) {
+                    true -> {
+                        val posts: MutableList<Post> = mutableListOf()
+                        for (json in it.result) {
+                            val post = Post.fromJSON(json.data)
+                            posts.add(post)
+                        }
+                        callback(posts)
+                    }
+
+                    false -> callback(listOf())
+                }
+            }
+    }
+
+    fun getPosts(since: Long, callback: (List<Post>) -> Unit) {
+        apiManager.db.collection(POSTS_COLLECTION_PATH)
+            .whereGreaterThanOrEqualTo(Post.LAST_UPDATED, Timestamp(since, 0))
+            .get().addOnCompleteListener {
+                when (it.isSuccessful) {
+                    true -> {
+                        val posts: MutableList<Post> = mutableListOf()
+                        for (json in it.result) {
+                            val post = Post.fromJSON(json.data)
+                            posts.add(post)
+                        }
+                        callback(posts)
+                    }
+
+                    false -> callback(listOf())
+                }
+            }
+    }
+
+    fun getPostById(postId: String, callback: (post: Post?) -> Unit) {
+        apiManager.db.collection(POSTS_COLLECTION_PATH)
+            .whereEqualTo("id", postId)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val result = task.result
+                    if (result != null && !result.isEmpty) {
+                        val json = result.documents[0]
+                        val post = json.data?.let { Post.fromJSON(it) }
+                        callback(post)
+                    } else callback(null)
+                } else callback(null)
             }
     }
 }
