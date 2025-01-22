@@ -36,7 +36,7 @@ class UserDomain {
                 "ORGANIZATION" -> organizationUseCases.getOrganization(id) { organizationInfo ->
                     callback(User.UserOrganization(organizationInfo.copy(id = id)), null)
                 }
-                else -> callback(null, "Unknown user type") // Handle other types if needed
+                else -> callback(null, "Unknown user type")
             }
         }
     }
