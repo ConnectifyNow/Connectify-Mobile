@@ -26,6 +26,26 @@ class FireStoreAuthRepository {
             .addOnFailureListener { onFailureCallBack(it.message) }
     }
 
+    fun logOutUser() {
+        firebaseAuth.signOut()
+    }
+
+    fun resetPassword(email: String, onSuccessCallBack: () -> Unit, onFailureCallBack: (String?) -> Unit) {
+        firebaseAuth.sendPasswordResetEmail(email)
+            .addOnSuccessListener { onSuccessCallBack() }
+            .addOnFailureListener { onFailureCallBack(it.message) }
+    }
+
+    fun getUserType(userId: String, onSuccessCallBack: (String?) -> Unit) {
+        val documentRef = apiManager.db.collection(USER_TYPE_COLLECTION_PATH).document(userId)
+        documentRef.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val userType = document.getString("type")
+                    onSuccessCallBack(userType)
+                }
+            }
+    }
 
 
 }
