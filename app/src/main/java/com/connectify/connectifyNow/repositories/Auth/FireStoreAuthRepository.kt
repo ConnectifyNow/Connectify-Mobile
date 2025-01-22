@@ -20,4 +20,12 @@ class FireStoreAuthRepository {
             }
     }
 
+    fun signInUser(email: String, password: String, onSuccessCallBack: () -> Unit, onFailureCallBack: (String?) -> Unit) {
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener { onSuccessCallBack() }
+            .addOnFailureListener { onFailureCallBack(it.message) }
+    }
+
+
+
 }
