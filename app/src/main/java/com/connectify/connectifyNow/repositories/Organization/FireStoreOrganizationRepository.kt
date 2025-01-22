@@ -149,5 +149,14 @@ class FireStoreOrganizationRepository {
             GeoHash(latitude, longitude)
         )
     }
+
+    fun updateOrganization(organization: Organization, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit){
+        apiManager.db.collection(ORGANIZATIONS_COLLECTION_PATH).whereEqualTo("id", organization.id).get().addOnSuccessListener {
+            apiManager.db.collection(ORGANIZATIONS_COLLECTION_PATH).document(it.documents[0].id).update(data)
+                .addOnSuccessListener { onSuccessCallBack() }
+                .addOnFailureListener { onFailureCallBack() }
+        }
+    }
+    
     
 }
