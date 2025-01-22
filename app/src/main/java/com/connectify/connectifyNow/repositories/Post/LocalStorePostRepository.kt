@@ -2,6 +2,8 @@ package com.connectify.connectifyNow.repositories.Post
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import com.connectify.connectifyNow.models.Post
+import com.connectify.connectifyNow.models.dao.AppLocalDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

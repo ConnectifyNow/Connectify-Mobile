@@ -1,7 +1,13 @@
 package com.connectify.connectifyNow.repositories.Volunteer
 
 import android.util.Log
+import com.connectify.connectifyNow.models.Type
+import com.connectify.connectifyNow.models.UserType
+import com.connectify.connectifyNow.models.Volunteer
+import com.connectify.connectifyNow.repositories.ApiManager
+import com.connectify.connectifyNow.repositories.Auth.FireStoreAuthRepository.Companion.USER_TYPE_COLLECTION_PATH
 import com.google.firebase.Timestamp
+import kotlinx.coroutines.tasks.await
 
 class FireStoreVolunteerRepository {
     companion object {
@@ -36,7 +42,7 @@ class FireStoreVolunteerRepository {
                                 lastUpdated = it.seconds
                             }
 
-                            val volunteer = volunteer(
+                            val volunteer = Volunteer(
                                 name = data["name"] as String,
                                 email = data["email"] as String,
                                 bio = data["bio"] as String,
@@ -56,7 +62,7 @@ class FireStoreVolunteerRepository {
     }
 
     fun setvolunteerInUserTypeDB(organizationId: String) = run {
-        val userType = UserType(Type.volunteer)
+        val userType = UserType(Type.VOLUNTEER)
         apiManager.db.collection(USER_TYPE_COLLECTION_PATH).document(organizationId).set(userType)
     }
 

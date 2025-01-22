@@ -1,5 +1,7 @@
 package com.connectify.connectifyNow.repositories.Post
 
+import com.connectify.connectifyNow.models.Post
+import com.connectify.connectifyNow.repositories.ApiManager
 import com.google.firebase.Timestamp
 
 class FireStorePostRepository {

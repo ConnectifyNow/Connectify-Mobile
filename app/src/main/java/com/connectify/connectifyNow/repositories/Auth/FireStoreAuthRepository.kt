@@ -1,5 +1,7 @@
 package com.connectify.connectifyNow.repositories.Auth
 
+import com.connectify.connectifyNow.repositories.ApiManager
+
 class FireStoreAuthRepository {
 
     companion object {
