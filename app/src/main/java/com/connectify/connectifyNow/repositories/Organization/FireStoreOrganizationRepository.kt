@@ -13,7 +13,7 @@ class FireStoreOrganizationRepository {
     val apiManager = ApiManager()
 
     fun getOrganization(organizationId: String, callback: (organization: Organization) -> Unit) {
-        val organizationDocument = apiManager.db.collection(COMPANIES_COLLECTION_PATH)
+        val organizationDocument = apiManager.db.collection(ORGANIZATIONS_COLLECTION_PATH)
 
         organizationDocument.whereEqualTo("id", organizationId).get()
             .addOnSuccessListener { documentSnapshot ->
@@ -61,4 +61,38 @@ class FireStoreOrganizationRepository {
             }
     }
 
+    fun getorganizations(since: Long, callback: (List<Organization>) -> Unit) {
+        apiManager.db.collection(ORGANIZATIONS_COLLECTION_PATH)
+            .whereGreaterThanOrEqualTo(organization.LAST_UPDATED, Timestamp(since, 0))
+            .get().addOnCompleteListener {
+                when (it.isSuccessful) {
+                    true -> {
+                        val organizations: MutableList<Organization> = mutableListOf()
+                        for (json in it.result) {
+                            val organization = organization.fromJSON(json.data)
+                            organizations.add(organization)
+                        }
+                        callback(organizations)
+                    }
+                    false -> callback(listOf())
+                }
+            }
+    }
+
+    suspend fun addorganization(organization: organization, onSuccess: (String) -> Unit): String {
+        val documentReference = apiManager.db.collection(ORGANIZATIONS_COLLECTION_PATH)
+            .add(organization.json)
+            .await()
+
+        onSuccess(organization.id)
+        return documentReference.id
+    }
+
+    fun setorganizationInUserTypeDB(documentReferenceId: String) = run {
+        val userType = UserType(Type.organization)
+        apiManager.db.collection(USER_TYPE_COLLECTION_PATH).document(documentReferenceId).set(userType)
+    }
+
+
+    
 }
