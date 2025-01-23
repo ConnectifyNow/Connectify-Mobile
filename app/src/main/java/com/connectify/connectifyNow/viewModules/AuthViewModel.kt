@@ -8,7 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 class UserAuthViewModel: ViewModel() {
     val firebaseAuth = FirebaseAuth.getInstance()
 
-    val userUseCases: UserUseCases = UserUseCases()
+    val userUseCases: UserDomains = UserDomains()
     private val _userId = MutableLiveData<String?>()
     val userId: LiveData<String?> get() = _userId
 
