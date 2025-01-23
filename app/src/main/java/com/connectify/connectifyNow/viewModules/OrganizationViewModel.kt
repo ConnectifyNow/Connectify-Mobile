@@ -5,37 +5,38 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.connectify.connectifyNow.models.Organization
 
-class CompanyViewModel: ViewModel() {
-    var companies: LiveData<MutableList<Company>>? = null
+class OrganizationViewModel: ViewModel() {
+    var companies: LiveData<MutableList<Organization>>? = null
 
-    private val companyUseCases: CompanyUseCases = CompanyUseCases()
+    private val organizationUseCases: OrganizationUseCases = OrganizationUseCases()
 
-    fun createUserAsCompanyOwner(email: String, password: String, onSuccessCallBack: (String?) -> Unit, onFailureCallBack: (String?) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        companyUseCases.fireStoreAuthRepository.createUser(email, password, { userId ->
+    fun createUserAsOrganizationOwner(email: String, password: String, onSuccessCallBack: (String?) -> Unit, onFailureCallBack: (String?) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+        organizationUseCases.fireStoreAuthRepository.createUser(email, password, { userId ->
             onSuccessCallBack(userId)
         }, onFailureCallBack)
     }
 
-    fun addCompany(company: Company) = viewModelScope.launch(Dispatchers.IO) {
-        companyUseCases.add(company)
+    fun addOrganization(company: Organization) = viewModelScope.launch(Dispatchers.IO) {
+        organizationUseCases.add(company)
     }
 
-    fun getCompany(companyId: String, callback: (company: Company) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        companyUseCases.getCompany(companyId, callback);
+    fun getOrganization(companyId: String, callback: (company: Organization) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+        organizationUseCases.getOrganization(companyId, callback);
     }
 
-    fun refreshCompanies() = viewModelScope.launch(Dispatchers.IO) {
-        companyUseCases.refreshCompanies()
+    fun refreshOrganizations() = viewModelScope.launch(Dispatchers.IO) {
+        organizationUseCases.refreshCompanies()
     }
 
-    fun setCompaniesOnMap(callback: (Company) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        companyUseCases.setCompaniesOnMap(callback)
+    fun setOrganizationsOnMap(callback: (Organization) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+        organizationUseCases.setCompaniesOnMap(callback)
     }
 
-    fun update(company: Company, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+    fun update(organization: Organization, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
         try {
-            companyUseCases.update(company, data, onSuccessCallBack, onFailureCallBack)
+            organizationUseCases.update(company, data, onSuccessCallBack, onFailureCallBack)
         } catch (e: Exception) {
             onFailureCallBack()
         }
