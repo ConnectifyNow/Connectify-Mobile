@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.connectify.connectifyNow.domains.UserDomain
 import com.connectify.connectifyNow.models.UserInfo
 
-class UserAuthViewModel: ViewModel() {
+class AuthViewModel: ViewModel() {
     val firebaseAuth = FirebaseAuth.getInstance()
 
     val userUseCases: UserDomain = UserDomain()
