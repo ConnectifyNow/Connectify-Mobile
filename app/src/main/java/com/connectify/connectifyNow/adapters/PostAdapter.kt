@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.R
 import com.connectify.connectifyNow.fragments.FeedFragment
-import com.connectify.connectifyNow.domains.UserUseCases
-import com.connectify.connectifyNow.
+import com.connectify.connectifyNow.domains.UserDomain
+import com.connectify.connectifyNow.viewModules.PostViewModel
 
 class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var containArgs: Boolean = false) : RecyclerView.Adapter<PostAdapter.PostHolder>() {
 
@@ -62,7 +62,7 @@ class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var con
         val post = posts[position]
 
 
-        val currentUserID = UserUseCases().getUserId()
+        val currentUserID = UserDomain().getUserId()
         val isOwner = currentUserID == post.ownerId
 
         if (!isFromFeed && isOwner && !containArgs) {
