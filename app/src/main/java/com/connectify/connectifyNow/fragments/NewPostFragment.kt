@@ -79,9 +79,9 @@ class NewPostFragment : Fragment() {
                 val content = contentGroup.editTextField.text.toString()
 
                 // Check if an image has been selected
-                if (imageHelper.isImageSelected()) {
+                if (image.isImageSelected()) {
                     // If an image is selected, create the post with the existing image URL
-                    createPost(title, content, imageHelper.getImageUrl())
+                    createPost(title, content, image.getImageUrl())
                 } else {
                     // If no image is selected, create the post without an image URL
                     createPost(title, content, "")
@@ -118,14 +118,14 @@ class NewPostFragment : Fragment() {
     ): Boolean {
         val validationResults = mutableListOf<Boolean>()
         validationResults.add(
-            ValidationHelper.isValidField(title.editTextField.text.toString()).also { isValid ->
-                ValidationHelper.handleValidationResult(isValid, title, requireContext())
+            Validation.isValidField(title.editTextField.text.toString()).also { isValid ->
+                Validation.handleValidationResult(isValid, title, requireContext())
             }
         )
 
         validationResults.add(
-            ValidationHelper.isValidField(content.editTextField.text.toString()).also { isValid ->
-                ValidationHelper.handleValidationResult(isValid, content, requireContext())
+            Validation.isValidField(content.editTextField.text.toString()).also { isValid ->
+                Validation.handleValidationResult(isValid, content, requireContext())
             }
         )
 
