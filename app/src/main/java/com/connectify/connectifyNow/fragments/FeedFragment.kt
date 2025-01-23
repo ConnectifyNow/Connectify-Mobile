@@ -51,11 +51,11 @@ class FeedFragment : Fragment() {
 
         userAuthViewModel.getInfoOnUser(userAuthViewModel.getUserId().toString()) { userInfo, error ->
             when (userInfo) {
-                is UserInfo.UserStudent -> {
-                    (activity as MainActivity).setProfile("USER")
-                }
-                is UserInfo.UserCompany -> {
+                is UserInfo.UserVolunteer -> {
                     (activity as MainActivity).setProfile("VOLUNTEER")
+                }
+                is UserInfo.UserOrganization -> {
+                    (activity as MainActivity).setProfile("ORGANIZATION")
                 }
 
                 null -> Log.d("InfoUser", "we have identify unknown user")
