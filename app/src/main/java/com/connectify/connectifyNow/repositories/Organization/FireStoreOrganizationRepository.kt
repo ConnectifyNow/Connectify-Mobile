@@ -96,7 +96,7 @@ class FireStoreOrganizationRepository {
         return documentReference.id
     }
 
-    fun setOrganizationInUserTypeDB(documentReferenceId: String) = run {
+    fun setOrganizationUserType(documentReferenceId: String) = run {
         val userType = UserType(Type.ORGANIZATION)
         apiManager.db.collection(USER_TYPE_COLLECTION_PATH).document(documentReferenceId).set(userType)
     }

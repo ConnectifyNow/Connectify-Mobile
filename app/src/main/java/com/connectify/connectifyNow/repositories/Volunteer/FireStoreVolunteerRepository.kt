@@ -8,6 +8,7 @@ import com.connectify.connectifyNow.repositories.ApiManager
 import com.connectify.connectifyNow.repositories.Auth.FireStoreAuthRepository.Companion.USER_TYPE_COLLECTION_PATH
 import com.google.firebase.Timestamp
 import kotlinx.coroutines.tasks.await
+import java.security.Timestamp
 
 class FireStoreVolunteerRepository {
     companion object {
@@ -16,7 +17,7 @@ class FireStoreVolunteerRepository {
 
     val apiManager = ApiManager()
 
-    suspend fun addvolunteer(volunteer: Volunteer, onSuccess: (String) -> Unit): String {
+    suspend fun addVolunteer(volunteer: Volunteer, onSuccess: (String) -> Unit): String {
 
         val documentReference = apiManager.db.collection(USERS_COLLECTION_PATH)
             .add(volunteer.json)
@@ -26,7 +27,7 @@ class FireStoreVolunteerRepository {
         return documentReference.id
     }
 
-    fun getvolunteer(volunteerId: String, callback: (volunteer: Volunteer) -> Unit) {
+    fun getVolunteerById(volunteerId: String, callback: (volunteer: Volunteer) -> Unit) {
         val volunteerDocument = apiManager.db.collection(USERS_COLLECTION_PATH)
 
         volunteerDocument.whereEqualTo("id", volunteerId).get()
@@ -61,12 +62,12 @@ class FireStoreVolunteerRepository {
             }
     }
 
-    fun setvolunteerInUserTypeDB(organizationId: String) = run {
+    fun setVolunteerUserType(organizationId: String) = run {
         val userType = UserType(Type.VOLUNTEER)
         apiManager.db.collection(USER_TYPE_COLLECTION_PATH).document(organizationId).set(userType)
     }
 
-    fun updatevolunteer(volunteer: Volunteer, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit){
+    fun updateVolunteer(volunteer: Volunteer, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit){
         apiManager.db.collection(USERS_COLLECTION_PATH).whereEqualTo("id", volunteer.id).get().addOnSuccessListener {
             apiManager.db.collection(USERS_COLLECTION_PATH).document(it.documents[0].id).update(data)
                 .addOnSuccessListener { onSuccessCallBack() }
@@ -74,7 +75,7 @@ class FireStoreVolunteerRepository {
         }
     }
 
-    fun deletevolunteer(volunteer: Volunteer, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit){
+    fun deleteVolunteer(volunteer: Volunteer, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit){
         apiManager.db.collection(USERS_COLLECTION_PATH).document(volunteer.id).delete()
             .addOnSuccessListener { onSuccessCallBack() }
             .addOnFailureListener { onFailureCallBack() }
