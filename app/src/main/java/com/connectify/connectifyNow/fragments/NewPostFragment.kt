@@ -14,12 +14,14 @@ import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.R
 import com.connectify.connectifyNow.viewModules.AuthViewModel
 import com.connectify.connectifyNow.utils.DynamicText
+import com.connectify.connectifyNow.utils.Image
+import com.connectify.connectifyNow.utils.ImageUploadListener
 
 class NewPostFragment : Fragment() {
     private lateinit var view: View
     private lateinit var postViewModel: PostViewModel
     private lateinit var imageView: ImageView
-    private lateinit var imageHelper: ImageHelper
+    private lateinit var image: Image
     private lateinit var dynamicText: DynamicText
     private  lateinit var loadingOverlay: LinearLayout
 
@@ -39,13 +41,13 @@ class NewPostFragment : Fragment() {
         loadingOverlay = view.findViewById(R.id.new_post_loading_overlay);
         loadingOverlay.visibility = View.INVISIBLE
 
-        imageHelper = ImageHelper(this, imageView,  object : ImageUploadListener {
+        image = Image(this, imageView,  object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
                 // Perform actions after image upload completes
                 loadingOverlay.visibility = View.INVISIBLE
             }
         })
-        imageHelper.setImageViewClickListener {
+        image.setImageViewClickListener {
             loadingOverlay.visibility = View.VISIBLE
         }
 

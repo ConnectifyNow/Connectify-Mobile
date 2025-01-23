@@ -15,7 +15,7 @@ interface ImageUploadListener {
     fun onImageUploaded(imageUrl: String)
 }
 
-class ImageHelper(val fragment: Fragment, private val imageView: ImageView, private val uploadListener: ImageUploadListener) {
+class Image(val fragment: Fragment, private val imageView: ImageView, private val uploadListener: ImageUploadListener) {
 
     private var imageUrl: String? = null
     private val storageRef = FirebaseStorage.getInstance().reference
