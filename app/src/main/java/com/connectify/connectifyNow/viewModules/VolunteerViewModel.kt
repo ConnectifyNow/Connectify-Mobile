@@ -5,37 +5,34 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.connectify.connectifyNow.models.Volunteer
+import com.connectify.connectifyNow.domains.VolunteerDomain
 
 class VolunteerViewModel: ViewModel() {
-    val volunteerUseCases: VolunteerUseCases = VolunteerUseCases()
+    val volunteerDomain: VolunteerDomain = VolunteerDomain()
 
     fun createUserAsVolunteer(email: String, password: String, onSuccessCallBack: (String?) -> Unit, onFailureCallBack: (String?) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        volunteerUseCases.fireStoreAuthRepository.createUser(email, password, { userId ->
+        volunteerDomain.fireStoreAuthRepository.createUser(email, password, { userId ->
             onSuccessCallBack(userId)
         }, onFailureCallBack)
     }
 
     fun getAllVolunteers() = viewModelScope.launch(Dispatchers.IO) {
-        volunteerUseCases.getAllVolunteers()
+        volunteerDomain.getAllVolunteers()
     }
 
     fun getVolunteer(volunteerId: String, callback: (volunteer: Volunteer) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        volunteerUseCases.getVolunteer(volunteerId, callback);
+        volunteerDomain.getVolunteer(volunteerId, callback);
     }
 
     fun addVolunteer(volunteer: Volunteer) = viewModelScope.launch(Dispatchers.IO) {
-        volunteerUseCases.addVolunteer(volunteer)
+        volunteerDomain.addVolunteer(volunteer)
     }
 
     fun update(volunteer: Volunteer, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
         try {
-            volunteerUseCases.update(volunteer, data, onSuccessCallBack, onFailureCallBack)
+            volunteerDomain.update(volunteer, data, onSuccessCallBack, onFailureCallBack)
         } catch (e: Exception) {
             onFailureCallBack()
         }
     }
-
-
-
-
 }
