@@ -16,14 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.android.skillsync.ViewModel.PostViewModel
-import com.android.skillsync.ViewModel.UserAuthViewModel
-import com.android.skillsync.adapters.PostAdapter
-import com.android.skillsync.databinding.FragmentFeedBinding
-import com.android.skillsync.databinding.UserProfileDialogBinding
-import com.android.skillsync.helpers.ActionBarHelper
-import com.android.skillsync.models.Post.Post
-import com.android.skillsync.models.UserInfo
 
 class FeedFragment : Fragment() {
     private lateinit var postsRecyclerView: RecyclerView
@@ -63,7 +55,7 @@ class FeedFragment : Fragment() {
                     (activity as MainActivity).setProfile("USER")
                 }
                 is UserInfo.UserCompany -> {
-                    (activity as MainActivity).setProfile("COMPANY")
+                    (activity as MainActivity).setProfile("VOLUNTEER")
                 }
 
                 null -> Log.d("InfoUser", "we have identify unknown user")

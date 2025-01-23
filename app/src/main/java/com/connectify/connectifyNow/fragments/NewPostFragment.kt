@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.connectify.connectifyNow.viewModels.PostViewModel
 
 class NewPostFragment : Fragment() {
     private lateinit var view: View
