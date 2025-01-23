@@ -8,12 +8,26 @@
     app:startDestination="@id/startPageFragment">
 
     <fragment
-        android:id="@+id/postFragment"
-        android:name="com.connectify.connectifyNow.fragments.FeedFragment.PostFragment"
+        android:id="@+id/profileFragment"
+        android:name="com.connectify.connectifyNow.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_editPost"
+            app:destination="@id/editPost">
+            <argument
+                android:name="postId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/postFragment
+        android:name="com.connectify.connectifyNow.fragments.PostFragment"
         android:label="PostFragment" />
     <fragment
         android:id="@+id/editPost"
-        android:name="com.android.skillsync.editPost"
+        android:name="com.connectify.connectifyNow.editPost"
         android:label="fragment_edit_post"
         tools:layout="@layout/fragment_edit_post" >
         <action
