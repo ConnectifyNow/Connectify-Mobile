@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.connectify.connectifyNow.models.Post
+import com.connectify.connectifyNow.domains.PostDomain
 
 class PostViewModel: ViewModel() {
 
@@ -21,25 +22,25 @@ class PostViewModel: ViewModel() {
 //    }
 //    val postsListLoadingState: MutableLiveData<LoadingState> = MutableLiveData(LoadingState.LOADED)
 
-    private val postsUseCases: PostUseCases = PostUseCases()
+    private val postDomain: PostDomain = PostDomain()
 
     init {
-        postsUseCases.posts.observeForever { posts ->
+        postDomain.posts.observeForever { posts ->
             _posts.postValue(posts.toMutableList())
         }
     }
 
     fun getPosts() = viewModelScope.launch (Dispatchers.IO) {
-        postsUseCases.posts
+        postDomain.posts
     }
 
     fun getPostsByOwnerId(ownerId: String, callback: (posts: List<Post>) -> Unit) = viewModelScope.launch (Dispatchers.IO) {
-        postsUseCases.getPostsByOwnerId(ownerId, callback);
+        postDomain.getPostsByUserId(ownerId, callback);
     }
 
     fun getPostById(id: String, callback: (Post?) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            postsUseCases.getPostById(id) { post ->
+            postDomain.getPostById(id) { post ->
                 callback(post)
             }
         }
@@ -48,7 +49,7 @@ class PostViewModel: ViewModel() {
    fun addPost(post: Post, callback: (Boolean) -> Unit) {
        viewModelScope.launch(Dispatchers.IO) {
            try {
-               postsUseCases.add(post)
+               postDomain.addPost(post)
                withContext(Dispatchers.Main) {
                    callback(true)
                }
@@ -62,14 +63,14 @@ class PostViewModel: ViewModel() {
 
 
     fun deletePost(post: Post) = viewModelScope.launch(Dispatchers.IO) {
-        postsUseCases.delete(post)
+        postDomain.deletePost(post)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun refreshPosts() {
         viewModelScope.launch(Dispatchers.IO) {
 //            postsListLoadingState.value = LoadingState.LOADING
-            postsUseCases.refreshPosts()
+            postDomain.refreshPosts()
 //            postsListLoadingState.value = LoadingState.LOADED
         }
     }
@@ -77,7 +78,7 @@ class PostViewModel: ViewModel() {
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun update(postId: String, data: Map<String, Any>): Boolean {
         return try {
-            postsUseCases.update(postId, data)
+            postDomain.updatePost(postId, data)
             true
         } catch (e: Exception) {
             false
