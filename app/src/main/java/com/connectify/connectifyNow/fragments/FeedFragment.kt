@@ -21,6 +21,7 @@ import com.connectify.connectifyNow.adapters.PostAdapter
 import com.connectify.connectifyNow.viewModules.AuthViewModel
 import com.connectify.connectifyNow.viewModules.PostViewModel
 import com.connectify.connectifyNow.R
+import com.connectify.connectifyNow.utils.ActionBar
 
 class FeedFragment : Fragment() {
     private lateinit var postsRecyclerView: RecyclerView
@@ -172,7 +173,7 @@ class FeedFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ActionBarHelper.showActionBarAndBottomNavigationView(requireActivity() as? AppCompatActivity)
+        ActionBar.showActionBarAndBottomNavigationView(requireActivity() as? AppCompatActivity)
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
