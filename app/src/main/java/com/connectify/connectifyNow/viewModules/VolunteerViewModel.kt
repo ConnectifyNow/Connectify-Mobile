@@ -15,20 +15,20 @@ class VolunteerViewModel: ViewModel() {
     }
 
     fun getAllVolunteers() = viewModelScope.launch(Dispatchers.IO) {
-        studentUseCases.getAllVolunteers()
+        volunteerUseCases.getAllVolunteers()
     }
 
-    fun getVolunteer(studentId: String, callback: (student: Volunteer) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        studentUseCases.getVolunteer(studentId, callback);
+    fun getVolunteer(volunteerId: String, callback: (volunteer: Volunteer) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+        volunteerUseCases.getVolunteer(volunteerId, callback);
     }
 
-    fun addVolunteer(student: Volunteer) = viewModelScope.launch(Dispatchers.IO) {
-        studentUseCases.addVolunteer(student)
+    fun addVolunteer(volunteer: Volunteer) = viewModelScope.launch(Dispatchers.IO) {
+        volunteerUseCases.addVolunteer(volunteer)
     }
 
-    fun update(student: Volunteer, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+    fun update(volunteer: Volunteer, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
         try {
-            studentUseCases.update(student, data, onSuccessCallBack, onFailureCallBack)
+            volunteerUseCases.update(volunteer, data, onSuccessCallBack, onFailureCallBack)
         } catch (e: Exception) {
             onFailureCallBack()
         }
