@@ -1,3 +1,3 @@
 package com.connectify.connectifyNow.models;
 
-data class LocationsResponse (val places: Array<Location>)
+data class LocationsResponse (val locations: Array<Location>)
