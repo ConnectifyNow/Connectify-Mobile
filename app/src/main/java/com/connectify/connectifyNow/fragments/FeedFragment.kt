@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.connectify.connectifyNow.models.Post
+import com.connectify.connectifyNow.adapters.PostAdapter
 
 class FeedFragment : Fragment() {
     private lateinit var postsRecyclerView: RecyclerView
