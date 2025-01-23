@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.connectify.connectifyNow.R
 
-class DynamicTextHelper(private val view: View) {
+class DynamicText(private val view: View) {
     fun setTextViewText(parentId: Int, stringResourceId: Int): TextView {
         val parentGroup = view.findViewById<ConstraintLayout>(parentId)
         val textView = parentGroup.findViewById<TextView>(R.id.edit_text_label)

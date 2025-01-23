@@ -13,13 +13,14 @@ import com.connectify.connectifyNow.viewModules.PostViewModel
 import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.R
 import com.connectify.connectifyNow.viewModules.AuthViewModel
+import com.connectify.connectifyNow.utils.DynamicText
 
 class NewPostFragment : Fragment() {
     private lateinit var view: View
     private lateinit var postViewModel: PostViewModel
     private lateinit var imageView: ImageView
     private lateinit var imageHelper: ImageHelper
-    private lateinit var dynamicTextHelper: DynamicTextHelper
+    private lateinit var dynamicText: DynamicText
     private  lateinit var loadingOverlay: LinearLayout
 
     private var _binding: FragmentNewPostBinding? = null
@@ -33,7 +34,7 @@ class NewPostFragment : Fragment() {
         _binding = FragmentNewPostBinding.inflate(layoutInflater, container, false)
         view = binding.root
         imageView = binding.imageToUpload
-        dynamicTextHelper = DynamicTextHelper(view)
+        dynamicText = DynamicText(view)
 
         loadingOverlay = view.findViewById(R.id.new_post_loading_overlay);
         loadingOverlay.visibility = View.INVISIBLE
@@ -57,8 +58,8 @@ class NewPostFragment : Fragment() {
     }
 
     private fun setHints() {
-        dynamicTextHelper.setHintForEditText(R.id.post_title_group, R.string.project_name_hint, R.string.project_name_title)
-        dynamicTextHelper.setHintForEditText(R.id.post_description_group, R.string.project_description_hint, R.string.project_description)
+        dynamicText.setHintForEditText(R.id.post_title_group, R.string.project_name_hint, R.string.project_name_title)
+        dynamicText.setHintForEditText(R.id.post_description_group, R.string.project_description_hint, R.string.project_description)
     }
 
     override fun onDestroy() {
