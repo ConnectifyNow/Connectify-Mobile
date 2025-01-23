@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.connectify.connectifyNow.domains.UserDomain
+import com.connectify.connectifyNow.models.UserInfo
 
 class UserAuthViewModel: ViewModel() {
     val firebaseAuth = FirebaseAuth.getInstance()
 
-    val userUseCases: UserDomains = UserDomains()
+    val userUseCases: UserDomain = UserDomain()
     private val _userId = MutableLiveData<String?>()
     val userId: LiveData<String?> get() = _userId
 
@@ -17,7 +19,7 @@ class UserAuthViewModel: ViewModel() {
     }
 
     fun signInUser(email: String, password: String, onSuccess: () -> Unit, onFailure: (String?) -> Unit) {
-        userUseCases.signInUser(email, password, onSuccessCallBack = {
+        userUseCases.signIn(email, password, onSuccessCallBack = {
             // Set the user ID in the LiveData upon successful sign-in
             setCurrentUserId()
             onSuccess.invoke()
