@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.adapters.PostAdapter
+import com.connectify.connectifyNow.viewModules.AuthViewModel
 
 class FeedFragment : Fragment() {
     private lateinit var postsRecyclerView: RecyclerView
@@ -25,7 +26,7 @@ class FeedFragment : Fragment() {
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var viewModel: PostViewModel
     private lateinit var progressBar: ProgressBar
-    private val userAuthViewModel: UserAuthViewModel by activityViewModels()
+    private val authViewModel: AuthViewModel by activityViewModels()
 
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
@@ -51,7 +52,7 @@ class FeedFragment : Fragment() {
         progressBar.visibility = View.VISIBLE
 
 
-        userAuthViewModel.getInfoOnUser(userAuthViewModel.getUserId().toString()) { userInfo, error ->
+        authViewModel.getInfoOnUser(authViewModel.getUserId().toString()) { userInfo, error ->
             when (userInfo) {
                 is UserInfo.UserVolunteer -> {
                     (activity as MainActivity).setProfile("VOLUNTEER")
@@ -86,7 +87,7 @@ class FeedFragment : Fragment() {
         postAdapter.setOnPostClickListener(object : OnPostClickListener {
             override fun onPostClicked(post: Post?) {
                 post?.let {
-                    userAuthViewModel.getInfoOnUser(it.ownerId) { userInfo, error ->
+                    authViewModel.getInfoOnUser(it.ownerId) { userInfo, error ->
                         if (error != null) {
                             Log.e("User Info Error", error)
                         } else {

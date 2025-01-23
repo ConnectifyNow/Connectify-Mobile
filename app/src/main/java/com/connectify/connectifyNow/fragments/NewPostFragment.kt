@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import com.connectify.connectifyNow.viewModules.PostViewModel
 import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.R
-import com.connectify.connectifyNow.viewModules.UserAuthViewModel
+import com.connectify.connectifyNow.viewModules.AuthViewModel
 
 class NewPostFragment : Fragment() {
     private lateinit var view: View
