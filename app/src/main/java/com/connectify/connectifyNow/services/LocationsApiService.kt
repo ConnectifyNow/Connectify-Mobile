@@ -9,7 +9,7 @@ import retrofit.http.POST
 interface LocationsApiService {
     @Headers(
         "Content-Type: application/json",
-        "X-API-KEY: 6ad2bb4f22fca025e6fad9dae09f951eb1c6ab71"
+        "X-API-KEY: f7f57178224d19338a67a09532470b35ed62dc08"
     )
     @POST("locations")
     fun getLocations(@Body body: Map<String, Any>): Call<LocationsResponse>
