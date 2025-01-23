@@ -5,28 +5,28 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class StudentViewModel: ViewModel() {
-    val studentUseCases: StudentUseCases = StudentUseCases()
+class VolunteerViewModel: ViewModel() {
+    val volunteerUseCases: VolunteerUseCases = VolunteerUseCases()
 
-    fun createUserAsStudent(email: String, password: String, onSuccessCallBack: (String?) -> Unit, onFailureCallBack: (String?) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        studentUseCases.fireStoreAuthRepository.createUser(email, password, { userId ->
+    fun createUserAsVolunteer(email: String, password: String, onSuccessCallBack: (String?) -> Unit, onFailureCallBack: (String?) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+        volunteerUseCases.fireStoreAuthRepository.createUser(email, password, { userId ->
             onSuccessCallBack(userId)
         }, onFailureCallBack)
     }
 
-    fun getAllStudents() = viewModelScope.launch(Dispatchers.IO) {
-        studentUseCases.getAllStudents()
+    fun getAllVolunteers() = viewModelScope.launch(Dispatchers.IO) {
+        studentUseCases.getAllVolunteers()
     }
 
-    fun getStudent(studentId: String, callback: (student: Student) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        studentUseCases.getStudent(studentId, callback);
+    fun getVolunteer(studentId: String, callback: (student: Volunteer) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+        studentUseCases.getVolunteer(studentId, callback);
     }
 
-    fun addStudent(student: Student) = viewModelScope.launch(Dispatchers.IO) {
-        studentUseCases.addStudent(student)
+    fun addVolunteer(student: Volunteer) = viewModelScope.launch(Dispatchers.IO) {
+        studentUseCases.addVolunteer(student)
     }
 
-    fun update(student: Student, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+    fun update(student: Volunteer, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
         try {
             studentUseCases.update(student, data, onSuccessCallBack, onFailureCallBack)
         } catch (e: Exception) {
