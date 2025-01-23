@@ -1,14 +1,14 @@
 package com.connectify.connectifyNow.domains
 
 import androidx.lifecycle.LiveData
-import com.connectify.connectifyNow.models.Volunteer.Volunteer
-import com.connectify.connectifyNow.repoistory.Auth.FireStoreAuthRepository
-import com.connectify.connectifyNow.repoistory.Volunteer.FireStoreVolunteerRepository
-import com.connectify.connectifyNow.repoistory.Volunteer.LocalStoreUserRepository
+import com.connectify.connectifyNow.models.Volunteer
+import com.connectify.connectifyNow.repositories.Auth.FireStoreAuthRepository
+import com.connectify.connectifyNow.repositories.Volunteer.FireStoreVolunteerRepository
+import com.connectify.connectifyNow.repositories.Volunteer.LocalStoreVolunteerRepository
 
 class VolunteerDomain {
 
-    val localStoreVolunteerRepository: LocalStoreUserRepository = LocalStoreUserRepository()
+    val localStoreVolunteerRepository: LocalStoreVolunteerRepository = LocalStoreVolunteerRepository()
     val fireStoreVolunteerRepository: FireStoreVolunteerRepository = FireStoreVolunteerRepository()
     val fireStoreAuthRepository: FireStoreAuthRepository = FireStoreAuthRepository()
 
