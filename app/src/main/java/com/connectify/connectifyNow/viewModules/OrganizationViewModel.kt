@@ -6,37 +6,38 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.connectify.connectifyNow.models.Organization
+import com.connectify.connectifyNow.domains.OrganizationDomain
 
 class OrganizationViewModel: ViewModel() {
     var organizations: LiveData<MutableList<Organization>>? = null
 
-    private val organizationUseCases: OrganizationUseCases = OrganizationUseCases()
+    private val organizationDomain: OrganizationDomain = OrganizationDomain()
 
     fun createUserAsOrganizationOwner(email: String, password: String, onSuccessCallBack: (String?) -> Unit, onFailureCallBack: (String?) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        organizationUseCases.fireStoreAuthRepository.createUser(email, password, { userId ->
+        organizationDomain.fireStoreAuthRepository.createUser(email, password, { userId ->
             onSuccessCallBack(userId)
         }, onFailureCallBack)
     }
 
     fun addOrganization(organization: Organization) = viewModelScope.launch(Dispatchers.IO) {
-        organizationUseCases.add(organization)
+        organizationDomain.addOrganization(organization)
     }
 
     fun getOrganization(organizationId: String, callback: (organization: Organization) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        organizationUseCases.getOrganization(organizationId, callback);
+        organizationDomain.getOrganizationById(organizationId, callback);
     }
 
     fun refreshOrganizations() = viewModelScope.launch(Dispatchers.IO) {
-        organizationUseCases.refreshOrganizations()
+        organizationDomain.refreshOragnizations()
     }
 
     fun setOrganizationsOnMap(callback: (Organization) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        organizationUseCases.setOrganizationsOnMap(callback)
+        organizationDomain.setOrganizationsOnMap(callback)
     }
 
     fun update(organization: Organization, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
         try {
-            organizationUseCases.update(organization, data, onSuccessCallBack, onFailureCallBack)
+            organizationDomain.updateOrganization(organization, data, onSuccessCallBack, onFailureCallBack)
         } catch (e: Exception) {
             onFailureCallBack()
         }
