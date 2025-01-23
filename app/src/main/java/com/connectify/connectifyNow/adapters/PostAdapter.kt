@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.R
 import com.connectify.connectifyNow.fragments.FeedFragment
-import com.connectify.connectifyNow..UserUseCases
+import com.connectify.connectifyNow.domains.UserUseCases
 
 class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var containArgs: Boolean = false) : RecyclerView.Adapter<PostAdapter.PostHolder>() {
 
