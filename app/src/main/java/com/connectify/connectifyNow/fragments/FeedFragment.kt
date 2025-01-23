@@ -1,4 +1,4 @@
-package com.connectify.connectifyNow
+package com.connectify.connectifyNow.fragments
 
 import android.os.Build
 import android.os.Bundle
@@ -51,11 +51,11 @@ class FeedFragment : Fragment() {
 
         userAuthViewModel.getInfoOnUser(userAuthViewModel.getUserId().toString()) { userInfo, error ->
             when (userInfo) {
-                is UserInfo.UserStudent -> {
-                    (activity as MainActivity).setProfile("USER")
+                is UserInfo.UserVolunteer -> {
+                    (activity as MainActivity).setProfile("VOLUNTEER")
                 }
-                is UserInfo.UserCompany -> {
-                    (activity as MainActivity).setProfile("COMPANY")
+                is UserInfo.UserOrganization -> {
+                    (activity as MainActivity).setProfile("ORGANIZATION")
                 }
 
                 null -> Log.d("InfoUser", "we have identify unknown user")
@@ -94,16 +94,16 @@ class FeedFragment : Fragment() {
                                 .create()
 
                             when (userInfo) {
-                                is UserInfo.UserStudent -> {
-                                    dialogBinding.textViewName.text = userInfo.studentInfo?.name
-                                    dialogBinding.textViewEmail.text = userInfo.studentInfo?.email
-                                    dialogBinding.textViewBio.text = userInfo.studentInfo?.bio
+                                is UserInfo.UserVolunteer -> {
+                                    dialogBinding.textViewName.text = userInfo.volunteerInfo?.name
+                                    dialogBinding.textViewEmail.text = userInfo.volunteerInfo?.email
+                                    dialogBinding.textViewBio.text = userInfo.volunteerInfo?.bio
                                 }
 
-                                is UserInfo.UserCompany -> {
-                                    dialogBinding.textViewName.text = userInfo.companyInfo?.name
-                                    dialogBinding.textViewEmail.text = userInfo.companyInfo?.email
-                                    dialogBinding.textViewBio.text = userInfo.companyInfo?.bio
+                                is UserInfo.UserOrganization -> {
+                                    dialogBinding.textViewName.text = userInfo.organizationInfo?.name
+                                    dialogBinding.textViewEmail.text = userInfo.organizationInfo?.email
+                                    dialogBinding.textViewBio.text = userInfo.organizationInfo?.bio
                                 }
 
                                 null -> throw IllegalArgumentException("unknown userInfo")
@@ -116,8 +116,8 @@ class FeedFragment : Fragment() {
                             dialogBinding.buttonMoreDetails.setOnClickListener {
                                 dialog.dismiss()
                                 when (userInfo) {
-                                    is UserInfo.UserStudent -> {
-                                        userInfo.studentInfo?.id?.let { userId ->
+                                    is UserInfo.UserVolunteer -> {
+                                        userInfo.volunteerInfo?.id?.let { userId ->
 
                                             val args = Bundle()
                                             args.putString("userId", userId)
@@ -133,11 +133,11 @@ class FeedFragment : Fragment() {
                                         }
                                     }
 
-                                    is UserInfo.UserCompany -> {
-                                        userInfo.companyInfo?.id?.let { companyId ->
+                                    is UserInfo.UserOrganization -> {
+                                        userInfo.organizationInfo?.id?.let { organizationId ->
 
                                             val args = Bundle()
-                                            args.putString("userId", companyId)
+                                            args.putString("userId", organizationId)
                                             profileFragment.arguments = args
 
                                             fragmentTransaction.replace(
