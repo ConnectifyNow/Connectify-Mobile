@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import com.connectify.connectifyNow.models.Organization
 
 class OrganizationViewModel: ViewModel() {
-    var companies: LiveData<MutableList<Organization>>? = null
+    var organizations: LiveData<MutableList<Organization>>? = null
 
     private val organizationUseCases: OrganizationUseCases = OrganizationUseCases()
 
@@ -18,25 +18,25 @@ class OrganizationViewModel: ViewModel() {
         }, onFailureCallBack)
     }
 
-    fun addOrganization(company: Organization) = viewModelScope.launch(Dispatchers.IO) {
-        organizationUseCases.add(company)
+    fun addOrganization(organization: Organization) = viewModelScope.launch(Dispatchers.IO) {
+        organizationUseCases.add(organization)
     }
 
-    fun getOrganization(companyId: String, callback: (company: Organization) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        organizationUseCases.getOrganization(companyId, callback);
+    fun getOrganization(organizationId: String, callback: (organization: Organization) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+        organizationUseCases.getOrganization(organizationId, callback);
     }
 
     fun refreshOrganizations() = viewModelScope.launch(Dispatchers.IO) {
-        organizationUseCases.refreshCompanies()
+        organizationUseCases.refreshOrganizations()
     }
 
     fun setOrganizationsOnMap(callback: (Organization) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        organizationUseCases.setCompaniesOnMap(callback)
+        organizationUseCases.setOrganizationsOnMap(callback)
     }
 
     fun update(organization: Organization, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
         try {
-            organizationUseCases.update(company, data, onSuccessCallBack, onFailureCallBack)
+            organizationUseCases.update(organization, data, onSuccessCallBack, onFailureCallBack)
         } catch (e: Exception) {
             onFailureCallBack()
         }
