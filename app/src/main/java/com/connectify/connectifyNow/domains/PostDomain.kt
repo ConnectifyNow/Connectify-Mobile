@@ -15,7 +15,7 @@ import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.repositories.Post.FireStorePostRepository
 import com.connectify.connectifyNow.repositories.Post.LocalStorePostRepository
 
-class postDomain {
+class PostDomain {
     val localStorePostRepository: LocalStorePostRepository = LocalStorePostRepository()
     val fireStorePostRepository: FireStorePostRepository = FireStorePostRepository()
     private val coroutineScope = CoroutineScope(Job())

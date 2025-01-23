@@ -1,13 +1,12 @@
 package com.connectify.connectifyNow.domains
 import android.util.Log
-import androidx.lifecycle.LiveData
 import com.connectify.connectifyNow.models.Organization
 import com.connectify.connectifyNow.repositories.Auth.FireStoreAuthRepository
 import com.connectify.connectifyNow.repositories.Organization.FireStoreOrganizationRepository
 import com.connectify.connectifyNow.repositories.Organization.LocalStoreOrganizationRepository
 import java.util.concurrent.Executors
 
-class organizationDomain {
+class OrganizationDomain {
     private val localStoreOrganizationRepository: LocalStoreOrganizationRepository = LocalStoreOrganizationRepository()
     private val fireStoreOrganizationRepository: FireStoreOrganizationRepository = FireStoreOrganizationRepository()
     val fireStoreAuthRepository: FireStoreAuthRepository = FireStoreAuthRepository()

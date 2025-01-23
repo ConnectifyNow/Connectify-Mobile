@@ -6,7 +6,7 @@ import com.connectify.connectifyNow.repoistory.Auth.FireStoreAuthRepository
 import com.connectify.connectifyNow.repoistory.Volunteer.FireStoreVolunteerRepository
 import com.connectify.connectifyNow.repoistory.Volunteer.LocalStoreUserRepository
 
-class volunteerDomain {
+class VolunteerDomain {
 
     val localStoreVolunteerRepository: LocalStoreUserRepository = LocalStoreUserRepository()
     val fireStoreVolunteerRepository: FireStoreVolunteerRepository = FireStoreVolunteerRepository()
