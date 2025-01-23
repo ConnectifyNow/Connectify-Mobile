@@ -1,11 +1,10 @@
 package com.connectify.connectifyNow.domains
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.connectify.connectifyNow.models.Organization.Organization
-import com.connectify.connectifyNow.models.Volunteer.Volunteer
-import com.connectify.connectifyNow.repoistory.Auth.FireStoreAuthRepository
-import com.connectify.connectifyNow.repoistory.Organization.FireStoreOrganizationRepository
-import com.connectify.connectifyNow.repoistory.Organization.LocalStoreOrganizationRepository
+import com.connectify.connectifyNow.models.Organization
+import com.connectify.connectifyNow.repositories.Auth.FireStoreAuthRepository
+import com.connectify.connectifyNow.repositories.Organization.FireStoreOrganizationRepository
+import com.connectify.connectifyNow.repositories.Organization.LocalStoreOrganizationRepository
 import java.util.concurrent.Executors
 
 class organizationDomain {
@@ -23,7 +22,7 @@ class organizationDomain {
 
         val lastUpdated: Long = Organization.lastUpdated
 
-        fireStoreOrganizationRepository.getCompanies(lastUpdated) { organizations ->
+        fireStoreOrganizationRepository.getOrganizations(lastUpdated) { organizations ->
             Log.i("TAG", "Firebase returned ${organizations.size}, lastUpdated: $lastUpdated")
             executor.execute {
                 var time = lastUpdated
@@ -44,7 +43,7 @@ class organizationDomain {
     suspend fun addOrganization(organization: Organization) {
         fireStoreOrganizationRepository.addOrganization(organization) { id ->
             fireStoreOrganizationRepository.setOrganizationUserType(id)
-            refreshCompanies()
+            refreshOragnizations()
         }
     }
 
