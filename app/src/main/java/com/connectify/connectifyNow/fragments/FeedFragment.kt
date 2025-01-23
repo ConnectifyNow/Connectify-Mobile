@@ -19,6 +19,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.adapters.PostAdapter
 import com.connectify.connectifyNow.viewModules.AuthViewModel
+import com.connectify.connectifyNow.R
 
 class FeedFragment : Fragment() {
     private lateinit var postsRecyclerView: RecyclerView
