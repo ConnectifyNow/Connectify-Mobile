@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.connectify.connectifyNow.viewModels.PostViewModel
 import com.connectify.connectifyNow.models.Post
+import com.connectify.connectifyNow.R
 
 class NewPostFragment : Fragment() {
     private lateinit var view: View
