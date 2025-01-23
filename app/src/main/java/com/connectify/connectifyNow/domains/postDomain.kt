@@ -5,15 +5,15 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.connectify.connectifyNow.models.Post.Post
-import com.connectify.connectifyNow.repoistory.Post.FireStorePostRepository
-import com.connectify.connectifyNow.repoistory.Post.LocalStorePostRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.concurrent.Executors
 import androidx.lifecycle.MediatorLiveData
+import com.connectify.connectifyNow.models.Post
+import com.connectify.connectifyNow.repositories.Post.FireStorePostRepository
+import com.connectify.connectifyNow.repositories.Post.LocalStorePostRepository
 
 class postDomain {
     val localStorePostRepository: LocalStorePostRepository = LocalStorePostRepository()
@@ -64,7 +64,7 @@ class postDomain {
 
     suspend fun deletePost(post: Post) {
         fireStorePostRepository.deletePost(post)
-        localStorePostRepository.deletePost(post)
+        localStorePostRepository.delete(post)
     }
 
     fun deleteAllPosts() {
