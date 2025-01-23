@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.connectify.connectifyNow.models.Volunteer
 
 class VolunteerViewModel: ViewModel() {
     val volunteerUseCases: VolunteerUseCases = VolunteerUseCases()
