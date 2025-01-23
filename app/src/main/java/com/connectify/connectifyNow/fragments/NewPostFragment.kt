@@ -24,7 +24,7 @@ class NewPostFragment : Fragment() {
 
     private var _binding: FragmentNewPostBinding? = null
     private val binding get() = _binding!!
-    private val userAuthViewModel: UserAuthViewModel by activityViewModels()
+    private val authViewModel: AuthViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,7 +89,7 @@ class NewPostFragment : Fragment() {
 
     private fun createPost(title: String, content: String, imageUrl: String?) {
         val post = Post(
-            ownerId = userAuthViewModel.getUserId().toString(),
+            ownerId = authViewModel.getUserId().toString(),
             title = title,
             content = content,
             imagePath = imageUrl ?: ""
