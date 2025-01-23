@@ -11,7 +11,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
+import com.connectify.connectifyNow.models.Post
+import com.connectify.connectifyNow.R
+import com.connectify.connectifyNow.fragments.FeedFragment
+import com.connectify.connectifyNow.domains.UserUseCases
+import com.connectify.connectifyNow.viewModels
 
 class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var containArgs: Boolean = false) : RecyclerView.Adapter<PostAdapter.PostHolder>() {
 
@@ -26,9 +30,9 @@ class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var con
         val listener: FeedFragment.OnPostClickListener?,
         isFromFeed: Boolean
     ) : RecyclerView.ViewHolder(itemView) {
-        val ownerNameLabel: TextView = itemView.findViewById(R.id.ownerName)
+        val ownerNameLabel: TextView = itemView.findViewById(R.id.ownerId)
         val contentLabel: TextView = itemView.findViewById(R.id.content)
-        val image = itemView.findViewById<ImageView>(R.id.imagePost)
+        val image = itemView.findViewById<ImageView>(R.id.imagePath)
 
         val editPostButton = itemView.findViewById<ImageView>(R.id.post_edit_button)
         val deletePostButton = itemView.findViewById<ImageView>(R.id.deletePostButton)
