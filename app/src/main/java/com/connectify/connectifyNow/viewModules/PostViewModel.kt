@@ -16,11 +16,6 @@ class PostViewModel: ViewModel() {
 
     private val _posts: MutableLiveData<MutableList<Post>> = MutableLiveData()
     val posts: LiveData<MutableList<Post>> = _posts
-//    enum class LoadingState {
-//        LOADING,
-//        LOADED
-//    }
-//    val postsListLoadingState: MutableLiveData<LoadingState> = MutableLiveData(LoadingState.LOADED)
 
     private val postDomain: PostDomain = PostDomain()
 
@@ -69,9 +64,7 @@ class PostViewModel: ViewModel() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun refreshPosts() {
         viewModelScope.launch(Dispatchers.IO) {
-//            postsListLoadingState.value = LoadingState.LOADING
             postDomain.refreshPosts()
-//            postsListLoadingState.value = LoadingState.LOADED
         }
     }
 
