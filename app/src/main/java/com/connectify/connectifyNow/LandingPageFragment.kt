@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.connectify.connectifyNow.databinding.FragmentLandingPageBinding
-import com.connectify.connectifyNow.ViewModel.UserAuthViewModel
+import com.connectify.connectifyNow.ViewModel.AuthViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class LandingPageFragment : BaseFragment() {
 
-    private var userAuthViewModel: UserAuthViewModel? = null
+    private var userAuthViewModel: AuthViewModel? = null
 
     private var _binding: FragmentLandingPageBinding? = null
     private val binding get() = _binding!!
@@ -22,7 +22,7 @@ class LandingPageFragment : BaseFragment() {
     ): View {
         _binding = FragmentLandingPageBinding.inflate(inflater, container, false)
         view = binding.root
-        userAuthViewModel = UserAuthViewModel()
+        userAuthViewModel = AuthViewModel()
 
         setEventListeners()
         return view
