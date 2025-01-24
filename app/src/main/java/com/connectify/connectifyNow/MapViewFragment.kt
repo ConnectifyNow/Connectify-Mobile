@@ -34,9 +34,9 @@ import org.osmdroid.views.overlay.OverlayItem
 import java.util.Timer
 import java.util.TimerTask
 
-class MapViewFragment : BaseFragment(), LocationListener {
+class MapFragment : BaseFragment(), LocationListener {
 
-    private lateinit var aMapView: MapView
+    private lateinit var aMap: MapView
     private lateinit var locationManager: LocationManager
     private lateinit var view: View
     private lateinit var viewModel: OrganizationViewModel
@@ -51,10 +51,10 @@ class MapViewFragment : BaseFragment(), LocationListener {
     private var locationUpdatesRequested = false
     val LOCATIONS_PERMISSIONS_CODE = 2
 
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+    private val permissionLauncherRequest = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
         if (isGranted) {
 
-            initializeMapView()
+            initializeMap()
             requestLocationUpdates()
         }
     }
@@ -78,7 +78,7 @@ class MapViewFragment : BaseFragment(), LocationListener {
         requestPermissionLauncher
 
         if (isLocationPermissionGranted()) {
-            initializeMapView()
+            initializeMap()
             requestLocationUpdates()
         } else {
             requestLocationPermissions()
@@ -98,7 +98,7 @@ class MapViewFragment : BaseFragment(), LocationListener {
 
         binding.feedBtn.setOnClickListener {
             clearMapOverlays()
-            if (showFeed) view.navigate(R.id.action_mapViewFragment_to_feedFragment)
+            if (showFeed) view.navigate(R.id.action_mapFragment_to_feedFragment)
             else findNavController().navigateUp()
 
         }
@@ -155,11 +155,11 @@ class MapViewFragment : BaseFragment(), LocationListener {
         viewModel.refreshOrganizations()
     }
 
-    private fun initializeMapView() {
+    private fun initializeMap() {
         val context = context ?: return
-        aMapView = binding.map
-        aMapView.setTileSource(TileSourceFactory.MAPNIK)
-        aMapView.controller.setZoom(17.0)
+        aMap = binding.map
+        aMap.setTileSource(TileSourceFactory.MAPNIK)
+        aMap.controller.setZoom(17.0)
 
         // Load map configuration
         Configuration.getInstance().load(
@@ -180,7 +180,7 @@ class MapViewFragment : BaseFragment(), LocationListener {
             try {
                 requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             } catch (e: Exception) {
-                Log.e("MapViewFragment", "Error launching permission request: ${e.message}")
+                Log.e("MapFragment", "Error launching permission request: ${e.message}")
                 e.printStackTrace()
             }
         }
@@ -191,10 +191,10 @@ class MapViewFragment : BaseFragment(), LocationListener {
         if (requestCode == LOCATIONS_PERMISSIONS_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, proceed with your logic
-                initializeMapView()
+                initializeMap()
                 requestLocationUpdates()
             } else {
-                Log.d("MapViewFragment", "Location permission denied")
+                Log.d("MapFragment", "Location permission denied")
             }
         }
     }
@@ -228,8 +228,8 @@ class MapViewFragment : BaseFragment(), LocationListener {
             }
         )
 
-        aMapView.overlays.add(itemizedIconOverlay)
-        aMapView.invalidate()
+        aMap.overlays.add(itemizedIconOverlay)
+        aMap.invalidate()
     }
 
     private fun showOrganizationInfoDialog(organizationData: HashMap<String, String?>) {
@@ -265,8 +265,8 @@ class MapViewFragment : BaseFragment(), LocationListener {
     }
 
     private fun clearMapOverlays() {
-        aMapView.overlays.clear()
-        aMapView.invalidate()
+        aMap.overlays.clear()
+        aMap.invalidate()
     }
 
     private fun requestLocationUpdates() {
@@ -295,7 +295,7 @@ class MapViewFragment : BaseFragment(), LocationListener {
 
     override fun onLocationChanged(location: Location) {
         val geoPoint = GeoPoint(location.latitude, location.longitude)
-        aMapView.controller.setCenter(geoPoint)
+        aMap.controller.setCenter(geoPoint)
         addMarker(geoPoint, hashMapOf("name" to "this is my location", "bio" to "", "address" to ""), "OSMDroid Marker")
         loadingOverlay?.visibility = View.INVISIBLE;
     }
@@ -304,7 +304,7 @@ class MapViewFragment : BaseFragment(), LocationListener {
         super.onResume()
         if (isLocationPermissionGranted()) {
             // Location permission is granted, proceed with initialization
-            initializeMapView()
+            initializeMap()
             requestLocationUpdates()
 
             viewModel.organizations?.observe(viewLifecycleOwner) { organizations ->
