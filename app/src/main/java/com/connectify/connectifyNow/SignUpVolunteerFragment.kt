@@ -126,9 +126,7 @@ class SignUpVolunteerFragment : Fragment() {
                     bio = bio
                 )
 
-                //TODO: turn those parameters to volunteer object since this is what createUserAsVolunteer expects
-
-//                volunteerViewModel.createUserAsVolunteer(email, password, onSuccess, onError)
+                volunteerViewModel.createUserAsVolunteer(volunteer, onSuccess, onError)
             }
         }
 
