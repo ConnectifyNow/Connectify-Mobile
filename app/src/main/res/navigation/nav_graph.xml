@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:defaultNavHost="true"
+    app:navGraph="@navigation/nav_graph"
+    app:startDestination="@id/landingPageFragment">
+
+    <fragment
+        android:id="@+id/landingPageFragment"
+        android:name="com.connectify.connectifyNow.LandingPageFragment"
+        android:label="fragment_start_page"
+        tools:layout="@layout/fragment_landing_page">
+        <action
+            android:id="@+id/action_landingPageFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_landingPageFragment_to_pickUserTypeFragment"
+            app:destination="@id/pickUserTypeFragment" />
+        <action
+            android:id="@+id/action_landingPageFragment_to_mapViewFragment"
+            app:destination="@id/mapViewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.connectify.connectifyNow.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_mapViewFragment"
+            app:destination="@id/mapViewFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_pickUserTypeFragment"
+            app:destination="@id/pickUserTypeFragment" />
+    </fragment>
 
 </navigation>
