@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.connectify.connectifyNow.databinding.FragmentEditOrganizationProfileBinding
+import com.connectify.connectifyNow.helpers.ActionBarHelpers
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
 import com.connectify.connectifyNow.models.OrganizationLocation
@@ -57,7 +58,7 @@ class EditOrganizationProfileFragment : Fragment() {
         setEventListeners()
 
         // Hide the BottomNavigationView
-        ActionBarHelper.hideActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
+        ActionBarHelpers.hideActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
 
         val backButton = view.findViewById<ImageView>(R.id.back_button)
         backButton.setOnClickListener {
@@ -66,6 +67,20 @@ class EditOrganizationProfileFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        ActionBarHelpers.showActionBarAndBottomNavigationView(requireActivity() as? AppCompatActivity)
+        super.onCreate(savedInstanceState)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    private fun setHints() {
+        dynamicTextHelper.setTextViewText(R.id.company_name, R.string.company_name_title)
+        dynamicTextHelper.setTextViewText(R.id.company_bio, R.string.bio_title)
     }
 
     companion object {
