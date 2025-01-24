@@ -20,9 +20,11 @@ import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
 import com.connectify.connectifyNow.helpers.ImageUploadListener
 import com.connectify.connectifyNow.helpers.ValidationHelper
+import com.connectify.connectifyNow.models.Organization
 import com.connectify.connectifyNow.models.OrganizationLocation
 import com.connectify.connectifyNow.viewModel.OrganizationViewModel
 import com.connectify.connectifyNow.viewModel.UserAuthViewModel
+import com.squareup.picasso.Picasso
 
 class EditOrganizationProfileFragment : Fragment() {
     
@@ -68,7 +70,7 @@ class EditOrganizationProfileFragment : Fragment() {
         val backButton = view.findViewById<ImageView>(R.id.back_button)
         backButton.setOnClickListener {
             Navigation.findNavController(it)
-                .navigate(R.id.action_editoragnizationProfileFragment_to_ProfileFragment)
+                .navigate(R.id.action_editOragnizationProfileFragment_to_ProfileFragment)
         }
 
         return view
@@ -84,7 +86,7 @@ class EditOrganizationProfileFragment : Fragment() {
     }
 
     private fun setHints() {
-        dynamicTextHelper.setTextViewText(R.id.oragnization_name, R.string.oragnization_name_title)
+        dynamicTextHelper.setTextViewText(R.id.oragnization_name, R.string.organization_name_title)
         dynamicTextHelper.setTextViewText(R.id.oragnization_bio, R.string.bio_title)
     }
 
@@ -114,7 +116,7 @@ class EditOrganizationProfileFragment : Fragment() {
                 val name = oragnizationName.editTextField.text.toString()
                 val bio = oragnizationBio.editTextField.text.toString()
 
-                val updatedoragnization = Oragnization(
+                val updatedoragnization = Organization(
                     id = userAuthViewModel.getUserId().toString(),
                     name = name,
                     location = oragnizationLocation,
@@ -161,25 +163,29 @@ class EditOrganizationProfileFragment : Fragment() {
 
         return validationResults.all { it }
     }
-    
-    
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditOrganizationProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditOrganizationProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
+
+    private fun setUserData() {
+        val userId = userAuthViewModel.getUserId().toString()
+        compViewModel.getOrganization(userId) { oragnization ->
+            binding.oragnizationName.editTextField.setText(oragnization.name)
+            binding.oragnizationBio.editTextField.setText(oragnization.bio)
+            email_address = oragnization.email
+            oragnizationLocation = oragnization.location
+            profileImageUrl = oragnization.logo
+
+
+            profileImage = view.findViewById(R.id.oragnizationImage)
+
+            if (profileImage != null) {
+                val profileImageUrl = if (oragnization.logo.isEmpty())
+                    "https://firebasestorage.googleapis.com/v0/b/skills-e4dc8.appspot.com/o/images%2FuserAvater.png?alt=media&token=1fa189ff-b5df-4b1a-8673-2f8e11638acc"
+                else oragnization.logo
+
+                Picasso.get().load(profileImageUrl).into(profileImage)
+
             }
+
+        }
     }
 }
