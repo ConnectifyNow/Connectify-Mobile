@@ -9,8 +9,8 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.connectify.connectifyNow.ViewModel.AuthViewModel
-import com.connectify.connectifyNow.ViewModel.PostViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
+import com.connectify.connectifyNow.viewModel.PostViewModel
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
 import com.connectify.connectifyNow.databinding.FragmentNewPostBinding
 import com.connectify.connectifyNow.helpers.DynamicTextHelper

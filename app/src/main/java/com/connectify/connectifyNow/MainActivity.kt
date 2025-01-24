@@ -7,7 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.connectify.connectifyNow.helpers.ActionBarHelpers
-import com.connectify.connectifyNow.ViewModel.UserAuthViewModel
+import com.connectify.connectifyNow.viewModel.UserAuthViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

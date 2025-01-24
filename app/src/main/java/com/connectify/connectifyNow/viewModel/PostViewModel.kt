@@ -1,4 +1,4 @@
-package com.connectify.connectifyNow.ViewModel
+package com.connectify.connectifyNow.viewModel
 
 import android.os.Build
 import androidx.annotation.RequiresApi

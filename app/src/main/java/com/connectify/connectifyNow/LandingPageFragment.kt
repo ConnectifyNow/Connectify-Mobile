@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.connectify.connectifyNow.databinding.FragmentLandingPageBinding
-import com.connectify.connectifyNow.ViewModel.AuthViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class LandingPageFragment : BaseFragment() {

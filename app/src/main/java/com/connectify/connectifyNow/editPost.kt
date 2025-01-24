@@ -16,13 +16,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.connectify.connectifyNow.ViewModel.AuthViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.databinding.FragmentEditPostBinding
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
 import com.connectify.connectifyNow.helpers.ImageUploadListener
 import com.connectify.connectifyNow.models.Post
-import com.connectify.connectifyNow.ViewModel.PostViewModel
+import com.connectify.connectifyNow.viewModel.PostViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

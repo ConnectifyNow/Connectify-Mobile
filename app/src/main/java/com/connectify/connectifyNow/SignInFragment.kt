@@ -14,7 +14,7 @@ import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
 import com.connectify.connectifyNow.databinding.FragmentSignInBinding
 import com.connectify.connectifyNow.helpers.ValidationHelper
-import com.connectify.connectifyNow.ViewModel.UserAuthViewModel
+import com.connectify.connectifyNow.viewModel.UserAuthViewModel
 
 
 class SignInFragment : BaseFragment() {

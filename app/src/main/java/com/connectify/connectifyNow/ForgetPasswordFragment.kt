@@ -12,7 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import com.connectify.connectifyNow.databinding.FragmentForgetPasswordBinding
 import com.connectify.connectifyNow.helpers.DialogHelper
-import com.connectify.connectifyNow.ViewModel.UserAuthViewModel
+import com.connectify.connectifyNow.viewModel.UserAuthViewModel
 
 class ForgetPasswordFragment : BaseFragment() {
 

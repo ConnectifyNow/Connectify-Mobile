@@ -16,8 +16,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.connectify.connectifyNow.ViewModel.PostViewModel
-import com.connectify.connectifyNow.ViewModel.AuthViewModel
+import com.connectify.connectifyNow.viewModel.PostViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.adapters.PostAdapter
 import com.connectify.connectifyNow.databinding.FragmentFeedBinding
 import com.connectify.connectifyNow.databinding.ProfileDialogBinding
