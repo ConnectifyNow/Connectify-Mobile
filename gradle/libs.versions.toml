@@ -20,6 +20,7 @@ picasso = "2.8"
 lottie = "6.0.0"
 swiperefreshlayout = "1.1.0"
 osmdroidAndroid = "6.1.17"
+googleServices = "4.4.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,5 +54,5 @@ osmdroid-android = { group = "org.osmdroid", name = "osmdroid-android", version.
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidx-navigation-safeargs = { id = "androidx.navigation.safeargs"}
-google-services = { id = "google.services"}
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices"}
 
