@@ -8,7 +8,6 @@ import com.connectify.connectifyNow.repositories.ApiManager
 import com.connectify.connectifyNow.repositories.Auth.FireStoreAuthRepository.Companion.USER_TYPE_COLLECTION_PATH
 import com.google.firebase.Timestamp
 import kotlinx.coroutines.tasks.await
-import java.security.Timestamp
 
 class FireStoreVolunteerRepository {
     companion object {

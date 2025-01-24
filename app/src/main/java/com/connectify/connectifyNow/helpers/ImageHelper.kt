@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import java.util.UUID
 
 

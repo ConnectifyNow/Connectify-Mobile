@@ -21,7 +21,7 @@ class UserDomain {
     }
 
     fun getUserId(): String? {
-        return fireStoreAuthRepository.firebaseAuth.currUser?.id
+        return fireStoreAuthRepository.firebaseAuth.currentUser?.uid
     }
 
     fun resetPassword(email: String, onSuccessCallBack: () -> Unit, onFailureCallBack: (String?) -> Unit) {

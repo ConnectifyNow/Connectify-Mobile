@@ -71,7 +71,7 @@ class EditOrganizationProfileFragment : Fragment() {
         val backButton = view.findViewById<ImageView>(R.id.back_button)
         backButton.setOnClickListener {
             Navigation.findNavController(it)
-                .navigate(R.id.action_editOragnizationProfileFragment_to_ProfileFragment)
+                .navigate(R.id.action_editOrganizationProfileFragment_to_ProfileFragment)
         }
 
         return view
