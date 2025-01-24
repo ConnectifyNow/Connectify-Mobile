@@ -1,3 +1,0 @@
-# Connectify Mobile📱
-
-Connectify Mobile📱
