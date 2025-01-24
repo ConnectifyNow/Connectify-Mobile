@@ -161,15 +161,14 @@ class SignUpOrganizationFragment : BaseFragment() {
                 val name = organizationNameGroup.editTextField.text.toString()
                 val bio = bioGroup.editTextField.text.toString()
 
-//                TODO: FIX LOGO PROBLEM
-                organization = Organization(
-                    id = userAuthViewModel.getUserId().toString(),
-                    name = name,
-                    email = email,
-                    logo = logo.toString(),
-                    location = organizationLocation,
-                    bio = bio
-                )
+//                organization = Organization(
+//                    id = userAuthViewModel.getUserId().toString(),
+//                    name = name,
+//                    email = email,
+//                    logo = logo.toString(),
+//                    location = organizationLocation,
+//                    bio = bio
+//                )
                 organizationViewModel.createUserAsOrganizationOwner(email, password, onSuccess, onError)
             }
         }
