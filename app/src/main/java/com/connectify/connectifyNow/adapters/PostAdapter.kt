@@ -15,7 +15,7 @@ import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.R
 import com.connectify.connectifyNow.FeedFragment
 import com.connectify.connectifyNow.domains.UserDomain
-import com.connectify.connectifyNow.viewModules.PostViewModel
+import com.connectify.connectifyNow.viewModel.PostViewModel
 
 class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var containArgs: Boolean = false) : RecyclerView.Adapter<PostAdapter.PostHolder>() {
 

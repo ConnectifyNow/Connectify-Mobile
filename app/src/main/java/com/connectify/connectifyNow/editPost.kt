@@ -21,8 +21,8 @@ import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
 import com.connectify.connectifyNow.helpers.ImageUploadListener
 import com.connectify.connectifyNow.models.Post
-import com.connectify.connectifyNow.viewModules.PostViewModel
-import com.connectify.connectifyNow.viewModules.UserAuthViewModel
+import com.connectify.connectifyNow.viewModel.PostViewModel
+import com.connectify.connectifyNow.viewModel.UserAuthViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

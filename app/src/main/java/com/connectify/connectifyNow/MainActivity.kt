@@ -2,15 +2,12 @@ package com.connectify.connectifyNow
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.connectify.connectifyNow.helpers.ActionBarHelpers
-import com.connectify.connectifyNow.viewModules.UserAuthViewModel
+import com.connectify.connectifyNow.viewModel.UserAuthViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

@@ -5,36 +5,67 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
+import com.connectify.connectifyNow.databinding.FragmentEditOrganizationProfileBinding
+import com.connectify.connectifyNow.helpers.DynamicTextHelper
+import com.connectify.connectifyNow.helpers.ImageHelper
+import com.connectify.connectifyNow.models.OrganizationLocation
+import com.connectify.connectifyNow.viewModel.OrganizationViewModel
+import com.connectify.connectifyNow.viewModel.UserAuthViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EditOrganizationProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EditOrganizationProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    
+    private val userAuthViewModel: UserAuthViewModel by activityViewModels()
+    private val compViewModel: OrganizationViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentEditOrganizationProfileBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var view: View
+    private lateinit var saveBtn: Button
+    private lateinit var oragnizationViewModel: OrganizationViewModel
+    private lateinit var dynamicTextHelper: DynamicTextHelper
+    private lateinit var email_address: String
+    private lateinit var oragnizationLocation: OrganizationLocation
+
+    private lateinit var profileImageUrl: String
+    private lateinit var imageHelper: ImageHelper
+    private lateinit var imageView: ImageView
+    private  lateinit var loadingOverlay: LinearLayout
+
+    private var profileImage: ImageView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_organization_profile, container, false)
+        _binding = FragmentEditOrganizationProfileBinding.inflate(layoutInflater, container, false)
+        view = binding.root
+        dynamicTextHelper = DynamicTextHelper(view)
+
+
+        loadingOverlay = view.findViewById(R.id.edit_image_loading_overlay);
+        loadingOverlay.visibility = View.INVISIBLE
+
+        setHints()
+        setUserData()
+        setEventListeners()
+
+        // Hide the BottomNavigationView
+        ActionBarHelper.hideActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
+
+        val backButton = view.findViewById<ImageView>(R.id.back_button)
+        backButton.setOnClickListener {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_editCompanyProfileFragment_to_ProfileFragment)
+        }
+
+        return view
     }
 
     companion object {
