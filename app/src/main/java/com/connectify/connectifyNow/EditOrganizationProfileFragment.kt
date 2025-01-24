@@ -1,5 +1,6 @@
 package com.connectify.connectifyNow
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -23,12 +24,12 @@ import com.connectify.connectifyNow.helpers.ValidationHelper
 import com.connectify.connectifyNow.models.Organization
 import com.connectify.connectifyNow.models.OrganizationLocation
 import com.connectify.connectifyNow.viewModel.OrganizationViewModel
-import com.connectify.connectifyNow.viewModel.UserAuthViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.squareup.picasso.Picasso
 
 class EditOrganizationProfileFragment : Fragment() {
     
-    private val userAuthViewModel: UserAuthViewModel by activityViewModels()
+    private val userAuthViewModel: AuthViewModel by activityViewModels()
     private val compViewModel: OrganizationViewModel by activityViewModels()
 
     private var _binding: FragmentEditOrganizationProfileBinding? = null
@@ -178,11 +179,10 @@ class EditOrganizationProfileFragment : Fragment() {
             profileImage = view.findViewById(R.id.oragnizationImage)
 
             if (profileImage != null) {
-                val profileImageUrl = if (oragnization.logo.isEmpty())
-                    "https://firebasestorage.googleapis.com/v0/b/skills-e4dc8.appspot.com/o/images%2FuserAvater.png?alt=media&token=1fa189ff-b5df-4b1a-8673-2f8e11638acc"
-                else oragnization.logo
-
-                Picasso.get().load(profileImageUrl).into(profileImage)
+                if (oragnization.logo.isEmpty())
+                    Picasso.get().load(R.drawable.userAvatar).into(profileImage)
+                else
+                    Picasso.get().load(oragnization.logo).into(profileImage)
 
             }
 
