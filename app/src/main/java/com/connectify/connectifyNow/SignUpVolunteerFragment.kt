@@ -21,7 +21,7 @@ import com.connectify.connectifyNow.helpers.ImageHelper
 import com.connectify.connectifyNow.helpers.ImageUploadListener
 import com.connectify.connectifyNow.helpers.ValidationHelper
 import com.connectify.connectifyNow.models.Volunteer
-import com.connectify.connectifyNow.viewModules.VolunteerViewModel
+import com.connectify.connectifyNow.viewModel.VolunteerViewModel
 
 
 class SignUpVolunteerFragment : Fragment() {

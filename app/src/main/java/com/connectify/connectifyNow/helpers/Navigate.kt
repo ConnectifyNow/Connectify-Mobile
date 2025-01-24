@@ -1,4 +1,9 @@
-package com.connectify.connectifyNow.helpers
+package com.connectify.connectifyNow
 
-class Navigate {
+import android.view.View
+import androidx.navigation.findNavController
+
+fun View.navigate(destinationId: Int) {
+    val navController = findNavController()
+    navController.navigate(destinationId)
 }

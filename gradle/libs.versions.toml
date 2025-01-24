@@ -19,6 +19,7 @@ roomRuntime = "2.6.1"
 picasso = "2.8"
 lottie = "6.0.0"
 swiperefreshlayout = "1.1.0"
+osmdroidAndroid = "6.1.17"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +47,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+osmdroid-android = { group = "org.osmdroid", name = "osmdroid-android", version.ref = "osmdroidAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

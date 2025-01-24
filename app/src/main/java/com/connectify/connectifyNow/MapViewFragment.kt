@@ -21,9 +21,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.connectify.connectifyNow.Navigations.navigate
-import com.connectify.connectifyNow.viewModules.OrganizationViewModel
-import com.connectify.connectifyNow.databinding.FragmentMapViewBinding
+import com.connectify.connectifyNow.databinding.FragmentMapBinding
+import com.connectify.connectifyNow.viewModel.OrganizationViewModel
 import com.connectify.connectifyNow.models.Organization
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -47,7 +46,7 @@ class MapFragment : BaseFragment(), LocationListener {
     private val timer = Timer()
     private val binding get() = _binding!!
 
-    private var _binding: FragmentMapViewBinding? = null
+    private var _binding: FragmentMapBinding? = null
     private var locationUpdatesRequested = false
     val LOCATIONS_PERMISSIONS_CODE = 2
 
@@ -64,7 +63,7 @@ class MapFragment : BaseFragment(), LocationListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMapViewBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentMapBinding.inflate(layoutInflater, container, false)
         view = binding.root
 
         val args = arguments
@@ -75,7 +74,7 @@ class MapFragment : BaseFragment(), LocationListener {
         loadingOverlay = view.findViewById(R.id.map_loading_overlay);
         loadingOverlay?.visibility = View.VISIBLE;
         // Initialize the permission launcher
-        requestPermissionLauncher
+//        requestPermissionLauncher (TODO: NEED TO CHECK WHY THIS IS NOT WORKING)
 
         if (isLocationPermissionGranted()) {
             initializeMap()
@@ -98,7 +97,9 @@ class MapFragment : BaseFragment(), LocationListener {
 
         binding.feedBtn.setOnClickListener {
             clearMapOverlays()
-            if (showFeed) view.navigate(R.id.action_mapFragment_to_feedFragment)
+            if (showFeed) {
+                view.navigate(R.id.action_mapViewFragment_to_feedFragment)
+            }
             else findNavController().navigateUp()
 
         }
@@ -136,7 +137,7 @@ class MapFragment : BaseFragment(), LocationListener {
     }
 
     private fun reloadData() {
-        viewModel.setOrganizationssOnMap { organization ->
+        viewModel.setOrganizationsOnMap { organization ->
             val (address, location) = organization.location
             val latitude = location.latitude
             val longitude = location.longitude
@@ -178,7 +179,7 @@ class MapFragment : BaseFragment(), LocationListener {
     private fun requestLocationPermissions() {
         if (!isLocationPermissionGranted()) {
             try {
-                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+//                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)  (TODO: NEED TO CHECK WHY THIS IS NOT WORKING)
             } catch (e: Exception) {
                 Log.e("MapFragment", "Error launching permission request: ${e.message}")
                 e.printStackTrace()
@@ -233,7 +234,7 @@ class MapFragment : BaseFragment(), LocationListener {
     }
 
     private fun showOrganizationInfoDialog(organizationData: HashMap<String, String?>) {
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.card_view_location, null)
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.card_location, null)
         val dialog = AlertDialog.Builder(requireContext())
             .setView(dialogView)
             .create()

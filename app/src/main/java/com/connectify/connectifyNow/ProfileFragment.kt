@@ -19,10 +19,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.connectify.connectifyNow.viewModules.OrganizationViewModel
-import com.connectify.connectifyNow.viewModules.PostViewModel
-import com.connectify.connectifyNow.viewModules.VolunteerViewModel
-import com.connectify.connectifyNow.viewModules.AuthViewModel
+import com.connectify.connectifyNow.viewModel.OrganizationViewModel
+import com.connectify.connectifyNow.viewModel.PostViewModel
+import com.connectify.connectifyNow.viewModel.VolunteerViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.adapters.PostAdapter
 import com.connectify.connectifyNow.databinding.FragmentProfileBinding
 import com.connectify.connectifyNow.helpers.ActionBarHelpers

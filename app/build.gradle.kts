@@ -77,6 +77,6 @@ dependencies {
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.lottie)
-    implementation(libs.lottie)
+    implementation(libs.osmdroid.android)
 
 }
