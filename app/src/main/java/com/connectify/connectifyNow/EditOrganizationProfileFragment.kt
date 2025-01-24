@@ -183,7 +183,6 @@ class EditOrganizationProfileFragment : Fragment() {
                     Picasso.get().load(R.drawable.user_avatar).into(profileImage)
                 else
                     Picasso.get().load(oragnization.logo).into(profileImage)
-
             }
 
         }
