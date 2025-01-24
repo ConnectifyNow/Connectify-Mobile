@@ -26,7 +26,7 @@ class LocalStoreOrganizationRepository {
     }
 
     @WorkerThread
-    fun getAllCompanies(): LiveData<MutableList<Organization>> {
+    fun getAllOrganiztions(): LiveData<MutableList<Organization>> {
         return organizationDao.getAllOrganizations()
     }
 }

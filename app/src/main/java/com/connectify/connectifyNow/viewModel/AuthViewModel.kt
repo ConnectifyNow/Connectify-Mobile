@@ -1,4 +1,4 @@
-package com.connectify.connectifyNow.viewModules
+package com.connectify.connectifyNow.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
