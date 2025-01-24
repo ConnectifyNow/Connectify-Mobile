@@ -1,4 +1,4 @@
-package com.connectify.connectifyNow.viewModules
+package com.connectify.connectifyNow.ViewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

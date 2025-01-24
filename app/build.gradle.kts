@@ -64,7 +64,7 @@ dependencies {
 
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui)
-
+    implementation(libs.androidx.swiperefreshlayout)
 
     implementation(libs.converter.gson)
     implementation(libs.firebase.firestore)
@@ -76,5 +76,5 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
-
+    implementation(libs.lottie)
 }

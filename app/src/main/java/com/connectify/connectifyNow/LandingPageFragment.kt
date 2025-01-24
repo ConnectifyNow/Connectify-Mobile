@@ -1,13 +1,12 @@
 package com.connectify.connectifyNow
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.connectify.connectifyNow.databinding.FragmentLandingPageBinding
-import com.connectify.connectifyNow.viewModules.UserAuthViewModel
+import com.connectify.connectifyNow.ViewModel.UserAuthViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class LandingPageFragment : BaseFragment() {

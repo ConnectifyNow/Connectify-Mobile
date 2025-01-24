@@ -1,0 +1,171 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  tools:context=".ProfileFragment">
+
+  <ImageView
+    android:id="@+id/post_background_image"
+    android:layout_width="413dp"
+    android:layout_height="250dp"
+    android:scaleType="centerCrop"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/background_start_page" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="409dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="40dp"
+    android:backgroundTint="@color/white"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/post_background_image">
+
+    <androidx.cardview.widget.CardView
+      android:id="@+id/cardView"
+      android:layout_width="110dp"
+      android:layout_height="110dp"
+      android:background="@drawable/ic_launcher_background"
+      app:cardCornerRadius="100dp"
+      app:cardElevation="10dp"
+      app:cardUseCompatPadding="false"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <LinearLayout
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="@drawable/collage_logo"
+        android:orientation="vertical" />
+
+      <ImageView
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="@drawable/collage_logo"
+        android:orientation="vertical" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/post_group"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="68dp"
+      android:background="@drawable/rounded_box"
+      android:backgroundTint="@color/white"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:layout_editor_absoluteX="-55dp">
+
+      <ImageButton
+        android:id="@+id/edit_project"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="24dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/edit_button"
+        android:src="@drawable/edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Post_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+          android:id="@+id/project_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="50dp"
+          android:fontFamily="@font/poppins"
+          android:text="Project Name"
+          android:textAlignment="center"
+          android:textSize="24sp"
+          android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/email_organization"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:alpha="0.5"
+          android:fontFamily="@font/poppins"
+          android:text="Email: email@gmail.com"
+          android:textAlignment="center"
+          app:layout_constraintBottom_toTopOf="@+id/phone"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/project_name" />
+
+        <TextView
+          android:id="@+id/phone"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:alpha="0.5"
+          android:fontFamily="@font/poppins"
+          android:text="Phone: 0555555555"
+          android:textAlignment="center"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/email_organization" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.331">
+
+        <TextView
+          android:id="@+id/AboutProject"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:fontFamily="@font/poppins"
+          android:text="@string/about_project"
+          android:textAlignment="viewStart"
+          android:textSize="20sp"
+          android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+          android:id="@+id/bio_project"
+          android:layout_width="350dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:alpha="0.5"
+          android:fontFamily="@font/poppins"
+          android:text="Our SmartCityConnect project employs IoT and AI to create smarter urban spaces. By leveraging sensor networks and data analytics, we're working towards enhancing city services, optimizing resources, and building a sustainable and connected future for urban living"
+          android:textAlignment="viewStart"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/AboutProject" />
+
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
