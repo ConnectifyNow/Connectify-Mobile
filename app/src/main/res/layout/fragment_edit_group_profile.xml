@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/group_bio">
 
         <ImageView
-            android:id="@+id/userImage"
+            android:id="@+id/volunteerImage"
             android:src="@drawable/user_avatar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

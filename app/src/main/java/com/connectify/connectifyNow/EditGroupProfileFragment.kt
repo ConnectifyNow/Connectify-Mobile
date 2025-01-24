@@ -1,6 +1,7 @@
 package com.connectify.connectifyNow
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -15,6 +17,8 @@ import com.connectify.connectifyNow.databinding.FragmentEditGroupProfileBinding
 import com.connectify.connectifyNow.helpers.ActionBarHelpers
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
+import com.connectify.connectifyNow.helpers.ImageUploadListener
+import com.connectify.connectifyNow.models.Volunteer
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.viewModel.VolunteerViewModel
 
@@ -81,11 +85,62 @@ class EditGroupProfileFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ActionsBarHelpers.showActionBarAndBottomNavigationView(requireActivity() as? AppCompatActivity)
+        ActionBarHelpers.showActionBarAndBottomNavigationView(requireActivity() as? AppCompatActivity)
         super.onCreate(savedInstanceState)
     }
 
+    private fun setEventListeners() {
+        saveBtn = view.findViewById(R.id.save_group_btn)
 
+        groupViewModel = VolunteerViewModel()
+
+        //allow update image
+        imageView = view.findViewById(R.id.volunteerImage)
+
+        imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
+            override fun onImageUploaded(imageUrl: String) {
+                loadingOverlay?.visibility = View.INVISIBLE
+            }
+        })
+
+        imageHelper.setImageViewClickListener {
+            loadingOverlay?.visibility = View.VISIBLE
+        }
+
+        saveBtn.setOnClickListener {
+            val groupName = binding.groupName
+            val groupInstitution = binding.groupInstitution
+            val groupBio = binding.groupBio
+
+
+            if (isValidInputs(groupName, groupInstitution,groupBio)) {
+                val name = groupName.editTextField.text.toString()
+                val institution = groupInstitution.editTextField.text.toString()
+                val bio = groupBio.editTextField.text.toString()
+
+                val userId = userAuthViewModel.getUserId().toString()
+                val updatedVolunteer = Volunteer(
+                    id = userId,
+                    name = name,
+                    institution = institution,
+                    bio = bio,
+                    email = emailAddress,
+                    image = imageHelper.getImageUrl() ?:profileImageUrl
+                )
+
+                groupViewModel.update(updatedVolunteer,updatedVolunteer.json,
+                    onSuccessCallBack = {
+                        Toast.makeText(context, "The data has been successfully updated", Toast.LENGTH_SHORT).show()
+                        Log.d("EditProfilePage", "Success in update")
+                    },
+                    onFailureCallBack = {
+                        Toast.makeText(context, "An error occurred while updating the data, please try again", Toast.LENGTH_SHORT).show()
+                        Log.d("EditProfilePage", "Error in update")
+                    }
+                )
+            }
+        }
+    }
 
     companion object {
         /**
