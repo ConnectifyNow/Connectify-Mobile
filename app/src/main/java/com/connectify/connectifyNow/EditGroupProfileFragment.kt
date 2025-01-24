@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.connectify.connectifyNow.databinding.FragmentEditGroupProfileBinding
+import com.connectify.connectifyNow.helpers.ActionBarHelpers
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
 import com.connectify.connectifyNow.viewModel.AuthViewModel
@@ -56,7 +57,7 @@ class EditGroupProfileFragment : Fragment() {
         setUserData()
 
         // Hide the BottomNavigationView
-        ActionsBarHelper.hideActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
+        ActionBarHelpers.hideActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
 
         val backButton = view.findViewById<ImageView>(R.id.back_button)
         backButton.setOnClickListener {
@@ -80,9 +81,11 @@ class EditGroupProfileFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ActionsBarHelper.showActionBarAndBottomNavigationView(requireActivity() as? AppCompatActivity)
+        ActionsBarHelpers.showActionBarAndBottomNavigationView(requireActivity() as? AppCompatActivity)
         super.onCreate(savedInstanceState)
     }
+
+
 
     companion object {
         /**
