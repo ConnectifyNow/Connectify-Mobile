@@ -7,19 +7,19 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.connectify.connectifyNow.helpers.ActionBarHelpers
-import com.connectify.connectifyNow.viewModel.UserAuthViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private var navController: NavController? = null
-    private var userAuthViewModel: UserAuthViewModel? = null
+    private var userAuthViewModel: AuthViewModel? = null
     private var userTypeProfile = "ORGANIZATION"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        userAuthViewModel = UserAuthViewModel()
+        userAuthViewModel = AuthViewModel()
 
         ActionBarHelpers.showActionBarAndBottomNavigationView(this)
 

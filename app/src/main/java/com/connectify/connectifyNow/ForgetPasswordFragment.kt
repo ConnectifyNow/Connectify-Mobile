@@ -12,7 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import com.connectify.connectifyNow.databinding.FragmentForgetPasswordBinding
 import com.connectify.connectifyNow.helpers.DialogHelper
-import com.connectify.connectifyNow.viewModel.UserAuthViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
 
 class ForgetPasswordFragment : BaseFragment() {
 
@@ -20,7 +20,7 @@ class ForgetPasswordFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private lateinit var view: View
-    private lateinit var userAuthViewModel: UserAuthViewModel
+    private lateinit var userAuthViewModel: AuthViewModel
     private var backToSignIn: TextView? = null
     private var resetPassword: Button? = null
     private var email: TextView? = null
@@ -32,7 +32,7 @@ class ForgetPasswordFragment : BaseFragment() {
     ): View {
         _binding = FragmentForgetPasswordBinding.inflate(layoutInflater, container, false)
         view = binding.root
-        userAuthViewModel = UserAuthViewModel()
+        userAuthViewModel = AuthViewModel()
 
         setEventListeners(view)
 

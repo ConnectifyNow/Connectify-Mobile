@@ -32,12 +32,12 @@ class LandingPageFragment : BaseFragment() {
 
         binding.buttonSignIn.setOnClickListener {
             Navigation.findNavController(view)
-                .navigate(R.id.action_landingPageFragment_to_signInFragment)
+                .navigate(R.id.action_startPageFragment_to_signInFragment)
         }
 
         binding.buttonSignUp.setOnClickListener {
             Navigation.findNavController(view)
-                .navigate(R.id.action_landingPageFragment_to_pickUserTypeFragment)
+                .navigate(R.id.action_startPageFragment_to_pickUserTypeFragment)
         }
 
         view.post {
@@ -46,7 +46,7 @@ class LandingPageFragment : BaseFragment() {
             if (currentUser != null) {
                 userAuthViewModel?.setCurrentUserId()
                 Navigation.findNavController(requireView())
-                    .navigate(R.id.action_landingPageFragment_to_mapViewFragment)
+                    .navigate(R.id.action_startPageFragment_to_mapViewFragment)
             }
         }
     }
