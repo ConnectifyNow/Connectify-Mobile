@@ -1,6 +1,7 @@
 package com.connectify.connectifyNow
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +9,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
 import com.connectify.connectifyNow.databinding.FragmentEditOrganizationProfileBinding
 import com.connectify.connectifyNow.helpers.ActionBarHelpers
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
+import com.connectify.connectifyNow.helpers.ImageUploadListener
+import com.connectify.connectifyNow.helpers.ValidationHelper
 import com.connectify.connectifyNow.models.OrganizationLocation
 import com.connectify.connectifyNow.viewModel.OrganizationViewModel
 import com.connectify.connectifyNow.viewModel.UserAuthViewModel
@@ -63,7 +68,7 @@ class EditOrganizationProfileFragment : Fragment() {
         val backButton = view.findViewById<ImageView>(R.id.back_button)
         backButton.setOnClickListener {
             Navigation.findNavController(it)
-                .navigate(R.id.action_editCompanyProfileFragment_to_ProfileFragment)
+                .navigate(R.id.action_editoragnizationProfileFragment_to_ProfileFragment)
         }
 
         return view
@@ -79,10 +84,85 @@ class EditOrganizationProfileFragment : Fragment() {
     }
 
     private fun setHints() {
-        dynamicTextHelper.setTextViewText(R.id.company_name, R.string.company_name_title)
-        dynamicTextHelper.setTextViewText(R.id.company_bio, R.string.bio_title)
+        dynamicTextHelper.setTextViewText(R.id.oragnization_name, R.string.oragnization_name_title)
+        dynamicTextHelper.setTextViewText(R.id.oragnization_bio, R.string.bio_title)
     }
 
+    private fun setEventListeners() {
+        saveBtn = view.findViewById(R.id.save_group_btn)
+
+        oragnizationViewModel = OrganizationViewModel()
+
+        //allow update image
+        imageView = view.findViewById(R.id.oragnizationImage)
+
+        imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
+            override fun onImageUploaded(imageUrl: String) {
+                loadingOverlay.visibility = View.INVISIBLE
+            }
+        })
+
+        imageHelper.setImageViewClickListener {
+            loadingOverlay.visibility = View.VISIBLE
+        }
+
+        saveBtn.setOnClickListener {
+            val oragnizationName = binding.oragnizationName
+            val oragnizationBio = binding.oragnizationBio
+
+            if (isValidInputs(oragnizationName,oragnizationBio)) {
+                val name = oragnizationName.editTextField.text.toString()
+                val bio = oragnizationBio.editTextField.text.toString()
+
+                val updatedoragnization = Oragnization(
+                    id = userAuthViewModel.getUserId().toString(),
+                    name = name,
+                    location = oragnizationLocation,
+                    bio = bio,
+                    email = email_address,
+                    logo = imageHelper.getImageUrl() ?:profileImageUrl
+                )
+
+                oragnizationViewModel.update(updatedoragnization,updatedoragnization.json,
+                    onSuccessCallBack = {
+                        Toast.makeText(context, "oragnization Details have been updated successfully", Toast.LENGTH_SHORT).show()
+                        Log.d("EditProfilePage", "Success in update")
+                    },
+                    onFailureCallBack = {
+                        Toast.makeText(context, "An error occurred while updating the data, please try again", Toast.LENGTH_SHORT).show()
+                        Log.d("EditProfilePage", "Error in update")
+                    }
+                )
+            }
+        }
+    }
+
+
+    private fun isValidInputs(
+        oragnizationName: CustomInputFieldTextBinding,
+        bioGroup: CustomInputFieldTextBinding
+    ): Boolean {
+        val validationResults = mutableListOf<Boolean>()
+
+
+        validationResults.add(
+            ValidationHelper.isValidString(oragnizationName.editTextField.text.toString())
+                .also { isValid ->
+                    ValidationHelper.handleValidationResult(isValid, oragnizationName, requireContext())
+                }
+        )
+
+        validationResults.add(
+            ValidationHelper.isValidField(bioGroup.editTextField.text.toString())
+                .also { isValid ->
+                    ValidationHelper.handleValidationResult(isValid, bioGroup, requireContext())
+                }
+        )
+
+        return validationResults.all { it }
+    }
+    
+    
     companion object {
         /**
          * Use this factory method to create a new instance of
