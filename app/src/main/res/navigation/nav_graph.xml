@@ -1,42 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:defaultNavHost="true"
-    app:navGraph="@navigation/nav_graph"
-    app:startDestination="@id/landingPageFragment">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/nav_graph"
+  app:defaultNavHost="true"
+  app:navGraph="@navigation/nav_graph"
+  app:startDestination="@id/startPageFragment">
 
-    <fragment
-        android:id="@+id/landingPageFragment"
-        android:name="com.connectify.connectifyNow.LandingPageFragment"
-        android:label="fragment_start_page"
-        tools:layout="@layout/fragment_landing_page">
-        <action
-            android:id="@+id/action_landingPageFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
-        <action
-            android:id="@+id/action_landingPageFragment_to_pickUserTypeFragment"
-            app:destination="@id/pickUserTypeFragment" />
-        <action
-            android:id="@+id/action_landingPageFragment_to_mapViewFragment"
-            app:destination="@id/mapViewFragment" />
-    </fragment>
+  <fragment
+    android:id="@+id/startPageFragment"
+    android:name="com.android.connecitfy.StartPageFragment"
+    android:label="fragment_start_page"
+    tools:layout="@layout/fragment_start_page">
+    <action
+      android:id="@+id/action_startPageFragment_to_signInFragment"
+      app:destination="@id/signInFragment" />
+    <action
+      android:id="@+id/action_startPageFragment_to_pickUserTypeFragment"
+      app:destination="@id/pickUserTypeFragment" />
+    <action
+      android:id="@+id/action_startPageFragment_to_mapViewFragment"
+      app:destination="@id/mapViewFragment" />
+  </fragment>
 
-    <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.connectify.connectifyNow.SignInFragment"
-        android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
-        <action
-            android:id="@+id/action_signInFragment_to_forgetPasswordFragment"
-            app:destination="@id/forgetPasswordFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_mapViewFragment"
-            app:destination="@id/mapViewFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_pickUserTypeFragment"
-            app:destination="@id/pickUserTypeFragment" />
-    </fragment>
+  <fragment
+    android:id="@+id/forgetPasswordFragment"
+    android:name="com.android.connecitfy.ForgetPasswordFragment"
+    android:label="fragment_forget_password"
+    tools:layout="@layout/fragment_forget_password">
+    <action
+      android:id="@+id/action_forgetPasswordFragment_to_signInFragment"
+      app:destination="@id/signInFragment" />
+  </fragment>
 
+  <fragment
+    android:id="@+id/signInFragment"
+    android:name="com.android.connecitfy.SignInFragment"
+    android:label="fragment_sign_in"
+    tools:layout="@layout/fragment_sign_in">
+    <action
+      android:id="@+id/action_signInFragment_to_forgetPasswordFragment"
+      app:destination="@id/forgetPasswordFragment" />
+    <action
+      android:id="@+id/action_signInFragment_to_mapViewFragment"
+      app:destination="@id/mapViewFragment" />
+    <action
+      android:id="@+id/action_signInFragment_to_pickUserTypeFragment"
+      app:destination="@id/pickUserTypeFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/profileFragment"
+    android:name="com.android.connecitfy.ProfileFragment"
+    android:label="fragment_profile"
+    tools:layout="@layout/fragment_profile">
+    <action
+      android:id="@+id/action_profileFragment_to_startPageFragment"
+      app:destination="@id/startPageFragment" />
+    <action
+      android:id="@+id/action_profileFragment_to_feedFragment"
+      app:destination="@id/feedFragment" />
+    <action
+      android:id="@+id/action_profileFragment_to_editOrganizationProfileFragment"
+      app:destination="@id/editOrganizationProfileFragment" />
+    <action
+      android:id="@+id/action_profileFragment_to_editPost"
+      app:destination="@id/editPost">
+      <argument
+        android:name="postId"
+        app:argType="string" />
+    </action>
+    <action
+      android:id="@+id/action_profileFragment_to_mapFragment"
+      app:destination="@id/mapViewFragment" />
+    <action
+      android:id="@+id/action_profileFragment_to_mapViewFragment"
+      app:destination="@id/mapViewFragment" />
+    <action
+      android:id="@+id/action_profileFragment_to_editGroupProfileFragment"
+      app:destination="@id/editGroupProfileFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/signUpOrganizationFragment"
+    android:name="com.android.connecitfy.SignUpOrganizationFragment"
+    android:label="fragment_sign_up_organization"
+    tools:layout="@layout/fragment_sign_up_organization">
+    <action
+      android:id="@+id/action_signUpOrganizationFragment_to_mapViewFragment"
+      app:destination="@id/mapViewFragment" />
+    <action
+      android:id="@+id/action_signUpOrganizationFragment_to_signInFragment"
+      app:destination="@id/signInFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/newPostFragment"
+    android:name="com.android.connecitfy.NewPostFragment"
+    android:label="fragment_new_post"
+    tools:layout="@layout/fragment_new_post">
+    <action
+      android:id="@+id/action_newPostFragment_to_feedFragment"
+      app:destination="@id/feedFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/mapViewFragment"
+    android:name="com.android.connecitfy.MapViewFragment"
+    android:label="fragment_map_view"
+    tools:layout="@layout/fragment_map_view">
+    <action
+      android:id="@+id/action_mapViewFragment_to_feedFragment"
+      app:destination="@id/feedFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/pickUserTypeFragment"
+    android:name="com.android.connecitfy.PickUserTypeFragment"
+    android:label="fragment_pick_user_type"
+    tools:layout="@layout/fragment_pick_user_type">
+    <action
+      android:id="@+id/action_pickUserTypeFragment_to_signUpOrganizationFragment"
+      app:destination="@id/signUpOrganizationFragment" />
+    <action
+      android:id="@+id/action_pickUserTypeFragment_to_signUpVolunteerFragment"
+      app:destination="@id/signUpVolunteerFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/signUpVolunteerFragment"
+    android:name="com.android.connecitfy.SignUpVolunteerFragment"
+    android:label="SignUpVolunteerFragment">
+    <action
+      android:id="@+id/action_signUpVolunteerFragment_to_signInFragment"
+      app:destination="@id/signInFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/feedFragment"
+    android:name="com.android.connecitfy.FeedFragment"
+    android:label="fragment_feed"
+    tools:layout="@layout/fragment_feed">
+    <action
+      android:id="@+id/action_feedFragment_to_newPostFragment"
+      app:destination="@id/newPostFragment" />
+    <action
+      android:id="@+id/action_feedFragment_to_ProfileFragment"
+      app:destination="@id/profileFragment">
+      <argument
+        android:name="userId"
+        app:argType="string" />
+    </action>
+  </fragment>
+  <fragment
+    android:id="@+id/postFragment"
+    android:name="com.android.connecitfy.PostFragment"
+    android:label="PostFragment" />
+  <fragment
+    android:id="@+id/editPost"
+    android:name="com.android.connecitfy.editPost"
+    android:label="fragment_edit_post"
+    tools:layout="@layout/fragment_edit_post">
+    <action
+      android:id="@+id/action_editPost_to_profileFragment"
+      app:destination="@id/profileFragment" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/editGroupProfileFragment"
+    android:name="com.android.connecitfy.EditGroupProfileFragment"
+    android:label="fragment_edit_group_profile"
+    tools:layout="@layout/fragment_edit_group_profile">
+
+    <action
+      android:id="@+id/action_editGroupProfileFragment_to_ProfileFragment"
+      app:destination="@id/profileFragment" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/editOrganizationProfileFragment"
+    android:name="com.android.connecitfy.EditOrganizationProfileFragment"
+    android:label="fragment_edit_organization_profile"
+    tools:layout="@layout/fragment_edit_organization_profile">
+
+    <action
+      android:id="@+id/action_editOrganizationProfileFragment_to_ProfileFragment"
+      app:destination="@id/profileFragment" />
+  </fragment>
 </navigation>

@@ -2,7 +2,6 @@ package com.connectify.connectifyNow
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
 import com.connectify.connectifyNow.databinding.FragmentSignInBinding
 import com.connectify.connectifyNow.helpers.ValidationHelper
-import com.connectify.connectifyNow.viewModules.UserAuthViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
 
 
 class SignInFragment : BaseFragment() {
@@ -23,7 +22,7 @@ class SignInFragment : BaseFragment() {
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
 
-    private val userAuthViewModel: UserAuthViewModel by activityViewModels()
+    private val userAuthViewModel: AuthViewModel by activityViewModels()
     private var errorMessage: TextView? = null
 
     private var emailLayout: View? = null
@@ -54,7 +53,7 @@ class SignInFragment : BaseFragment() {
         errorMessage = view.findViewById(R.id.login_error_attempt)
         backButton.setOnClickListener {
             Navigation.findNavController(it)
-                .navigate(R.id.landingPageFragment)
+                .navigate(R.id.startPageFragment)
         }
     }
 

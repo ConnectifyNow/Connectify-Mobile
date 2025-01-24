@@ -28,8 +28,8 @@ import com.connectify.connectifyNow.models.Location
 import com.connectify.connectifyNow.models.Organization
 import com.connectify.connectifyNow.models.OrganizationLocation
 import com.connectify.connectifyNow.services.LocationsApiCall
-import com.connectify.connectifyNow.viewModules.OrganizationViewModel
-import com.connectify.connectifyNow.viewModules.UserAuthViewModel
+import com.connectify.connectifyNow.viewModel.OrganizationViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.firebase.geofire.core.GeoHash
 import com.google.firebase.firestore.GeoPoint
 
@@ -42,7 +42,7 @@ class SignUpOrganizationFragment : BaseFragment() {
     private lateinit var signUpOrganization: Button
     private lateinit var dynamicTextHelper: DynamicTextHelper
     private lateinit var organizationViewModel: OrganizationViewModel
-    private lateinit var userAuthViewModel: UserAuthViewModel
+    private lateinit var userAuthViewModel: AuthViewModel
     private lateinit var imageHelper: ImageHelper
     private lateinit var addressAutoComplete: AutoCompleteTextView
     private  lateinit var loadingOverlay: LinearLayout
@@ -62,7 +62,7 @@ class SignUpOrganizationFragment : BaseFragment() {
         _binding = FragmentSignUpOrganizationBinding.inflate(layoutInflater, container, false)
         view = binding.root
         organizationViewModel = OrganizationViewModel()
-        userAuthViewModel = UserAuthViewModel()
+        userAuthViewModel = AuthViewModel()
         dynamicTextHelper = DynamicTextHelper(view)
 
         loadingOverlay = view.findViewById(R.id.signup_organization_loading_overlay);
@@ -161,11 +161,12 @@ class SignUpOrganizationFragment : BaseFragment() {
                 val name = organizationNameGroup.editTextField.text.toString()
                 val bio = bioGroup.editTextField.text.toString()
 
+//                TODO: FIX LOGO PROBLEM
                 organization = Organization(
                     id = userAuthViewModel.getUserId().toString(),
                     name = name,
                     email = email,
-                    logo = logo,
+                    logo = logo.toString(),
                     location = organizationLocation,
                     bio = bio
                 )
