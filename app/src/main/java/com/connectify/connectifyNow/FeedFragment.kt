@@ -1,4 +1,4 @@
-package com.android.
+package com.connectify.connectifyNow
 
 import android.os.Build
 import android.os.Bundle
@@ -16,12 +16,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.connectify.connectifyNow.MainActivity
-import com.connectify.connectifyNow.R
 import com.connectify.connectifyNow.ViewModel.PostViewModel
-import com.connectify.connectifyNow.ViewModel.UserAuthViewModel
+import com.connectify.connectifyNow.ViewModel.AuthViewModel
 import com.connectify.connectifyNow.adapters.PostAdapter
 import com.connectify.connectifyNow.databinding.FragmentFeedBinding
+import com.connectify.connectifyNow.databinding.ProfileDialogBinding
 import com.connectify.connectifyNow.helpers.ActionBarHelpers
 import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.models.UserInfo
@@ -32,7 +31,7 @@ class FeedFragment : Fragment() {
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var viewModel: PostViewModel
     private lateinit var progressBar: ProgressBar
-    private val userAuthViewModel: UserAuthViewModel by activityViewModels()
+    private val userAuthViewModel: AuthViewModel by activityViewModels()
 
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
@@ -97,7 +96,7 @@ class FeedFragment : Fragment() {
                         if (error != null) {
                             Log.e("User Info Error", error)
                         } else {
-                            val dialogBinding = UserProfileDialogBinding.inflate(layoutInflater)
+                            val dialogBinding = ProfileDialogBinding.inflate(layoutInflater)
                             val dialog = AlertDialog.Builder(requireContext())
                                 .setView(dialogBinding.root)
                                 .create()

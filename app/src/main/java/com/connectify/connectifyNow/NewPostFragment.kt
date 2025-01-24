@@ -1,4 +1,4 @@
-package com.android.
+package com.connectify.connectifyNow
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,15 +9,15 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.android..ViewModel.PostViewModel
-import com.android..ViewModel.UserAuthViewModel
-import com.android..databinding.CustomInputFieldTextBinding
-import com.android..databinding.FragmentNewPostBinding
-import com.android..helpers.DynamicTextHelper
-import com.android..helpers.ImageHelper
-import com.android..helpers.ImageUploadListener
-import com.android..helpers.ValidationHelper
-import com.android..models.Post.Post
+import com.connectify.connectifyNow.ViewModel.AuthViewModel
+import com.connectify.connectifyNow.ViewModel.PostViewModel
+import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
+import com.connectify.connectifyNow.databinding.FragmentNewPostBinding
+import com.connectify.connectifyNow.helpers.DynamicTextHelper
+import com.connectify.connectifyNow.helpers.ImageHelper
+import com.connectify.connectifyNow.helpers.ImageUploadListener
+import com.connectify.connectifyNow.helpers.ValidationHelper
+import com.connectify.connectifyNow.models.Post
 
 class NewPostFragment : Fragment() {
     private lateinit var view: View
@@ -29,7 +29,7 @@ class NewPostFragment : Fragment() {
 
     private var _binding: FragmentNewPostBinding? = null
     private val binding get() = _binding!!
-    private val userAuthViewModel: UserAuthViewModel by activityViewModels()
+    private val userAuthViewModel: AuthViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
