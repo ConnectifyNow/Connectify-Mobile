@@ -1,4 +1,4 @@
-package com.connectify.connectifyNow.viewModules
+package com.connectify.connectifyNow.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,10 +7,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.connectify.connectifyNow.domains.UserDomain
 import com.connectify.connectifyNow.models.UserInfo
 
-class UserAuthViewModel: ViewModel() {
+class AuthViewModel: ViewModel() {
     val firebaseAuth = FirebaseAuth.getInstance()
 
-    val userUseCases: UserDomain = UserDomain()
+    val userDomain: UserDomain = UserDomain()
     private val _userId = MutableLiveData<String?>()
     val userId: LiveData<String?> get() = _userId
 
@@ -19,7 +19,7 @@ class UserAuthViewModel: ViewModel() {
     }
 
     fun signInUser(email: String, password: String, onSuccess: () -> Unit, onFailure: (String?) -> Unit) {
-        userUseCases.signIn(email, password, onSuccessCallBack = {
+        userDomain.signIn(email, password, onSuccessCallBack = {
             // Set the user ID in the LiveData upon successful sign-in
             setCurrentUserId()
             onSuccess.invoke()
@@ -35,14 +35,14 @@ class UserAuthViewModel: ViewModel() {
     }
 
     fun logOutUser() {
-        userUseCases.logOutUser()
+        userDomain.logOutUser()
     }
 
     fun resetPassword(email: String, onSuccessCallBack: () -> Unit, onFailureCallBack: (String?) -> Unit) {
-        userUseCases.resetPassword(email, onSuccessCallBack, onFailureCallBack)
+        userDomain.resetPassword(email, onSuccessCallBack, onFailureCallBack)
     }
 
     fun getInfoOnUser(id: String, onCallBack: (userInfo: UserInfo?, error: String?) -> Unit) {
-        userUseCases.getUserInfo(id, onCallBack)
+        userDomain.getUserInfo(id, onCallBack)
     }
 }
