@@ -13,14 +13,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
 import com.connectify.connectifyNow.databinding.FragmentEditGroupProfileBinding
 import com.connectify.connectifyNow.helpers.ActionBarHelpers
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
 import com.connectify.connectifyNow.helpers.ImageUploadListener
+import com.connectify.connectifyNow.helpers.ValidationHelper
 import com.connectify.connectifyNow.models.Volunteer
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.viewModel.VolunteerViewModel
+import com.squareup.picasso.Picasso
 
 class EditGroupProfileFragment : Fragment() {
     private val userAuthViewModel: AuthViewModel by activityViewModels()
@@ -142,23 +145,50 @@ class EditGroupProfileFragment : Fragment() {
         }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditGroupProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditGroupProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun isValidInputs(
+        groupName: CustomInputFieldTextBinding,
+        groupInstitution: CustomInputFieldTextBinding,
+        groupBio: CustomInputFieldTextBinding
+    ): Boolean {
+        val validationResults = mutableListOf<Boolean>()
+        validationResults.add(
+            ValidationHelper.isValidString(groupName.editTextField.text.toString()).also { isValid ->
+                ValidationHelper.handleValidationResult(isValid, groupName, requireContext())
             }
+        )
+
+        validationResults.add(
+            ValidationHelper.isValidField(groupInstitution.editTextField.text.toString()).also { isValid ->
+                ValidationHelper.handleValidationResult(isValid, groupInstitution, requireContext())
+            }
+        )
+        validationResults.add(
+            ValidationHelper.isValidField(groupBio.editTextField.text.toString()).also { isValid ->
+                ValidationHelper.handleValidationResult(isValid, groupBio, requireContext())
+            }
+        )
+
+        return validationResults.all { it }
+    }
+
+    private fun setUserData() {
+        val userId = userAuthViewModel.getUserId().toString()
+        volunteerViewModel.getVolunteer(userId) { volunteer ->
+            binding.groupName.editTextField.setText(volunteer.name)
+            binding.groupInstitution.editTextField.setText(volunteer.institution)
+            binding.groupBio.editTextField.setText(volunteer.bio)
+
+            emailAddress = volunteer.email
+            profileImageUrl = volunteer.image
+
+            profileImage = view.findViewById(R.id.volunteerImage)
+
+            if (profileImage != null) {
+                if (volunteer.image.isEmpty())
+                    Picasso.get().load(R.drawable.user_avatar).into(profileImage)
+                else
+                    Picasso.get().load(volunteer.image).into(profileImage)
+            }
+        }
     }
 }
