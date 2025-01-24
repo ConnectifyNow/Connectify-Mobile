@@ -52,7 +52,6 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.auth)
-    implementation(libs.androidx.compilercommon)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -77,6 +76,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
-    implementation(libs.lottie)    implementation(libs.lottie)
+    implementation(libs.lottie)
+    implementation(libs.lottie)
 
 }
