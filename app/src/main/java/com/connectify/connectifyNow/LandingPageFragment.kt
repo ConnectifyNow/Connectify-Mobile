@@ -47,7 +47,7 @@ class LandingPageFragment : BaseFragment() {
             if (currentUser != null) {
                 userAuthViewModel?.setCurrentUserId()
                 Navigation.findNavController(requireView())
-                    .navigate(R.id.action_landingPage_to_mapViewFragment)
+                    .navigate(R.id.action_landingPageFragment_to_mapViewFragment)
             }
         }
     }
