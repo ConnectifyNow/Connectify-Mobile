@@ -23,6 +23,7 @@ import com.connectify.connectifyNow.helpers.ImageHelper
 import com.connectify.connectifyNow.helpers.ImageUploadListener
 import com.connectify.connectifyNow.models.Post
 import com.connectify.connectifyNow.viewModel.PostViewModel
+import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
