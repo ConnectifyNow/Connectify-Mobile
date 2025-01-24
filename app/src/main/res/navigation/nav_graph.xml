@@ -5,27 +5,27 @@
   android:id="@+id/nav_graph"
   app:defaultNavHost="true"
   app:navGraph="@navigation/nav_graph"
-  app:startDestination="@id/startPageFragment">
+  app:startDestination="@id/landingPageFragment">
 
   <fragment
-    android:id="@+id/startPageFragment"
-    android:name="com.android.connecitfy.StartPageFragment"
-    android:label="fragment_start_page"
-    tools:layout="@layout/fragment_start_page">
+    android:id="@+id/landingPageFragment"
+    android:name="com.connectify.connectifyNow.LandingPageFragment"
+    android:label="fragment_landing_page"
+    tools:layout="@layout/fragment_landing_page">
     <action
-      android:id="@+id/action_startPageFragment_to_signInFragment"
+      android:id="@+id/action_landingPageFragment_to_signInFragment"
       app:destination="@id/signInFragment" />
     <action
-      android:id="@+id/action_startPageFragment_to_pickUserTypeFragment"
+      android:id="@+id/action_landingPageFragment_to_pickUserTypeFragment"
       app:destination="@id/pickUserTypeFragment" />
     <action
-      android:id="@+id/action_startPageFragment_to_mapViewFragment"
+      android:id="@+id/action_landingPageFragment_to_mapViewFragment"
       app:destination="@id/mapViewFragment" />
   </fragment>
 
   <fragment
     android:id="@+id/forgetPasswordFragment"
-    android:name="com.android.connecitfy.ForgetPasswordFragment"
+    android:name="com.connectify.connectifyNow.ForgetPasswordFragment"
     android:label="fragment_forget_password"
     tools:layout="@layout/fragment_forget_password">
     <action
@@ -35,7 +35,7 @@
 
   <fragment
     android:id="@+id/signInFragment"
-    android:name="com.android.connecitfy.SignInFragment"
+    android:name="com.connectify.connectifyNow.SignInFragment"
     android:label="fragment_sign_in"
     tools:layout="@layout/fragment_sign_in">
     <action
@@ -50,12 +50,12 @@
   </fragment>
   <fragment
     android:id="@+id/profileFragment"
-    android:name="com.android.connecitfy.ProfileFragment"
+    android:name="com.connectify.connectifyNow.ProfileFragment"
     android:label="fragment_profile"
     tools:layout="@layout/fragment_profile">
     <action
-      android:id="@+id/action_profileFragment_to_startPageFragment"
-      app:destination="@id/startPageFragment" />
+      android:id="@+id/action_profileFragment_to_landingPageFragment"
+      app:destination="@id/landingPageFragment" />
     <action
       android:id="@+id/action_profileFragment_to_feedFragment"
       app:destination="@id/feedFragment" />
@@ -81,7 +81,7 @@
   </fragment>
   <fragment
     android:id="@+id/signUpOrganizationFragment"
-    android:name="com.android.connecitfy.SignUpOrganizationFragment"
+    android:name="com.connectify.connectifyNow.SignUpOrganizationFragment"
     android:label="fragment_sign_up_organization"
     tools:layout="@layout/fragment_sign_up_organization">
     <action
@@ -93,7 +93,7 @@
   </fragment>
   <fragment
     android:id="@+id/newPostFragment"
-    android:name="com.android.connecitfy.NewPostFragment"
+    android:name="com.connectify.connectifyNow.NewPostFragment"
     android:label="fragment_new_post"
     tools:layout="@layout/fragment_new_post">
     <action
@@ -102,16 +102,16 @@
   </fragment>
   <fragment
     android:id="@+id/mapViewFragment"
-    android:name="com.android.connecitfy.MapViewFragment"
+    android:name="com.connectify.connectifyNow.MapFragment"
     android:label="fragment_map_view"
-    tools:layout="@layout/fragment_map_view">
+    tools:layout="@layout/fragment_map">
     <action
       android:id="@+id/action_mapViewFragment_to_feedFragment"
       app:destination="@id/feedFragment" />
   </fragment>
   <fragment
     android:id="@+id/pickUserTypeFragment"
-    android:name="com.android.connecitfy.PickUserTypeFragment"
+    android:name="com.connectify.connectifyNow.PickUserTypeFragment"
     android:label="fragment_pick_user_type"
     tools:layout="@layout/fragment_pick_user_type">
     <action
@@ -123,7 +123,7 @@
   </fragment>
   <fragment
     android:id="@+id/signUpVolunteerFragment"
-    android:name="com.android.connecitfy.SignUpVolunteerFragment"
+    android:name="com.connectify.connectifyNow.SignUpVolunteerFragment"
     android:label="SignUpVolunteerFragment">
     <action
       android:id="@+id/action_signUpVolunteerFragment_to_signInFragment"
@@ -131,7 +131,7 @@
   </fragment>
   <fragment
     android:id="@+id/feedFragment"
-    android:name="com.android.connecitfy.FeedFragment"
+    android:name="com.connectify.connectifyNow.FeedFragment"
     android:label="fragment_feed"
     tools:layout="@layout/fragment_feed">
     <action
@@ -147,11 +147,11 @@
   </fragment>
   <fragment
     android:id="@+id/postFragment"
-    android:name="com.android.connecitfy.PostFragment"
+    android:name="com.connectify.connectifyNow.PostFragment"
     android:label="PostFragment" />
   <fragment
     android:id="@+id/editPost"
-    android:name="com.android.connecitfy.editPost"
+    android:name="com.connectify.connectifyNow.editPost"
     android:label="fragment_edit_post"
     tools:layout="@layout/fragment_edit_post">
     <action
@@ -161,7 +161,7 @@
 
   <fragment
     android:id="@+id/editGroupProfileFragment"
-    android:name="com.android.connecitfy.EditGroupProfileFragment"
+    android:name="com.connectify.connectifyNow.EditGroupProfileFragment"
     android:label="fragment_edit_group_profile"
     tools:layout="@layout/fragment_edit_group_profile">
 
@@ -172,7 +172,7 @@
 
   <fragment
     android:id="@+id/editOrganizationProfileFragment"
-    android:name="com.android.connecitfy.EditOrganizationProfileFragment"
+    android:name="com.connectify.connectifyNow.EditOrganizationProfileFragment"
     android:label="fragment_edit_organization_profile"
     tools:layout="@layout/fragment_edit_organization_profile">
 

@@ -184,7 +184,7 @@ class ProfileFragment : Fragment() {
             logoutButton?.setOnClickListener {
                 authViewModel.logOutUser();
                 Navigation.findNavController(it)
-                    .navigate(R.id.action_profileFragment_to_startPageFragment)
+                    .navigate(R.id.action_profileFragment_to_landingPageFragment)
             }
 
         } else {

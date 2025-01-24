@@ -53,7 +53,7 @@ class SignInFragment : BaseFragment() {
         errorMessage = view.findViewById(R.id.login_error_attempt)
         backButton.setOnClickListener {
             Navigation.findNavController(it)
-                .navigate(R.id.startPageFragment)
+                .navigate(R.id.landingPageFragment)
         }
     }
 
