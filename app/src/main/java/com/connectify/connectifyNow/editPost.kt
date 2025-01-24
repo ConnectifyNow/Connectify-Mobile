@@ -5,9 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
 import com.connectify.connectifyNow.databinding.FragmentEditPostBinding
+import com.connectify.connectifyNow.helpers.DynamicTextHelper
+import com.connectify.connectifyNow.viewModules.PostViewModel
+import com.connectify.connectifyNow.viewModules.UserAuthViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +30,17 @@ class editPost : Fragment() {
     private lateinit var imageHelper: ImageHelper
     private lateinit var imageView: ImageView
     private  lateinit var loadingOverlay: LinearLayout
+
+
+    private val userAuthViewModel: UserAuthViewModel by activityViewModels()
+    var titleConstraintLayout: ConstraintLayout? = null
+    var detailsConstraintlayout: ConstraintLayout? = null
+
+    var postId = ""
+    var title: TextView? = null
+    var details: TextView? = null
+    var updatePost: Button? = null
+    var imagePost = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
