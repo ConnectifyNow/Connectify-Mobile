@@ -50,7 +50,7 @@ class MapFragment : BaseFragment(), LocationListener {
     private var locationUpdatesRequested = false
     val LOCATIONS_PERMISSIONS_CODE = 2
 
-    private val permissionLauncherRequest = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
         if (isGranted) {
 
             initializeMap()
@@ -74,7 +74,7 @@ class MapFragment : BaseFragment(), LocationListener {
         loadingOverlay = view.findViewById(R.id.map_loading_overlay);
         loadingOverlay?.visibility = View.VISIBLE;
         // Initialize the permission launcher
-//        requestPermissionLauncher (TODO: NEED TO CHECK WHY THIS IS NOT WORKING)
+        requestPermissionLauncher
 
         if (isLocationPermissionGranted()) {
             initializeMap()
@@ -179,7 +179,7 @@ class MapFragment : BaseFragment(), LocationListener {
     private fun requestLocationPermissions() {
         if (!isLocationPermissionGranted()) {
             try {
-//                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)  (TODO: NEED TO CHECK WHY THIS IS NOT WORKING)
+                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             } catch (e: Exception) {
                 Log.e("MapFragment", "Error launching permission request: ${e.message}")
                 e.printStackTrace()
