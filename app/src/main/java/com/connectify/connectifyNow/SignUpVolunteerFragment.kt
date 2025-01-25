@@ -1,7 +1,6 @@
 package com.connectify.connectifyNow
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
@@ -35,7 +35,7 @@ class SignUpVolunteerFragment : Fragment() {
     private lateinit var volunteer: Volunteer
     private lateinit var volunteerViewModel: VolunteerViewModel
     private lateinit var dynamicTextHelper: DynamicTextHelper
-    private  lateinit var loadingOverlay: LinearLayout
+    private lateinit var loadingOverlay: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -140,8 +140,16 @@ class SignUpVolunteerFragment : Fragment() {
     private val onSuccess: (String?) -> Unit = { userId ->
         userId?.let { id ->
             volunteerViewModel.addVolunteer(volunteer.copy(id = id))
-            Toast.makeText(requireContext(), "Account created successfully", Toast.LENGTH_SHORT).show()
-            view.navigate(R.id.action_signUpVolunteerFragment_to_signInFragment)
+
+            requireActivity().runOnUiThread {
+                Toast.makeText(
+                    requireContext(),
+                    "Account created successfully",
+                    Toast.LENGTH_SHORT
+                ).show()
+                view.navigate(R.id.action_signUpVolunteerFragment_to_signInFragment)
+            }
+
         }
     }
 
