@@ -11,6 +11,6 @@ interface LocationsApiService {
         "Content-Type: application/json",
         "X-API-KEY: f7f57178224d19338a67a09532470b35ed62dc08"
     )
-    @POST("locations")
+    @POST("places")
     fun getLocations(@Body body: Map<String, Any>): Call<LocationsResponse>
 }
