@@ -129,8 +129,14 @@ class SignUpOrganizationFragment : BaseFragment() {
     private val onSuccess: (String?) -> Unit = { userId ->
         userId?.let { id ->
             organizationViewModel.addOrganization(organization.copy(id = id))
-            Toast.makeText(requireContext(), "Account created successfully", Toast.LENGTH_SHORT).show()
-            view.navigate(R.id.action_signUpOrganizationFragment_to_signInFragment)
+            requireActivity().runOnUiThread {
+                Toast.makeText(
+                    requireContext(),
+                    "Account created successfully",
+                    Toast.LENGTH_SHORT
+                ).show()
+                view.navigate(R.id.action_signUpOrganizationFragment_to_signInFragment)
+            }
         }
     }
 
