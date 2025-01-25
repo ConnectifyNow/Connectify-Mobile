@@ -146,7 +146,6 @@ class SignUpOrganizationFragment : BaseFragment() {
 
         imageHelper = ImageHelper(this, imageView , object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
-                // Perform actions after image upload completes
                 loadingOverlay?.visibility = View.INVISIBLE
             }
         })
@@ -195,7 +194,6 @@ class SignUpOrganizationFragment : BaseFragment() {
                 locationsAdapter.clear();
                 locationsSuggestions = ArrayList();
 
-                // Filter invalid addresses (with missing fields)
                 val filteredLocationsArray = ArrayList<String>();
                 locations.forEach {
                     if (it.address != null && it.longitude != null && it.latitude != null) {
@@ -204,7 +202,6 @@ class SignUpOrganizationFragment : BaseFragment() {
                     }
                 }
 
-//                Log.d("locationsApi", filteredLocationsArray.size.toString())
 
                 locationsAdapter = ArrayAdapter(
                     requireContext(),

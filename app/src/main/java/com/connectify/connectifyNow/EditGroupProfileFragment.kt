@@ -38,12 +38,12 @@ class EditGroupProfileFragment : Fragment() {
     private lateinit var dynamicTextHelper: DynamicTextHelper
     private lateinit var emailAddress: String
 
-    //allow update image
     private lateinit var profileImageUrl: String
     private lateinit var imageHelper: ImageHelper
     private lateinit var imageView: ImageView
     private  lateinit var loadingOverlay: LinearLayout
 
+    private var profileImage: ImageView? = null
     private var profileImage: ImageView? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +63,6 @@ class EditGroupProfileFragment : Fragment() {
         setEventListeners()
         setUserData()
 
-        // Hide the BottomNavigationView
         ActionBarHelpers.hideActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
 
         val backButton = view.findViewById<ImageView>(R.id.back_button)
@@ -97,7 +96,6 @@ class EditGroupProfileFragment : Fragment() {
 
         groupViewModel = VolunteerViewModel()
 
-        //allow update image
         imageView = view.findViewById(R.id.volunteerImage)
 
         imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {

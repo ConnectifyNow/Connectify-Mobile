@@ -93,7 +93,6 @@ class ForgetPasswordFragment : BaseFragment() {
                     ) {
                         val isValidEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches()
 
-                        // Enable button if email is not empty and in valid format
                         resetPassword?.isEnabled = s?.isNotEmpty() == true && isValidEmail
                         resetPassword?.alpha = if (resetPassword?.isEnabled == true) 1.0f else 0.8f
                     }

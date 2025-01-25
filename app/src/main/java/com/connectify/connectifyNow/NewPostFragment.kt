@@ -45,7 +45,6 @@ class NewPostFragment : Fragment() {
 
         imageHelper = ImageHelper(this, imageView,  object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
-                // Perform actions after image upload completes
                 loadingOverlay.visibility = View.INVISIBLE
             }
         })
@@ -80,12 +79,9 @@ class NewPostFragment : Fragment() {
                 val title = titleGroup.editTextField.text.toString()
                 val content = contentGroup.editTextField.text.toString()
 
-                // Check if an image has been selected
                 if (imageHelper.isImageSelected()) {
-                    // If an image is selected, create the post with the existing image URL
                     createPost(title, content, imageHelper.getImageUrl())
                 } else {
-                    // If no image is selected, create the post without an image URL
                     createPost(title, content, "")
                 }
             }

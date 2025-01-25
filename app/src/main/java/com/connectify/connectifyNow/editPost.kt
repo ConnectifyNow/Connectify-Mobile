@@ -52,7 +52,6 @@ class editPost : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentEditPostBinding.inflate(layoutInflater, container, false)
         view = binding.root
         dynamicTextHelper = DynamicTextHelper(view)
@@ -73,7 +72,6 @@ class editPost : Fragment() {
         imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
 
-                // Perform actions after image upload completes
                 loadingOverlay.visibility = View.INVISIBLE
             }
         })
