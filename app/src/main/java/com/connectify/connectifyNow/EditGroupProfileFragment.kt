@@ -44,7 +44,6 @@ class EditGroupProfileFragment : Fragment() {
     private  lateinit var loadingOverlay: LinearLayout
 
     private var profileImage: ImageView? = null
-    private var profileImage: ImageView? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
