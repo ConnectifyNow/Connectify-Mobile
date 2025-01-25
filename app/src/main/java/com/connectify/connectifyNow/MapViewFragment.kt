@@ -73,6 +73,7 @@ class MapFragment : BaseFragment(), LocationListener {
 
         loadingOverlay = view.findViewById(R.id.map_loading_overlay);
         loadingOverlay?.visibility = View.VISIBLE;
+//        requestPermissionLauncher (TODO: NEED TO CHECK WHY THIS IS NOT WORKING)
 
         if (isLocationPermissionGranted()) {
             initializeMap()
