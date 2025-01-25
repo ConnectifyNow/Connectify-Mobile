@@ -188,21 +188,6 @@
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-      android:id="@+id/back_button"
-      android:layout_width="60dp"
-      android:layout_height="60dp"
-      android:contentDescription="@string/back"
-      android:padding="16dp"
-      android:visibility="gone"
-      android:src="@drawable/back_arrow_icon"
-      tools:layout_editor_absoluteX="4dp" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
-
   <LinearLayout
     android:id="@+id/profile_loading_overlay"
     android:layout_width="match_parent"
