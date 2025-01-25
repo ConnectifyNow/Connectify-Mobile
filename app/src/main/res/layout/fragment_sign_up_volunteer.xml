@@ -119,8 +119,9 @@
         app:layout_constraintVertical_bias="0.805" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="180dp"
+        android:id="@+id/image_layout"
+        android:layout_width="189dp"
+        android:layout_height="137dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/sign_up_volunteer_btn"
@@ -130,8 +131,8 @@
 
         <ImageView
             android:id="@+id/volunteerImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="189dp"
+            android:layout_height="137dp"
             android:contentDescription="@string/user_image"
             android:src="@drawable/user_avatar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -147,6 +148,20 @@
             android:orientation="vertical"
             tools:layout_editor_absoluteX="20dp"
             tools:visibility="visible">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieAnimationView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.354"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading" />
 
             <TextView
                 android:id="@+id/textView3"
