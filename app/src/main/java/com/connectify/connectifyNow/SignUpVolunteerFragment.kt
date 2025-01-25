@@ -126,7 +126,7 @@ class SignUpVolunteerFragment : Fragment() {
                     bio = bio
                 )
 
-                volunteerViewModel.createUserAsVolunteer(volunteer, onSuccess, onError)
+                volunteerViewModel.createUserAsVolunteer(email,password, onSuccess, onError)
             }
         }
 
