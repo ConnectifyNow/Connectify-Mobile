@@ -1,202 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fillViewport="true"
+  tools:context=".SignUpOrganizationFragment">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SignUpOrganizationFragment">
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/back_arrow_icon"
-        android:padding="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Back" />
+      android:id="@+id/back_button"
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:src="@drawable/back_arrow_icon"
+      android:padding="16dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:contentDescription="@string/back" />
 
     <TextView
-        android:id="@+id/new_account_volunteer"
-        style="@style/AppTextStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center_horizontal|top"
-        android:text="@string/sign_up_group_title"
-        android:textAppearance="@style/log_in_text"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+      android:id="@+id/new_account_organization"
+      style="@style/AppTextStyle"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="30dp"
+      android:gravity="center_horizontal|top"
+      android:text="@string/sign_up_group_title"
+      android:textAppearance="@style/log_in_text"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/create_volunteer_title"
-        style="@style/AppTextStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:gravity="center_horizontal|top"
-        android:text="@string/sign_up_group_sub_title"
-        android:textAppearance="@style/sign_in_description"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/new_account_volunteer" />
-    <!--Start Body-->
+      android:id="@+id/create_organization_title"
+      style="@style/AppTextStyle"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="0dp"
+      android:gravity="center_horizontal|top"
+      android:text="@string/sign_up_group_sub_title"
+      android:textAppearance="@style/sign_in_description"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/new_account_organization" />
+    <!--Start
+    Body-->
 
     <include
-        android:id="@+id/organization_name_group"
-        layout="@layout/custom_input_field_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/create_volunteer_title" />
+      android:id="@+id/organization_name_group"
+      layout="@layout/custom_input_field_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/create_organization_title" />
 
     <include
-        android:id="@+id/email_organization"
-        layout="@layout/custom_input_field_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/organization_name_group" />
+      android:id="@+id/email_organization"
+      layout="@layout/custom_input_field_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/organization_name_group" />
 
     <TextView
-        android:id="@+id/input_suggestions"
-        style="@style/AppTextStyle"
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:gravity="top"
-        android:text="@string/address"
-        android:textColor="@color/Dark_Gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_organization"/>
+      android:id="@+id/input_suggestions"
+      style="@style/AppTextStyle"
+      android:layout_width="0dp"
+      android:layout_height="25dp"
+      android:paddingLeft="15dp"
+      android:paddingRight="15dp"
+      android:gravity="top"
+      android:text="@string/address"
+      android:textColor="@color/Dark_Gray"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/email_organization" />
 
     <AutoCompleteTextView
-        android:id="@+id/organizationSuggestion"
-        style="@style/AppTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/add_error_message"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_suggestions" />
+      android:id="@+id/organizationSuggestion"
+      style="@style/AppTextStyle"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:paddingLeft="15dp"
+      android:paddingRight="15dp"
+      app:layout_constraintBottom_toTopOf="@+id/add_error_message"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/input_suggestions" />
 
     <View
-        android:id="@+id/add_edit_text_line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="8dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@color/Light_Gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/organizationSuggestion" />
+      android:id="@+id/add_edit_text_line"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginStart="8dp"
+      android:paddingLeft="20dp"
+      android:paddingRight="20dp"
+      android:background="@color/Light_Gray"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/organizationSuggestion" />
     <TextView
-        android:id="@+id/add_error_message"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text=""
-        android:textColor="@color/red"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_edit_text_line" />
+      android:id="@+id/add_error_message"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:text=""
+      android:textColor="@color/red"
+      android:visibility="invisible"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/add_edit_text_line" />
 
     <include
-        android:id="@+id/bio_group"
-        layout="@layout/custom_input_field_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_error_message" />
+      android:id="@+id/bio_group"
+      layout="@layout/custom_input_field_text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/add_error_message" />
 
     <include
-        android:id="@+id/password_organization"
-        layout="@layout/custom_input_field_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bio_group" />
+      android:id="@+id/password_organization"
+      layout="@layout/custom_input_field_password"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/bio_group" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="189dp"
+      android:layout_height="137dp"
+      app:layout_constraintBottom_toTopOf="@+id/sign_up_organization_btn"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/bio_group"
+      app:layout_constraintVertical_bias="0.821">
+
+      <ImageView
+        android:id="@+id/logo_organization"
         android:layout_width="189dp"
         android:layout_height="137dp"
-        app:layout_constraintBottom_toTopOf="@+id/sign_up_organization_btn"
+        android:src="@drawable/user_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bio_group"
-        app:layout_constraintVertical_bias="0.821" >
+        tools:ignore="MissingConstraints" />
 
-        <ImageView
-            android:id="@+id/logo_organization"
-            android:layout_width="189dp"
-            android:layout_height="137dp"
-            android:src="@drawable/user_avatar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints" />
+      <LinearLayout
+        android:id="@+id/signup_organization_loading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff7ff"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="20dp"
+        tools:visibility="visible">
 
-        <LinearLayout
-            android:id="@+id/signup_organization_loading_overlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#fff7ff"
-            android:gravity="center"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="20dp"
-            tools:visibility="visible">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Uploading..."
-                android:textAlignment="center" />
-        </LinearLayout>
+        <TextView
+          android:id="@+id/textView3"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Uploading..."
+          android:textAlignment="center" />
+      </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
     <Button
-        android:id="@+id/sign_up_organization_btn"
-        style="@style/AppTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="80dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/submit_form_btn"
-        android:gravity="center"
-        android:text="@string/sign_up"
-        android:textAppearance="@style/log_in_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_organization"
-        app:layout_constraintVertical_bias="0.841" />
+      android:id="@+id/sign_up_organization_btn"
+      style="@style/AppTextStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="80dp"
+      android:layout_marginTop="32dp"
+      android:background="@drawable/submit_form_btn"
+      android:gravity="center"
+      android:text="@string/sign_up"
+      android:textAppearance="@style/log_in_button"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/password_organization"
+      app:layout_constraintVertical_bias="0.841" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
