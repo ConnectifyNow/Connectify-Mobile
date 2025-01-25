@@ -52,7 +52,7 @@ class ProfileFragment : Fragment() {
     private var noPostsWarningTV: TextView? = null
 
     private var editButton: ImageView? = null
-    private var logoutButton: TextView? = null
+    private var logoutButton: ImageView? = null
     private var backButton: ImageView? = null
 
     private var loadingOverlay: LinearLayout? = null;
