@@ -151,39 +151,57 @@
       app:layout_constraintTop_toBottomOf="@id/bio_group" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="189dp"
-      android:layout_height="137dp"
-      app:layout_constraintBottom_toTopOf="@+id/sign_up_organization_btn"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/bio_group"
-      app:layout_constraintVertical_bias="0.821">
-
-      <ImageView
-        android:id="@+id/logo_organization"
         android:layout_width="189dp"
         android:layout_height="137dp"
-        android:src="@drawable/user_avatar"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="8dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_organization_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/bio_group"
+        app:layout_constraintVertical_bias="0.821">
+
+      <ImageView
+          android:id="@+id/logo_organization"
+          android:layout_width="189dp"
+          android:layout_height="137dp"
+          android:src="@drawable/user_avatar"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          tools:ignore="MissingConstraints" />
 
       <LinearLayout
-        android:id="@+id/signup_organization_loading_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fff7ff"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="20dp"
-        tools:visibility="visible">
+          android:id="@+id/signup_organization_loading_overlay"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="#fff7ff"
+          android:gravity="center"
+          android:orientation="vertical"
+          tools:layout_editor_absoluteX="20dp"
+          tools:visibility="visible">
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.354"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading" />
 
         <TextView
-          android:id="@+id/textView3"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Uploading..."
-          android:textAlignment="center" />
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Uploading..."
+            android:textAlignment="center" />
       </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

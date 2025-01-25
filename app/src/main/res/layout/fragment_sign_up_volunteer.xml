@@ -153,13 +153,27 @@
         tools:layout_editor_absoluteX="20dp"
         tools:visibility="visible">
 
-        <TextView
-          android:id="@+id/textView3"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Uploading..."
-          android:textAlignment="center" />
-      </LinearLayout>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieAnimationView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.354"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Uploading..."
+                android:textAlignment="center" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.constraintlayout.widget.ConstraintLayout>
 
