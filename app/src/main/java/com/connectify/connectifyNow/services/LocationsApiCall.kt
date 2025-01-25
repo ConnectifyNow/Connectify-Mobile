@@ -21,7 +21,6 @@ class LocationsApiCall {
 
         val apiService: LocationsApiService = retrofit.create(LocationsApiService::class.java)
 
-        // Set Israel as origin
         val locationsRequestBody = mapOf(
             "q" to query,
             "gl" to "il"

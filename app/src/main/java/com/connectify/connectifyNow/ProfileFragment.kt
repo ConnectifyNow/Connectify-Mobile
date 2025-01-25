@@ -175,7 +175,6 @@ class ProfileFragment : Fragment() {
                             )
                         }
                         null -> {
-                            // Handle null case if needed
                         }
                     }
                 }
@@ -213,7 +212,6 @@ class ProfileFragment : Fragment() {
 
                 Picasso.get().load(imageUrl).into(profileImage)
 
-                // Blur the background image
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     profileImageBackgroundElement?.setRenderEffect(
                         RenderEffect.createBlurEffect(

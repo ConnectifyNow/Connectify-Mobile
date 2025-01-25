@@ -65,7 +65,6 @@ class EditOrganizationProfileFragment : Fragment() {
         setUserData()
         setEventListeners()
 
-        // Hide the BottomNavigationView
         ActionBarHelpers.hideActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
 
         val backButton = view.findViewById<ImageView>(R.id.back_button)

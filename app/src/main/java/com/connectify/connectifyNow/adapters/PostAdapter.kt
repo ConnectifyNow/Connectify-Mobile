@@ -109,15 +109,15 @@ class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var con
     fun addAll(newPosts: MutableList<Post>) {
         newPosts.sortByDescending { it.lastUpdated };
         posts.addAll(newPosts)
-        notifyDataSetChanged() // Notify the adapter that the data set has changed
+        notifyDataSetChanged()
     }
 
     private fun deletePost(post: Post) {
         val position = posts.indexOf(post)
         if (position != -1) {
             PostViewModel().deletePost(post)
-            posts.removeAt(position) // Remove from the list
-            notifyItemRemoved(position) // Update UI
+            posts.removeAt(position)
+            notifyItemRemoved(position)
             notifyItemRangeChanged(position, posts.size)
         }
     }

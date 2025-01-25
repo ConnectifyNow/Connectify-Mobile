@@ -134,7 +134,7 @@ class FireStoreOrganizationRepository {
                             logo = data["logo"] as String,
                             bio = data["bio"] as String,
                             location = organizationLocation,
-                            lastUpdated = lastUpdated ?: 0 // Default to 0 if timestamp is null
+                            lastUpdated = lastUpdated ?: 0
                         )
                         callback(organization)
                     }

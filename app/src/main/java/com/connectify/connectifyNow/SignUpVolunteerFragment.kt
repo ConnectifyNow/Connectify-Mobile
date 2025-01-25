@@ -51,7 +51,6 @@ class SignUpVolunteerFragment : Fragment() {
         setHints()
         setEventListeners()
 
-        // Hide the BottomNavigationView
         ActionBarHelpers.hideActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
 
         return view
@@ -86,7 +85,6 @@ class SignUpVolunteerFragment : Fragment() {
 
         imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
-                // Perform actions after image upload completes
                 loadingOverlay?.visibility = View.INVISIBLE
             }
         })

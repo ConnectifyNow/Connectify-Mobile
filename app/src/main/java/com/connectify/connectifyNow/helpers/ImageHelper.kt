@@ -26,7 +26,6 @@ class ImageHelper(val fragment: Fragment, private val imageView: ImageView, priv
             if (result.resultCode == android.app.Activity.RESULT_OK) {
                 val selectedImageUri = result.data?.data
                 selectedImageUri?.let { uri ->
-                    // Upload the image to Firebase Storage
                     uploadImageToFirebaseStorage(uri)
                 }
             }
@@ -53,13 +52,10 @@ class ImageHelper(val fragment: Fragment, private val imageView: ImageView, priv
         val riversRef = storageRef.child("images/$randomKey")
         riversRef.putFile(imageUri)
             .addOnSuccessListener { taskSnapshot ->
-                // Image uploaded successfully, get the download URL
                 riversRef.downloadUrl.addOnSuccessListener { uri ->
-                    // Store the uploaded image URL
                     imageUrl = uri.toString()
                     Log.d("url", imageUrl.toString())
 
-                    // Load the image using Picasso
                     Picasso.get().load(uri).into(imageView)
 
                     imageUrl?.let { uploadListener.onImageUploaded(it) }

@@ -20,7 +20,6 @@ class AuthViewModel: ViewModel() {
 
     fun signInUser(email: String, password: String, onSuccess: () -> Unit, onFailure: (String?) -> Unit) {
         userDomain.signIn(email, password, onSuccessCallBack = {
-            // Set the user ID in the LiveData upon successful sign-in
             setCurrentUserId()
             onSuccess.invoke()
         }, onFailure)

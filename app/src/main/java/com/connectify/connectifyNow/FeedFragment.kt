@@ -44,7 +44,6 @@ class FeedFragment : Fragment() {
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Initialize views
         postsRecyclerView = binding.postsRecyclerView
         swipeRefreshLayout = binding.pullToRefresh
         postAdapter = PostAdapter(mutableListOf(), true)
@@ -70,7 +69,6 @@ class FeedFragment : Fragment() {
             }
         }
 
-        // Set up RecyclerView
         postsRecyclerView.layoutManager = LinearLayoutManager(context)
         postsRecyclerView.adapter = postAdapter
 
@@ -78,9 +76,7 @@ class FeedFragment : Fragment() {
             reloadData()
         }
 
-        // Set up ViewModel
         viewModel.posts.observe(viewLifecycleOwner) { newPosts ->
-            // Clear the existing data in the adapter
             if (postAdapter.posts.isNotEmpty()) {
                 postAdapter.clear()
             }
