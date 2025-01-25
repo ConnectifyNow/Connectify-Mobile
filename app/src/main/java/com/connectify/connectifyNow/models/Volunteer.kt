@@ -11,7 +11,7 @@ import java.util.UUID
 @Entity
 data class Volunteer(
     @PrimaryKey
-    var id: String = UUID.randomUUID().toString(), // temp id
+    var id: String = UUID.randomUUID().toString(),
     val name: String,
     val email: String,
     val institution: String,

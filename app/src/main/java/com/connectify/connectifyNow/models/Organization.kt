@@ -13,7 +13,7 @@ import java.util.*
 @Entity
 data class Organization(
     @PrimaryKey(autoGenerate = false)
-    var id: String = UUID.randomUUID().toString(), // temp id
+    var id: String = UUID.randomUUID().toString(),
     val name: String,
     val email: String,
     val logo: String,
