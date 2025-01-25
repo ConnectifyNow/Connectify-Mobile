@@ -119,8 +119,10 @@
         app:layout_constraintVertical_bias="0.805" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="189dp"
-        android:layout_height="137dp"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/sign_up_volunteer_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,13 +130,13 @@
 
         <ImageView
             android:id="@+id/volunteerImage"
-            android:layout_width="189dp"
-            android:layout_height="137dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/user_image"
             android:src="@drawable/user_avatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            android:contentDescription="@string/user_image" />
+            tools:ignore="MissingConstraints" />
 
         <LinearLayout
             android:id="@+id/signup_volunteer_loading_overlay"

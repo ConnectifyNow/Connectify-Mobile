@@ -36,12 +36,12 @@
         android:layout_width="220dp"
         android:layout_height="220dp"
         android:layout_marginTop="40dp"
+        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/organization_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pick_user_title"
-        app:layout_constraintBottom_toTopOf="@+id/organization_card"
-        android:layout_marginBottom="60dp"
-        app:cardCornerRadius="8dp">
+        app:layout_constraintTop_toBottomOf="@id/pick_user_title">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,10 +51,10 @@
 
             <ImageView
                 android:id="@+id/volunteer_image"
-                app:srcCompat="@drawable/volunteer_icon"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/volunteer_icon" />
 
             <TextView
                 android:id="@+id/volunteer_sub_title"
@@ -64,7 +64,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/i_m_a_group"
                 android:textAppearance="@style/sign_in_description"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -72,15 +72,16 @@
         android:id="@+id/organization_card"
         android:layout_width="220dp"
         android:layout_height="220dp"
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/volunteer_card"
-        app:layout_constraintBottom_toTopOf="@+id/volunteer_card"
-        app:cardCornerRadius="8dp">
+        app:layout_constraintTop_toBottomOf="@id/volunteer_card">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="245dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="10dp">
 
