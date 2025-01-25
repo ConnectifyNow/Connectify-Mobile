@@ -31,8 +31,8 @@ class LocationsApiCall {
         call.enqueue(object: Callback<LocationsResponse> {
             override fun onResponse(response: Response<LocationsResponse>, retrofit: Retrofit?) {
                 val res: LocationsResponse = response.body()
-                Log.d("Success", "locations:" + res.locations.size.toString() + res.toString())
-                callback(res.locations)
+                Log.d("Success", "locations:" + res.places.size.toString() + res.toString())
+                callback(res.places)
             }
 
             override fun onFailure(t: Throwable?) {
