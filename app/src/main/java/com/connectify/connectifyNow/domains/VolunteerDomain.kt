@@ -10,6 +10,7 @@ class VolunteerDomain {
 
     val localStoreVolunteerRepository: LocalStoreVolunteerRepository = LocalStoreVolunteerRepository()
     val fireStoreVolunteerRepository: FireStoreVolunteerRepository = FireStoreVolunteerRepository()
+    val fireStoreAuthRepository: FireStoreAuthRepository = FireStoreAuthRepository()
 
     val volunteerLiveData: LiveData<MutableList<Volunteer>> get() = localStoreVolunteerRepository.volunteer
 
