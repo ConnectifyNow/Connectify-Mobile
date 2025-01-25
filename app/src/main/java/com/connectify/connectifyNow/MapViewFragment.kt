@@ -73,7 +73,6 @@ class MapFragment : BaseFragment(), LocationListener {
 
         loadingOverlay = view.findViewById(R.id.map_loading_overlay);
         loadingOverlay?.visibility = View.VISIBLE;
-        // Initialize the permission launcher
 //        requestPermissionLauncher (TODO: NEED TO CHECK WHY THIS IS NOT WORKING)
 
         if (isLocationPermissionGranted()) {
@@ -106,7 +105,6 @@ class MapFragment : BaseFragment(), LocationListener {
     }
 
     private fun scheduleAutomaticRefresh() {
-        // Schedule a task to run every 5 minutes
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 reloadData()
@@ -162,7 +160,6 @@ class MapFragment : BaseFragment(), LocationListener {
         aMap.setTileSource(TileSourceFactory.MAPNIK)
         aMap.controller.setZoom(17.0)
 
-        // Load map configuration
         Configuration.getInstance().load(
             context.applicationContext,
             context.getSharedPreferences("locations", AppCompatActivity.MODE_PRIVATE)
@@ -179,7 +176,6 @@ class MapFragment : BaseFragment(), LocationListener {
     private fun requestLocationPermissions() {
         if (!isLocationPermissionGranted()) {
             try {
-//                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)  (TODO: NEED TO CHECK WHY THIS IS NOT WORKING)
             } catch (e: Exception) {
                 Log.e("MapFragment", "Error launching permission request: ${e.message}")
                 e.printStackTrace()
@@ -191,7 +187,6 @@ class MapFragment : BaseFragment(), LocationListener {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATIONS_PERMISSIONS_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, proceed with your logic
                 initializeMap()
                 requestLocationUpdates()
             } else {
@@ -211,7 +206,6 @@ class MapFragment : BaseFragment(), LocationListener {
             listOf(overlayItem),
             object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
                 override fun onItemSingleTapUp(index: Int, item: OverlayItem): Boolean {
-                    // Log information when a pin is clicked
                     Log.d("Map Click", "Marker clicked: ${item.title} ${data["bio"]} ${data["address"]}")
                     val organizationData = hashMapOf(
                         "name" to data["name"],
@@ -223,7 +217,6 @@ class MapFragment : BaseFragment(), LocationListener {
                 }
 
                 override fun onItemLongPress(index: Int, item: OverlayItem): Boolean {
-                    // Handle long press if needed
                     return false
                 }
             }
@@ -239,7 +232,6 @@ class MapFragment : BaseFragment(), LocationListener {
             .setView(dialogView)
             .create()
 
-        // Set data to views
         dialogView.findViewById<TextView>(R.id.textViewTitle).text = organizationData["name"]
         dialogView.findViewById<TextView>(R.id.textViewBio).text = organizationData["bio"]
         dialogView.findViewById<TextView>(R.id.textViewAddress).text = organizationData["address"]
@@ -249,7 +241,7 @@ class MapFragment : BaseFragment(), LocationListener {
     private fun removeLocationUpdates() {
         if (locationUpdatesRequested) {
             locationManager.removeUpdates(this)
-            locationUpdatesRequested = false // Reset the flag
+            locationUpdatesRequested = false
         }
     }
 
@@ -273,8 +265,6 @@ class MapFragment : BaseFragment(), LocationListener {
     private fun requestLocationUpdates() {
         locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        // Check if GPS permission is granted
-        // Request location updates
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -304,7 +294,6 @@ class MapFragment : BaseFragment(), LocationListener {
     override fun onResume() {
         super.onResume()
         if (isLocationPermissionGranted()) {
-            // Location permission is granted, proceed with initialization
             initializeMap()
             requestLocationUpdates()
 

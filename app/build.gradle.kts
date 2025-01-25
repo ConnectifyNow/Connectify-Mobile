@@ -44,7 +44,6 @@ android {
 }
 
 dependencies {
-  //noinspection UseTomlInstead
   implementation(libs.google.firebase.storage)
 
   implementation(libs.androidx.core.ktx)
