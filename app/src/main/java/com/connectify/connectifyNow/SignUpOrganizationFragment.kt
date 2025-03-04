@@ -15,6 +15,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
@@ -40,6 +41,8 @@ class SignUpOrganizationFragment : BaseFragment() {
     private lateinit var organization: Organization
     private lateinit var view: View
     private lateinit var signUpOrganization: Button
+    private lateinit var chooseOnMap: Button
+
     private lateinit var dynamicTextHelper: DynamicTextHelper
     private lateinit var organizationViewModel: OrganizationViewModel
     private lateinit var userAuthViewModel: AuthViewModel
@@ -151,6 +154,15 @@ class SignUpOrganizationFragment : BaseFragment() {
         })
         imageHelper.setImageViewClickListener {
             loadingOverlay?.visibility = View.VISIBLE
+        }
+
+        chooseOnMap = view.findViewById(R.id.choose_on_map_button)
+
+        chooseOnMap.setOnClickListener{
+            val args = Bundle()
+            args.putBoolean("showFeed", false)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_signUpOrganizationFragment_to_mapViewFragment, args)
         }
 
         signUpOrganization.setOnClickListener {
