@@ -85,4 +85,5 @@
     <string name="back">Back</string>
     <string name="log_out">Log Out</string>
     <string name="explore_organizations">Back to Map</string>
+    <string name="choose_on_map">choose on map</string>
 </resources>
