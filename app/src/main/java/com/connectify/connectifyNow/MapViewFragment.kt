@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.FragmentMapBinding
@@ -124,7 +125,20 @@ class MapFragment : BaseFragment(), LocationListener {
 
                 addressApiCall.getAddressByLocation(requireContext(), latitude, longitude) { address ->
                     if (address != null) {
-                        Log.d("MapFragment", "Chosen location address: $address")
+                        // Create a bundle to hold the address data
+                        Log.d("MapFragment", "Idan: $address")
+
+                        val result = Bundle().apply {
+                            putDouble("latitude", latitude)
+                            putDouble("longitude", longitude)
+                            putString("address", address)
+                        }
+
+                        // Set the fragment result to be received by the previous fragment
+                        parentFragmentManager.setFragmentResult("location_result", result)
+
+                        // Navigate back to the previous fragment
+                        findNavController().popBackStack()
                     } else {
                         Log.d("MapFragment", "Failed to fetch address")
                     }
