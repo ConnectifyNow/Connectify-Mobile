@@ -1,6 +1,7 @@
 package com.connectify.connectifyNow
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
@@ -19,11 +20,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.FragmentMapBinding
 import com.connectify.connectifyNow.viewModel.OrganizationViewModel
 import com.connectify.connectifyNow.models.Organization
+import com.connectify.connectifyNow.services.AddressApiCall
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -35,24 +38,24 @@ import java.util.TimerTask
 
 class MapFragment : BaseFragment(), LocationListener {
 
+    private var chosenLocation: GeoPoint? = null
     private lateinit var aMap: MapView
     private lateinit var locationManager: LocationManager
     private lateinit var view: View
     private lateinit var viewModel: OrganizationViewModel
     private var organizationList: MutableList<Organization> = mutableListOf()
 
-    private var loadingOverlay: LinearLayout? = null;
+    private var loadingOverlay: LinearLayout? = null
+    private var addressApiCall: AddressApiCall = AddressApiCall()
 
     private val timer = Timer()
     private val binding get() = _binding!!
 
     private var _binding: FragmentMapBinding? = null
     private var locationUpdatesRequested = false
-    val LOCATIONS_PERMISSIONS_CODE = 2
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
         if (isGranted) {
-
             initializeMap()
             requestLocationUpdates()
         }
@@ -66,13 +69,10 @@ class MapFragment : BaseFragment(), LocationListener {
         _binding = FragmentMapBinding.inflate(layoutInflater, container, false)
         view = binding.root
 
-        val args = arguments
-        val showFeed = args?.getString("showFeed") ?: true
-
         viewModel = ViewModelProvider(this)[OrganizationViewModel::class.java]
 
-        loadingOverlay = view.findViewById(R.id.map_loading_overlay);
-        loadingOverlay?.visibility = View.VISIBLE;
+        loadingOverlay = view.findViewById(R.id.map_loading_overlay)
+        loadingOverlay?.visibility = View.VISIBLE
         requestPermissionLauncher
 
         if (isLocationPermissionGranted()) {
@@ -84,28 +84,86 @@ class MapFragment : BaseFragment(), LocationListener {
         return view
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setEventListeners() {
         val args = arguments
-        val showFeed = args?.getBoolean("showFeed", true) ?: true
+        val signUpPage = args?.getBoolean("showFeed", true) ?: true
 
-        if (showFeed) {
-            binding.feedBtn.text = "Feed"
+        if (signUpPage) {
+            binding.backPageButton.visibility = View.GONE
         } else {
-            binding.feedBtn.text = "Back to Profile"
+            binding.backPageButton.text = "Back to Profile"
         }
 
-        binding.feedBtn.setOnClickListener {
+        binding.backPageButton.setOnClickListener {
             clearMapOverlays()
-            if (showFeed) {
+            if (signUpPage) {
                 view.navigate(R.id.action_mapViewFragment_to_feedFragment)
             }
             else findNavController().navigateUp()
+        }
 
+        aMap.setOnTouchListener { view, event ->
+            if (event.action == android.view.MotionEvent.ACTION_UP) {
+                val geoPoint = aMap.projection.fromPixels(event.x.toInt(), event.y.toInt()) as? GeoPoint
+                geoPoint?.let { handleMapTouch(it, view) }
+            }
+            false
+        }
+
+        binding.backButton.setOnClickListener {
+            clearMapOverlays()
+            findNavController().navigateUp()
+        }
+
+        binding.doneButton.setOnClickListener {
+            clearMapOverlays()
+
+            chosenLocation?.let { location ->
+                val latitude = location.latitude
+                val longitude = location.longitude
+
+                addressApiCall.getAddressByLocation(requireContext(), latitude, longitude) { address ->
+                    if (address != null) {
+                        // Create a bundle to hold the address data
+                        Log.d("MapFragment", "Idan: $address")
+
+                        val result = Bundle().apply {
+                            putDouble("latitude", latitude)
+                            putDouble("longitude", longitude)
+                            putString("address", address)
+                        }
+
+                        // Set the fragment result to be received by the previous fragment
+                        parentFragmentManager.setFragmentResult("location_result", result)
+
+                        // Navigate back to the previous fragment
+                        findNavController().popBackStack()
+                    } else {
+                        Log.d("MapFragment", "Failed to fetch address")
+                    }
+                }
+            } ?: Log.d("MapFragment", "No location chosen")
         }
     }
 
+
+    private fun handleMapTouch(geoPoint: GeoPoint, view: View) {
+        chosenLocation = geoPoint
+        clearMapOverlays()
+
+        addMarker(
+            geoPoint,
+            hashMapOf("name" to "", "bio" to "", "address" to ""),
+            "",
+            false
+        )
+
+        view.performClick()
+    }
+
     private fun scheduleAutomaticRefresh() {
-        timer.scheduleAtFixedRate(object : TimerTask() {
+        timer.schedule(object : TimerTask() {
             override fun run() {
                 reloadData()
             }
@@ -184,19 +242,19 @@ class MapFragment : BaseFragment(), LocationListener {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == LOCATIONS_PERMISSIONS_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                initializeMap()
-                requestLocationUpdates()
-            } else {
-                Log.d("MapFragment", "Location permission denied")
-            }
-        }
-    }
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        if (requestCode == LOCATIONS_PERMISSIONS_CODE) {
+//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                initializeMap()
+//                requestLocationUpdates()
+//            } else {
+//                Log.d("MapFragment", "Location permission denied")
+//            }
+//        }
+//    }
 
-    private fun addMarker(geoPoint: GeoPoint, data: HashMap<String, String>, snippet: String) {
+    private fun addMarker(geoPoint: GeoPoint, data: HashMap<String, String>, snippet: String, showOrganizationDialog: Boolean = true) {
         val markerIcon: Drawable? = ContextCompat.getDrawable(requireContext(), R.drawable.custom_marker_icon)
 
         val overlayItem = OverlayItem(data["name"], snippet, geoPoint)
@@ -213,7 +271,9 @@ class MapFragment : BaseFragment(), LocationListener {
                         "address" to data["address"],
                         "bio" to data["bio"]
                     )
-                    showOrganizationInfoDialog(organizationData)
+                    if (showOrganizationDialog) {
+                        showOrganizationInfoDialog(organizationData)
+                    }
                     return true
                 }
 
@@ -289,7 +349,7 @@ class MapFragment : BaseFragment(), LocationListener {
         val geoPoint = GeoPoint(location.latitude, location.longitude)
         aMap.controller.setCenter(geoPoint)
         addMarker(geoPoint, hashMapOf("name" to "this is my location", "bio" to "", "address" to ""), "OSMDroid Marker")
-        loadingOverlay?.visibility = View.INVISIBLE;
+        loadingOverlay?.visibility = View.INVISIBLE
     }
 
     override fun onResume() {

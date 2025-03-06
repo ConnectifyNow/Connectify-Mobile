@@ -77,19 +77,21 @@
       app:layout_constraintTop_toBottomOf="@id/organization_name_group" />
 
     <TextView
-      android:id="@+id/input_suggestions"
-      style="@style/AppTextStyle"
-      android:layout_width="0dp"
-      android:layout_height="25dp"
-      android:paddingLeft="15dp"
-      android:paddingRight="15dp"
-      android:gravity="top"
-      android:text="@string/address"
-      android:textColor="@color/Dark_Gray"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/email_organization" />
+        android:id="@+id/input_suggestions"
+        style="@style/AppTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:gravity="top"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="@string/address"
+        android:textColor="@color/Dark_Gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_organization"
+        app:layout_constraintEnd_toStartOf="@id/choose_on_map_button"
+
+        />
+
 
     <AutoCompleteTextView
       android:id="@+id/organizationSuggestion"
@@ -102,7 +104,6 @@
       android:paddingRight="15dp"
       app:layout_constraintBottom_toTopOf="@+id/add_error_message"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/input_suggestions" />
 
     <View
@@ -222,6 +223,19 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/password_organization"
       app:layout_constraintVertical_bias="0.841" />
+
+    <Button
+        android:id="@+id/choose_on_map_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_on_map"
+        app:layout_constraintBaseline_toBaselineOf="@+id/input_suggestions"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.57"
+        app:layout_constraintStart_toEndOf="@+id/input_suggestions"
+        app:layout_constraintTop_toBottomOf="@id/email_organization"
+        app:layout_constraintVertical_bias="0.41" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
