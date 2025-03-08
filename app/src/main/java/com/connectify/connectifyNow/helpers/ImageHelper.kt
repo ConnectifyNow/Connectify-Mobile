@@ -91,19 +91,6 @@ class ImageHelper(val fragment: Fragment, private val imageView: ImageView, priv
         }
     }
 
-    // Display remote image in ImageView
-    fun displayRemoteImage(url: String) {
-        try {
-            Picasso.get()
-                .load(url)
-                .fit()
-                .centerCrop()
-                .into(imageView)
-        } catch (e: Exception) {
-            Log.e("ImageHelper", "Error loading remote image: ${e.message}")
-        }
-    }
-
     private fun uploadImage() {
         val intent = Intent()
         intent.type = "image/*"
