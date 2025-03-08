@@ -20,7 +20,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.FragmentMapBinding
@@ -92,7 +91,7 @@ class MapFragment : BaseFragment(), LocationListener {
         if (isEditMode) {
             binding.backPageButton.visibility = View.GONE
         } else {
-            binding.backPageButton.text = "Back to Profile"
+            binding.backPageButton.text = getString(R.string.back_to_profile)
             binding.backButton.visibility = View.GONE
             binding.doneButton.visibility = View.GONE
         }
@@ -343,7 +342,7 @@ class MapFragment : BaseFragment(), LocationListener {
             requestLocationPermissions()
         }
         locationManager.requestLocationUpdates(
-            LocationManager.NETWORK_PROVIDER,
+            LocationManager.GPS_PROVIDER,
             1000, // Minimum time interval between updates (in milliseconds)
             1f,   // Minimum distance between updates (in meters)
             this
