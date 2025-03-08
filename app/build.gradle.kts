@@ -18,6 +18,10 @@ android {
       versionName = "1.0"
 
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+      buildConfigField("String", "CLOUD_NAME", "\"${project.properties["CLOUD_NAME"] ?: ""}\"")
+      buildConfigField("String", "API_KEY", "\"${project.properties["API_KEY"] ?: ""}\"")
+      buildConfigField("String", "API_SECRET", "\"${project.properties["API_SECRET"] ?: ""}\"")
   }
 
   buildTypes {
@@ -75,7 +79,8 @@ dependencies {
 
   implementation(libs.androidx.room.runtime)
   kapt(libs.androidx.room.compiler)
-  implementation(libs.androidx.room.ktx)
+    implementation(libs.cloudinary.android)
+    implementation(libs.androidx.room.ktx)
   implementation(libs.lottie)
   implementation(libs.osmdroid.android)
 
