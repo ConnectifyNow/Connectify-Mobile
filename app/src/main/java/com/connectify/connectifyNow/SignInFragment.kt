@@ -103,7 +103,7 @@ class SignInFragment : BaseFragment() {
     }
 
     private val onSuccess: () -> Unit = {
-        view.navigate(R.id.action_signInFragment_to_mapViewFragment)
+        view.navigate(R.id.action_signInFragment_to_feedFragment)
     }
 
     private val onError: (String?) -> Unit = {

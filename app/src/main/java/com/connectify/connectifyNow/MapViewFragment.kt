@@ -126,7 +126,6 @@ class MapFragment : BaseFragment(), LocationListener {
                 addressApiCall.getAddressByLocation(requireContext(), latitude, longitude) { address ->
                     if (address != null) {
                         // Create a bundle to hold the address data
-                        Log.d("MapFragment", "Idan: $address")
 
                         val result = Bundle().apply {
                             putDouble("latitude", latitude)
@@ -134,12 +133,14 @@ class MapFragment : BaseFragment(), LocationListener {
                             putString("address", address)
                         }
 
+                        val navController = findNavController()
+
                         // Set the fragment result to be received by the previous fragment
-                        parentFragmentManager.setFragmentResult("location_result", result)
+                        navController.previousBackStackEntry?.savedStateHandle?.set("location_data", result)
 
                         // Navigate back to the previous fragment
-                        findNavController().popBackStack()
-                    } else {
+                        navController.popBackStack()
+                     } else {
                         Log.d("MapFragment", "Failed to fetch address")
                     }
                 }
