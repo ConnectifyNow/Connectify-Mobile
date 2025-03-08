@@ -87,29 +87,34 @@ class MapFragment : BaseFragment(), LocationListener {
     @SuppressLint("ClickableViewAccessibility")
     private fun setEventListeners() {
         val args = arguments
-        val signUpPage = args?.getBoolean("showFeed", true) ?: true
+        val isEditMode = args?.getBoolean("editMode", true) ?: true
 
-        if (signUpPage) {
+        if (isEditMode) {
             binding.backPageButton.visibility = View.GONE
         } else {
             binding.backPageButton.text = "Back to Profile"
+            binding.backButton.visibility = View.GONE
+            binding.doneButton.visibility = View.GONE
         }
 
         binding.backPageButton.setOnClickListener {
             clearMapOverlays()
-            if (signUpPage) {
+            if (isEditMode) {
                 view.navigate(R.id.action_mapViewFragment_to_feedFragment)
             }
             else findNavController().navigateUp()
         }
 
-        aMap.setOnTouchListener { view, event ->
-            if (event.action == android.view.MotionEvent.ACTION_UP) {
-                val geoPoint = aMap.projection.fromPixels(event.x.toInt(), event.y.toInt()) as? GeoPoint
-                geoPoint?.let { handleMapTouch(it, view) }
+        if(isEditMode){
+            aMap.setOnTouchListener { view, event ->
+                if (event.action == android.view.MotionEvent.ACTION_UP) {
+                    val geoPoint = aMap.projection.fromPixels(event.x.toInt(), event.y.toInt()) as? GeoPoint
+                    geoPoint?.let { handleMapTouch(it, view) }
+                }
+                false
             }
-            false
         }
+
 
         binding.backButton.setOnClickListener {
             clearMapOverlays()
