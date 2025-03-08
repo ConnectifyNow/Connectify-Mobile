@@ -147,14 +147,26 @@ class SignUpOrganizationFragment : BaseFragment() {
     }
 
     private fun setEventListeners() {
-        parentFragmentManager.setFragmentResultListener("location_result", viewLifecycleOwner) { requestKey, bundle ->
-            val latitude = bundle.getDouble("latitude")
-            val longitude = bundle.getDouble("longitude")
-            val address = bundle.getString("address")
+        val navController = findNavController()
+
+        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<Bundle>("location_data")?.observe(
+            viewLifecycleOwner
+        ) { result ->
+            val latitude = result.getDouble("latitude")
+            val longitude = result.getDouble("longitude")
+            val address = result.getString("address")
 
             Log.d("SignUpFragment", "Received address: $address")
 
             binding.organizationSuggestion.setText(address)
+
+            organizationLocation = OrganizationLocation(
+                address.toString(),
+                GeoPoint(latitude, longitude),
+                GeoHash(latitude, longitude)
+            )
+            navController.currentBackStackEntry?.savedStateHandle?.remove<Bundle>("location_data")
+
         }
 
         signUpOrganization = view.findViewById(R.id.sign_up_organization_btn)
