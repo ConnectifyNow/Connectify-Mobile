@@ -172,11 +172,20 @@ class SignUpOrganizationFragment : BaseFragment() {
         signUpOrganization = view.findViewById(R.id.sign_up_organization_btn)
         imageView = view.findViewById(R.id.logo_organization)
 
-        imageHelper = ImageHelper(this, imageView , object : ImageUploadListener {
+        imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
                 loadingOverlay?.visibility = View.INVISIBLE
+                // Save the imageUrl to your data model or wherever needed
+                Log.d("YourFragment", "Image uploaded: $imageUrl")
+            }
+
+            override fun onUploadFailed(error: String) {
+                loadingOverlay?.visibility = View.INVISIBLE
+                // Show error message to user
+                Log.e("YourFragment", "Upload failed: $error")
             }
         })
+
         imageHelper.setImageViewClickListener {
             loadingOverlay?.visibility = View.VISIBLE
         }
