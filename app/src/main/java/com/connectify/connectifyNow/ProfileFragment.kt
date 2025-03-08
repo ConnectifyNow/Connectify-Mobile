@@ -120,7 +120,7 @@ class ProfileFragment : Fragment() {
             mapButton.visibility = View.VISIBLE
             mapButton.setOnClickListener {
                 val args = Bundle()
-                args.putBoolean("showFeed", false)
+                args.putBoolean("editMode", false)
                 Navigation.findNavController(it)
                     .navigate(R.id.action_profileFragment_to_mapFragment, args)
             }

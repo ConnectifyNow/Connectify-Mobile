@@ -185,7 +185,7 @@ class SignUpOrganizationFragment : BaseFragment() {
 
         chooseOnMap.setOnClickListener{
             val args = Bundle()
-            args.putBoolean("showFeed", false)
+            args.putBoolean("editMode", true)
             Navigation.findNavController(view)
                 .navigate(R.id.action_signUpOrganizationFragment_to_mapViewFragment, args)
         }
