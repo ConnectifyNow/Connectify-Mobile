@@ -14,14 +14,8 @@ import java.io.InputStream
 class CloudinaryModel {
 
     init {
-        val config = mapOf(
-            "cloud_name" to BuildConfig.CLOUD_NAME,
-            "api_key" to BuildConfig.API_KEY,
-            "api_secret" to BuildConfig.API_SECRET
-        )
 
         MyApplication.Globals.appContext?.let {
-            MediaManager.init(it, config)
             MediaManager.get().globalUploadPolicy = GlobalUploadPolicy.defaultPolicy()
         }
     }
@@ -39,11 +33,9 @@ class CloudinaryModel {
             .option("folder", "images")
             .callback(object  : UploadCallback {
                 override fun onStart(requestId: String?) {
-
                 }
 
                 override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
-
                 }
 
                 override fun onSuccess(requestId: String?, resultData: Map<*, *>) {
@@ -53,7 +45,6 @@ class CloudinaryModel {
                 }
 
                 override fun onReschedule(requestId: String?, error: ErrorInfo?) {
-
                 }
 
             })

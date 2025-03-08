@@ -20,8 +20,6 @@ interface ImageUploadListener {
 class ImageHelper(val fragment: Fragment, private val imageView: ImageView, private val uploadListener: ImageUploadListener) {
     private val cloudinaryModel = CloudinaryModel()
     private var imageUrl: String? = null
-    private val storageRef = FirebaseStorage.getInstance().reference
-
 
     private val startForResult =
         fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -48,27 +46,6 @@ class ImageHelper(val fragment: Fragment, private val imageView: ImageView, priv
             }, 1000)
         }
     }
-
-//    private fun uploadImageToFirebaseStorage(imageUri: Uri) {
-//        val randomKey = UUID.randomUUID().toString()
-//        val riversRef = storageRef.child("images/$randomKey")
-//        riversRef.putFile(imageUri)
-//            .addOnSuccessListener { taskSnapshot ->
-//                riversRef.downloadUrl.addOnSuccessListener { uri ->
-//                    imageUrl = uri.toString()
-//                    Log.d("url", imageUrl.toString())
-//
-//                    Picasso.get().load(uri).into(imageView)
-//
-//                    imageUrl?.let { uploadListener.onImageUploaded(it) }
-//
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.e("Upload File", "Upload failed", exception)
-//            }
-//    }
-
 
 
     private fun uploadImage() {
