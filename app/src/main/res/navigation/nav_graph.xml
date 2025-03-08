@@ -19,8 +19,8 @@
       android:id="@+id/action_landingPageFragment_to_pickUserTypeFragment"
       app:destination="@id/pickUserTypeFragment" />
     <action
-      android:id="@+id/action_landingPageFragment_to_mapViewFragment"
-      app:destination="@id/mapViewFragment" />
+        android:id="@+id/action_landingPageFragment_to_feedFragment"
+        app:destination="@id/feedFragment" />
   </fragment>
 
   <fragment
@@ -47,6 +47,9 @@
     <action
       android:id="@+id/action_signInFragment_to_pickUserTypeFragment"
       app:destination="@id/pickUserTypeFragment" />
+    <action
+        android:id="@+id/action_signInFragment_to_feedFragment"
+        app:destination="@id/feedFragment" />
   </fragment>
   <fragment
     android:id="@+id/profileFragment"
