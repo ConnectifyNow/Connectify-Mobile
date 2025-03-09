@@ -18,6 +18,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
@@ -51,7 +52,7 @@ class SignUpOrganizationFragment : BaseFragment() {
     private lateinit var userAuthViewModel: AuthViewModel
     private lateinit var imageHelper: ImageHelper
     private lateinit var addressAutoComplete: AutoCompleteTextView
-    private  lateinit var loadingOverlay: LinearLayout
+    private lateinit var loadingOverlay: LinearLayout
 
     private var _binding: FragmentSignUpOrganizationBinding? = null
     private val binding get() = _binding!!
@@ -60,6 +61,17 @@ class SignUpOrganizationFragment : BaseFragment() {
         GeoPoint(0.0, 0.0),
         GeoHash(0.0, 0.0)
     )
+
+    // Form state keys
+    private val FORM_STATE_KEY = "form_state"
+    private val ORG_NAME_KEY = "org_name"
+    private val EMAIL_KEY = "email"
+    private val PASSWORD_KEY = "password"
+    private val BIO_KEY = "bio"
+    private val LOGO_URL_KEY = "logo_url"
+    private val ADDRESS_KEY = "address"
+    private val LAT_KEY = "latitude"
+    private val LON_KEY = "longitude"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,13 +83,16 @@ class SignUpOrganizationFragment : BaseFragment() {
         userAuthViewModel = AuthViewModel()
         dynamicTextHelper = DynamicTextHelper(view)
 
-        loadingOverlay = view.findViewById(R.id.signup_organization_loading_overlay);
-        loadingOverlay?.visibility = View.INVISIBLE
+        loadingOverlay = view.findViewById(R.id.signup_organization_loading_overlay)
+        loadingOverlay.visibility = View.INVISIBLE
 
         initLocationsAutoComplete()
 
         setHints()
         setEventListeners()
+
+        // Restore saved form data if available
+        restoreFormState()
 
         return view
     }
@@ -103,7 +118,7 @@ class SignUpOrganizationFragment : BaseFragment() {
 
         addressAutoComplete.setAdapter(locationsAdapter)
         addressAutoComplete.setOnItemClickListener { _, _, i, _ ->
-            val selectedLocation = locationsSuggestions[i];
+            val selectedLocation = locationsSuggestions[i]
             val latitude = selectedLocation.latitude.toDouble()
             val longitude = selectedLocation.longitude.toDouble()
 
@@ -166,7 +181,6 @@ class SignUpOrganizationFragment : BaseFragment() {
                 GeoHash(latitude, longitude)
             )
             navController.currentBackStackEntry?.savedStateHandle?.remove<Bundle>("location_data")
-
         }
 
         signUpOrganization = view.findViewById(R.id.sign_up_organization_btn)
@@ -174,25 +188,28 @@ class SignUpOrganizationFragment : BaseFragment() {
 
         imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
-                loadingOverlay?.visibility = View.INVISIBLE
+                loadingOverlay.visibility = View.INVISIBLE
                 // Save the imageUrl to your data model or wherever needed
                 Log.d("YourFragment", "Image uploaded: $imageUrl")
             }
 
             override fun onUploadFailed(error: String) {
-                loadingOverlay?.visibility = View.INVISIBLE
+                loadingOverlay.visibility = View.INVISIBLE
                 // Show error message to user
                 Log.e("YourFragment", "Upload failed: $error")
             }
         })
 
         imageHelper.setImageViewClickListener {
-            loadingOverlay?.visibility = View.VISIBLE
+            loadingOverlay.visibility = View.VISIBLE
         }
 
         chooseOnMap = view.findViewById(R.id.choose_on_map_button)
 
-        chooseOnMap.setOnClickListener{
+        chooseOnMap.setOnClickListener {
+            // Save form state before navigating
+            saveFormState()
+
             val args = Bundle()
             args.putBoolean("editMode", true)
             Navigation.findNavController(view)
@@ -206,7 +223,7 @@ class SignUpOrganizationFragment : BaseFragment() {
             val passwordGroup = binding.passwordOrganization
             val address = binding.organizationSuggestion.text
             val logo = imageHelper.getImageUrl()
-            if (isValidInputs(emailGroup, passwordGroup, organizationNameGroup, address,bioGroup)) {
+            if (isValidInputs(emailGroup, passwordGroup, organizationNameGroup, address, bioGroup)) {
                 val email = emailGroup.editTextField.text.toString()
                 val password = passwordGroup.editTextField.text.toString()
                 val name = organizationNameGroup.editTextField.text.toString()
@@ -239,17 +256,16 @@ class SignUpOrganizationFragment : BaseFragment() {
         context?.let {
             LocationsApiCall().getLocationsByQuery(it, query) { locations ->
 
-                locationsAdapter.clear();
-                locationsSuggestions = ArrayList();
+                locationsAdapter.clear()
+                locationsSuggestions = ArrayList()
 
-                val filteredLocationsArray = ArrayList<String>();
+                val filteredLocationsArray = ArrayList<String>()
                 locations.forEach {
                     if (it.address != null && it.longitude != null && it.latitude != null) {
                         filteredLocationsArray.add(it.title.plus(" - ").plus(it.address))
-                        locationsSuggestions.add(it);
+                        locationsSuggestions.add(it)
                     }
                 }
-
 
                 locationsAdapter = ArrayAdapter(
                     requireContext(),
@@ -258,7 +274,7 @@ class SignUpOrganizationFragment : BaseFragment() {
                 )
 
                 locationsAdapter.notifyDataSetChanged()
-                addressAutoComplete?.setAdapter(locationsAdapter)
+                addressAutoComplete.setAdapter(locationsAdapter)
             }
         }
     }
@@ -310,6 +326,63 @@ class SignUpOrganizationFragment : BaseFragment() {
                 }
         )
         return validationResults.all { it }
+    }
+
+    // Save form state to saved state handle
+    private fun saveFormState() {
+        val navController = findNavController()
+        val currentBackStackEntry = navController.currentBackStackEntry
+        val savedStateHandle = currentBackStackEntry?.savedStateHandle
+
+        savedStateHandle?.let { handle ->
+            val formBundle = Bundle().apply {
+                putString(ORG_NAME_KEY, binding.organizationNameGroup.editTextField.text.toString())
+                putString(EMAIL_KEY, binding.emailOrganization.editTextField.text.toString())
+                putString(PASSWORD_KEY, binding.passwordOrganization.editTextField.text.toString())
+                putString(BIO_KEY, binding.bioGroup.editTextField.text.toString())
+                putString(ADDRESS_KEY, binding.organizationSuggestion.text.toString())
+
+                // Save location coordinates if available
+                if (organizationLocation.location.latitude != 0.0 || organizationLocation.location.longitude != 0.0) {
+                    putDouble(LAT_KEY, organizationLocation.location.latitude)
+                    putDouble(LON_KEY, organizationLocation.location.longitude)
+                }
+            }
+
+            handle[FORM_STATE_KEY] = formBundle
+            Log.d("SignUpFragment", "Form state saved")
+        }
+    }
+
+    // Restore form state from saved state handle
+    private fun restoreFormState() {
+        val navController = findNavController()
+        val currentBackStackEntry = navController.currentBackStackEntry
+        val savedStateHandle = currentBackStackEntry?.savedStateHandle
+
+        savedStateHandle?.get<Bundle>(FORM_STATE_KEY)?.let { formBundle ->
+            view.post {
+                _binding?.let { binding ->
+                    formBundle.getString(ORG_NAME_KEY)?.let { name ->
+                        binding.organizationNameGroup.editTextField.setText(name)
+                    }
+
+                    formBundle.getString(EMAIL_KEY)?.let { email ->
+                        binding.emailOrganization.editTextField.setText(email)
+                    }
+
+                    formBundle.getString(PASSWORD_KEY)?.let { password ->
+                        binding.passwordOrganization.editTextField.setText(password)
+                    }
+
+                    formBundle.getString(BIO_KEY)?.let { bio ->
+                        binding.bioGroup.editTextField.setText(bio)
+                    }
+
+                    Log.d("SignUpFragment", "Form state restoration complete")
+                } ?: Log.e("SignUpFragment", "Binding is null during restore")
+            }
+        } ?: Log.d("SignUpFragment", "No saved form state found")
     }
 
     override fun onDestroy() {

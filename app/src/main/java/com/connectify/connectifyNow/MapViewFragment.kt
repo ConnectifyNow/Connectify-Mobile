@@ -343,7 +343,7 @@ class MapFragment : BaseFragment(), LocationListener {
             requestLocationPermissions()
         }
         locationManager.requestLocationUpdates(
-            LocationManager.NETWORK_PROVIDER,
+            LocationManager.GPS_PROVIDER,
             1000, // Minimum time interval between updates (in milliseconds)
             1f,   // Minimum distance between updates (in meters)
             this
