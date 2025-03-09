@@ -87,5 +87,6 @@
     <string name="explore_organizations">Back to Map</string>
     <string name="choose_on_map">choose on map</string>
     <string name="done">Done</string>
-    <string name="searching_around_you">Searching around you...</string>
+    <string name="searching_around_you">Searching around you…</string>
+    <string name="back_to_profile">Back to Profile</string>
 </resources>
