@@ -340,13 +340,6 @@ class SignUpOrganizationFragment : BaseFragment() {
                 putString(EMAIL_KEY, binding.emailOrganization.editTextField.text.toString())
                 putString(PASSWORD_KEY, binding.passwordOrganization.editTextField.text.toString())
                 putString(BIO_KEY, binding.bioGroup.editTextField.text.toString())
-                putString(ADDRESS_KEY, binding.organizationSuggestion.text.toString())
-
-                // Save location coordinates if available
-                if (organizationLocation.location.latitude != 0.0 || organizationLocation.location.longitude != 0.0) {
-                    putDouble(LAT_KEY, organizationLocation.location.latitude)
-                    putDouble(LON_KEY, organizationLocation.location.longitude)
-                }
             }
 
             handle[FORM_STATE_KEY] = formBundle
