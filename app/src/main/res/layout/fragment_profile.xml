@@ -133,7 +133,7 @@
       app:layout_constraintTop_toBottomOf="@+id/profile_additional_info" />
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
       android:id="@+id/explore_organizations"
       style="@style/AppTextStyle"
       android:layout_width="250dp"
@@ -141,6 +141,14 @@
       android:text="@string/explore_organizations"
       android:textSize="17sp"
       android:textStyle="normal"
+      app:icon="@drawable/ic_map_marker"
+      app:iconGravity="textStart"
+      app:iconPadding="8dp"
+      app:iconTint="@color/Dark_Gray"
+      app:strokeColor="@color/Light_Gray"
+      app:strokeWidth="1dp"
+      android:backgroundTint="#E0CFEF"
+      android:textColor="@color/Dark_Gray"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/profile_bio" />

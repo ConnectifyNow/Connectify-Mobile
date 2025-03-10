@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ConnectifyApp</string>
+    <string name="app_name">Connectify</string>
     <string name="sign_in">Sign in</string>
     <string name="lets_log_in_title">Lets sign you in.</string>
     <string name="sign_in_description_text">Sign in with your email and password and join us</string>
@@ -84,7 +84,7 @@
     <string name="organization_profile">Update Organization</string>
     <string name="back">Back</string>
     <string name="log_out">Log Out</string>
-    <string name="explore_organizations">Back to Map</string>
+    <string name="explore_organizations">Explore on Map</string>
     <string name="choose_on_map">choose on map</string>
     <string name="done">Done</string>
     <string name="searching_around_you">Searching around you…</string>
