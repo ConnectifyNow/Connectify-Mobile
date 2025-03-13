@@ -77,6 +77,10 @@ class ProfileFragment : Fragment() {
         val args = arguments
         val userId = args?.getString("userId") ?: authViewModel.getUserId()
 
+        if (args?.getString("userId") !== null) {
+            ActionBarHelpers.hideActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
+        }
+
         val isFromArgs = args != null
         postAdapter = PostAdapter(mutableListOf(), false, isFromArgs)
 
@@ -106,6 +110,8 @@ class ProfileFragment : Fragment() {
             backButton?.setVisibility(View.VISIBLE)
 
             backButton?.setOnClickListener {
+                ActionBarHelpers.showActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
+
                 requireActivity().supportFragmentManager.popBackStack(
                     "profileBackStack",
                     FragmentManager.POP_BACK_STACK_INCLUSIVE

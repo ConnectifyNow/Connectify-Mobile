@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.databinding.FragmentEditPostBinding
@@ -74,6 +75,10 @@ class editPost : Fragment() {
 
                 loadingOverlay.visibility = View.INVISIBLE
             }
+
+            override fun onUploadFailed(error: String) {
+                TODO("Not yet implemented")
+            }
         })
         imageHelper.setImageViewClickListener {
             loadingOverlay.visibility = View.VISIBLE
@@ -117,6 +122,10 @@ class editPost : Fragment() {
                     Toast.makeText(requireContext(), "Failed to update post", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            Navigation.findNavController(view).navigate(
+                R.id.action_editPost_to_profileFragment,
+            )
         }
     }
 
