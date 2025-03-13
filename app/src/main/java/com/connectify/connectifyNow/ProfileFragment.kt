@@ -119,13 +119,13 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        val mapButton = binding.exploreOrganizations
+        val mapButton = binding?.exploreOrganizations
 
         if(args?.getString("userId") != null) {
-            mapButton.visibility = View.GONE
+            mapButton?.visibility = View.GONE
         } else {
-            mapButton.visibility = View.VISIBLE
-            mapButton.setOnClickListener {
+            mapButton?.visibility = View.VISIBLE
+            mapButton?.setOnClickListener {
                 val args = Bundle()
                 args.putBoolean("editMode", false)
                 Navigation.findNavController(it)
