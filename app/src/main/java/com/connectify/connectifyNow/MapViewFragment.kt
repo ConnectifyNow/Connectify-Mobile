@@ -377,6 +377,6 @@ class MapFragment : BaseFragment(), LocationListener {
     override fun onDestroy() {
         super.onDestroy()
         timer.cancel()
-        _binding = null
+        binding = null
     }
 }
