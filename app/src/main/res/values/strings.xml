@@ -72,7 +72,7 @@
     <string name="edit_project_details">Edit Project Details</string>
     <string name="add_the_information_about_the_project_that_you_want_to_create">Add the information
     about the project that you want to create</string>
-    <string name="edit_post">Update Post</string>
+    <string name="edit_post">Update</string>
     <string name="project_name">Project Name</string>
 
     <string name="error_msg">One or more of the credentials you entered are incorrect. Please try

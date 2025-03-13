@@ -32,8 +32,7 @@ class EditOrganizationProfileFragment : Fragment() {
     private val userAuthViewModel: AuthViewModel by activityViewModels()
     private val compViewModel: OrganizationViewModel by activityViewModels()
 
-    private var _binding: FragmentEditOrganizationProfileBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentEditOrganizationProfileBinding? = null
 
     private lateinit var view: View
     private lateinit var saveBtn: Button
@@ -53,8 +52,8 @@ class EditOrganizationProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentEditOrganizationProfileBinding.inflate(layoutInflater, container, false)
-        view = binding.root
+        binding = FragmentEditOrganizationProfileBinding.inflate(layoutInflater, container, false)
+        view = binding?.root as View
         dynamicTextHelper = DynamicTextHelper(view)
 
 
@@ -82,7 +81,7 @@ class EditOrganizationProfileFragment : Fragment() {
     }
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 
     private fun setHints() {
@@ -102,6 +101,13 @@ class EditOrganizationProfileFragment : Fragment() {
             override fun onImageUploaded(imageUrl: String) {
                 loadingOverlay.visibility = View.INVISIBLE
             }
+
+            override fun onUploadFailed(error: String) {
+                // Handle the error (e.g., show an error message or log it)
+                loadingOverlay?.visibility = View.INVISIBLE
+                // You can also show a message to the user here
+                Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
+            }
         })
 
         imageHelper.setImageViewClickListener {
@@ -109,10 +115,10 @@ class EditOrganizationProfileFragment : Fragment() {
         }
 
         saveBtn.setOnClickListener {
-            val oragnizationName = binding.oragnizationName
-            val oragnizationBio = binding.oragnizationBio
+            val oragnizationName = binding?.oragnizationName
+            val oragnizationBio = binding?.oragnizationBio
 
-            if (isValidInputs(oragnizationName,oragnizationBio)) {
+            if (oragnizationName != null && oragnizationBio != null && isValidInputs(oragnizationName,oragnizationBio)) {
                 val name = oragnizationName.editTextField.text.toString()
                 val bio = oragnizationBio.editTextField.text.toString()
 
@@ -168,8 +174,8 @@ class EditOrganizationProfileFragment : Fragment() {
     private fun setUserData() {
         val userId = userAuthViewModel.getUserId().toString()
         compViewModel.getOrganization(userId) { oragnization ->
-            binding.oragnizationName.editTextField.setText(oragnization.name)
-            binding.oragnizationBio.editTextField.setText(oragnization.bio)
+            binding?.oragnizationName?.editTextField?.setText(oragnization.name)
+            binding?.oragnizationBio?.editTextField?.setText(oragnization.bio)
             email_address = oragnization.email
             oragnizationLocation = oragnization.location
             profileImageUrl = oragnization.logo

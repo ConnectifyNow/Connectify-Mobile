@@ -23,6 +23,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
+import com.connectify.connectifyNow.databinding.FragmentSignInBinding
 import com.connectify.connectifyNow.databinding.FragmentSignUpOrganizationBinding
 import com.connectify.connectifyNow.helpers.DialogHelper
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
@@ -54,8 +55,8 @@ class SignUpOrganizationFragment : BaseFragment() {
     private lateinit var addressAutoComplete: AutoCompleteTextView
     private lateinit var loadingOverlay: LinearLayout
 
-    private var _binding: FragmentSignUpOrganizationBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentSignUpOrganizationBinding? = null
+
     private var organizationLocation: OrganizationLocation = OrganizationLocation(
         "Unknown",
         GeoPoint(0.0, 0.0),
@@ -77,8 +78,8 @@ class SignUpOrganizationFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSignUpOrganizationBinding.inflate(layoutInflater, container, false)
-        view = binding.root
+        binding = FragmentSignUpOrganizationBinding.inflate(layoutInflater, container, false)
+        view = binding?.root as View
         organizationViewModel = OrganizationViewModel()
         userAuthViewModel = AuthViewModel()
         dynamicTextHelper = DynamicTextHelper(view)
@@ -173,7 +174,7 @@ class SignUpOrganizationFragment : BaseFragment() {
 
             Log.d("SignUpFragment", "Received address: $address")
 
-            binding.organizationSuggestion.setText(address)
+            binding?.organizationSuggestion?.setText(address)
 
             organizationLocation = OrganizationLocation(
                 address.toString(),
@@ -217,13 +218,13 @@ class SignUpOrganizationFragment : BaseFragment() {
         }
 
         signUpOrganization.setOnClickListener {
-            val organizationNameGroup = binding.organizationNameGroup
-            val emailGroup = binding.emailOrganization
-            val bioGroup = binding.bioGroup
-            val passwordGroup = binding.passwordOrganization
-            val address = binding.organizationSuggestion.text
+            val organizationNameGroup = binding?.organizationNameGroup
+            val emailGroup = binding?.emailOrganization
+            val bioGroup = binding?.bioGroup
+            val passwordGroup = binding?.passwordOrganization
+            val address = binding?.organizationSuggestion?.text
             val logo = imageHelper.getImageUrl()
-            if (isValidInputs(emailGroup, passwordGroup, organizationNameGroup, address, bioGroup)) {
+            if (organizationNameGroup!=null && emailGroup!=null && bioGroup!=null &&passwordGroup!=null && address!=null && logo!=null &&  isValidInputs(emailGroup, passwordGroup, organizationNameGroup, address, bioGroup)) {
                 val email = emailGroup.editTextField.text.toString()
                 val password = passwordGroup.editTextField.text.toString()
                 val name = organizationNameGroup.editTextField.text.toString()
@@ -319,8 +320,8 @@ class SignUpOrganizationFragment : BaseFragment() {
                 .also { isValid ->
                     ValidationHelper.handleValidationResult(
                         isValid,
-                        binding.addEditTextLine,
-                        binding.inputSuggestions,
+                        binding?.addEditTextLine as View,
+                        binding?.inputSuggestions as TextView,
                         requireContext()
                     )
                 }
@@ -336,10 +337,10 @@ class SignUpOrganizationFragment : BaseFragment() {
 
         savedStateHandle?.let { handle ->
             val formBundle = Bundle().apply {
-                putString(ORG_NAME_KEY, binding.organizationNameGroup.editTextField.text.toString())
-                putString(EMAIL_KEY, binding.emailOrganization.editTextField.text.toString())
-                putString(PASSWORD_KEY, binding.passwordOrganization.editTextField.text.toString())
-                putString(BIO_KEY, binding.bioGroup.editTextField.text.toString())
+                putString(ORG_NAME_KEY, binding?.organizationNameGroup?.editTextField?.text.toString())
+                putString(EMAIL_KEY, binding?.emailOrganization?.editTextField?.text.toString())
+                putString(PASSWORD_KEY, binding?.passwordOrganization?.editTextField?.text.toString())
+                putString(BIO_KEY, binding?.bioGroup?.editTextField?.text.toString())
             }
 
             handle[FORM_STATE_KEY] = formBundle
@@ -355,7 +356,7 @@ class SignUpOrganizationFragment : BaseFragment() {
 
         savedStateHandle?.get<Bundle>(FORM_STATE_KEY)?.let { formBundle ->
             view.post {
-                _binding?.let { binding ->
+                binding?.let { binding ->
                     formBundle.getString(ORG_NAME_KEY)?.let { name ->
                         binding.organizationNameGroup.editTextField.setText(name)
                     }
@@ -380,6 +381,6 @@ class SignUpOrganizationFragment : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 }
