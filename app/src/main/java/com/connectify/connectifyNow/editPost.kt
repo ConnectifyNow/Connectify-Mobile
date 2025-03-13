@@ -77,14 +77,10 @@ class editPost : Fragment() {
             }
 
             override fun onUploadFailed(error: String) {
-<<<<<<< HEAD
                 // Handle the error (e.g., show an error message or log it)
                 loadingOverlay?.visibility = View.INVISIBLE
                 // You can also show a message to the user here
                 Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
-=======
-                TODO("Not yet implemented")
->>>>>>> d0b54333181f4298b2dcbdde9546ffafdc61f09a
             }
         })
         imageHelper.setImageViewClickListener {
