@@ -53,7 +53,7 @@ class editPost : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEditPostBinding.inflate(layoutInflater, container, false)
-        view = binding?.root
+        view = binding?.root as View
         dynamicTextHelper = DynamicTextHelper(view)
 
         postViewModel = PostViewModel()
@@ -73,6 +73,13 @@ class editPost : Fragment() {
             override fun onImageUploaded(imageUrl: String) {
 
                 loadingOverlay.visibility = View.INVISIBLE
+            }
+
+            override fun onUploadFailed(error: String) {
+                // Handle the error (e.g., show an error message or log it)
+                loadingOverlay?.visibility = View.INVISIBLE
+                // You can also show a message to the user here
+                Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
             }
         })
         imageHelper.setImageViewClickListener {

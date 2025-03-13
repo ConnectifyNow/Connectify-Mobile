@@ -21,7 +21,7 @@ class PickUserTypeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPickUserTypeBinding.inflate(inflater, container, false)
-        view = binding?.root
+        view = binding?.root as View
         setEventListeners()
 
         return view

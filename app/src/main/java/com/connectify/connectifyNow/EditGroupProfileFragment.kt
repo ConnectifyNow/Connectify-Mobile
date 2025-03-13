@@ -48,7 +48,8 @@ class EditGroupProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEditGroupProfileBinding.inflate(layoutInflater, container, false)
-        view = binding?.root
+        view = binding?.root as View
+
         dynamicTextHelper = DynamicTextHelper(view)
 
 
@@ -100,6 +101,13 @@ class EditGroupProfileFragment : Fragment() {
             override fun onImageUploaded(imageUrl: String) {
                 loadingOverlay?.visibility = View.INVISIBLE
             }
+
+            override fun onUploadFailed(error: String) {
+                // Handle the error (e.g., show an error message or log it)
+                loadingOverlay?.visibility = View.INVISIBLE
+                // You can also show a message to the user here
+                Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
+            }
         })
 
         imageHelper.setImageViewClickListener {
@@ -107,9 +115,9 @@ class EditGroupProfileFragment : Fragment() {
         }
 
         saveBtn.setOnClickListener {
-            val groupName = binding.groupName
-            val groupInstitution = binding.groupInstitution
-            val groupBio = binding.groupBio
+            val groupName = binding!!.groupName
+            val groupInstitution = binding!!.groupInstitution
+            val groupBio = binding!!.groupBio
 
 
             if (isValidInputs(groupName, groupInstitution,groupBio)) {
@@ -170,9 +178,9 @@ class EditGroupProfileFragment : Fragment() {
     private fun setUserData() {
         val userId = userAuthViewModel.getUserId().toString()
         volunteerViewModel.getVolunteer(userId) { volunteer ->
-            binding.groupName.editTextField.setText(volunteer.name)
-            binding.groupInstitution.editTextField.setText(volunteer.institution)
-            binding.groupBio.editTextField.setText(volunteer.bio)
+            binding!!.groupName.editTextField.setText(volunteer.name)
+            binding!!.groupInstitution.editTextField.setText(volunteer.institution)
+            binding!!.groupBio.editTextField.setText(volunteer.bio)
 
             emailAddress = volunteer.email
             profileImageUrl = volunteer.image

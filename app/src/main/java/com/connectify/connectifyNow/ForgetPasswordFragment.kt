@@ -15,9 +15,7 @@ import com.connectify.connectifyNow.helpers.DialogHelper
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 
 class ForgetPasswordFragment : BaseFragment() {
-
-    private var _binding: FragmentForgetPasswordBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentForgetPasswordBinding? = null
 
     private lateinit var view: View
     private lateinit var userAuthViewModel: AuthViewModel
@@ -30,8 +28,8 @@ class ForgetPasswordFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentForgetPasswordBinding.inflate(layoutInflater, container, false)
-        view = binding.root
+        binding = FragmentForgetPasswordBinding.inflate(layoutInflater, container, false)
+        view = binding?.root as View
         userAuthViewModel = AuthViewModel()
 
         setEventListeners(view)
@@ -105,7 +103,7 @@ class ForgetPasswordFragment : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 }
 
