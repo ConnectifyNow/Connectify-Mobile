@@ -88,14 +88,14 @@ class MapFragment : BaseFragment(), LocationListener {
         val isEditMode = args?.getBoolean("editMode", true) ?: true
 
         if (isEditMode) {
-            binding!!.backPageButton.visibility = View.GONE
+            binding?.backPageButton?.visibility = View.GONE
         } else {
-            binding!!.backPageButton.text = getString(R.string.back_to_profile)
-            binding!!.backButton.visibility = View.GONE
-            binding!!.doneButton.visibility = View.GONE
+            binding?.backPageButton?.text = getString(R.string.back_to_profile)
+            binding?.backButton?.visibility = View.GONE
+            binding?.doneButton?.visibility = View.GONE
         }
 
-        binding!!.backPageButton.setOnClickListener {
+        binding?.backPageButton?.setOnClickListener {
             clearMapOverlays()
             if (isEditMode) {
                 view.navigate(R.id.action_mapViewFragment_to_feedFragment)
@@ -114,12 +114,12 @@ class MapFragment : BaseFragment(), LocationListener {
         }
 
 
-        binding!!.backButton.setOnClickListener {
+        binding?.backButton?.setOnClickListener {
             clearMapOverlays()
             findNavController().navigateUp()
         }
 
-        binding!!.doneButton.setOnClickListener {
+        binding?.doneButton?.setOnClickListener {
             clearMapOverlays()
 
             chosenLocation?.let { location ->
@@ -218,7 +218,7 @@ class MapFragment : BaseFragment(), LocationListener {
 
     private fun initializeMap() {
         val context = context ?: return
-        aMap = binding!!.map
+        aMap = binding?.map as MapView
         aMap.setTileSource(TileSourceFactory.MAPNIK)
         aMap.controller.setZoom(17.0)
 

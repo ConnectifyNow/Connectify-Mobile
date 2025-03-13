@@ -37,7 +37,7 @@ class NewPostFragment : Fragment() {
     ): View {
         binding = FragmentNewPostBinding.inflate(layoutInflater, container, false)
         view = binding?.root as View
-        imageView = binding!!.imageToUpload
+        imageView = binding?.imageToUpload as ImageView
         dynamicTextHelper = DynamicTextHelper(view)
 
         loadingOverlay = view.findViewById(R.id.new_post_loading_overlay);
@@ -79,11 +79,11 @@ class NewPostFragment : Fragment() {
     }
 
     private fun setEventListeners() {
-        binding!!.postButton.setOnClickListener {
-            val titleGroup = binding!!.postTitleGroup
-            val contentGroup = binding!!.postDescriptionGroup
+        binding?.postButton?.setOnClickListener {
+            val titleGroup = binding?.postTitleGroup
+            val contentGroup = binding?.postDescriptionGroup
 
-            if (isValidInputs(titleGroup, contentGroup)) {
+            if (titleGroup != null && contentGroup != null &&  isValidInputs(titleGroup, contentGroup)) {
                 val title = titleGroup.editTextField.text.toString()
                 val content = contentGroup.editTextField.text.toString()
 
@@ -112,9 +112,9 @@ class NewPostFragment : Fragment() {
         postViewModel.addPost(post) { success ->
             if (success) {
                 Toast.makeText(requireContext(), "Post added successfully", Toast.LENGTH_SHORT).show()
-                binding!!.postTitleGroup.editTextField.text = null
-                binding!!.postDescriptionGroup.editTextField.text = null
-                binding!!.imageToUpload.setImageResource(R.drawable.default_post)
+                binding?.postTitleGroup?.editTextField?.text = null
+                binding?.postDescriptionGroup?.editTextField?.text = null
+                binding?.imageToUpload?.setImageResource(R.drawable.default_post)
             } else Toast.makeText(requireContext(), "Failed to add post", Toast.LENGTH_SHORT).show()
         }
     }

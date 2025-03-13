@@ -174,7 +174,7 @@ class SignUpOrganizationFragment : BaseFragment() {
 
             Log.d("SignUpFragment", "Received address: $address")
 
-            binding!!.organizationSuggestion.setText(address)
+            binding?.organizationSuggestion?.setText(address)
 
             organizationLocation = OrganizationLocation(
                 address.toString(),
@@ -218,13 +218,13 @@ class SignUpOrganizationFragment : BaseFragment() {
         }
 
         signUpOrganization.setOnClickListener {
-            val organizationNameGroup = binding!!.organizationNameGroup
-            val emailGroup = binding!!.emailOrganization
-            val bioGroup = binding!!.bioGroup
-            val passwordGroup = binding!!.passwordOrganization
-            val address = binding!!.organizationSuggestion.text
+            val organizationNameGroup = binding?.organizationNameGroup
+            val emailGroup = binding?.emailOrganization
+            val bioGroup = binding?.bioGroup
+            val passwordGroup = binding?.passwordOrganization
+            val address = binding?.organizationSuggestion?.text
             val logo = imageHelper.getImageUrl()
-            if (isValidInputs(emailGroup, passwordGroup, organizationNameGroup, address, bioGroup)) {
+            if (organizationNameGroup!=null && emailGroup!=null && bioGroup!=null &&passwordGroup!=null && address!=null && logo!=null &&  isValidInputs(emailGroup, passwordGroup, organizationNameGroup, address, bioGroup)) {
                 val email = emailGroup.editTextField.text.toString()
                 val password = passwordGroup.editTextField.text.toString()
                 val name = organizationNameGroup.editTextField.text.toString()
@@ -320,8 +320,8 @@ class SignUpOrganizationFragment : BaseFragment() {
                 .also { isValid ->
                     ValidationHelper.handleValidationResult(
                         isValid,
-                        binding!!.addEditTextLine,
-                        binding!!.inputSuggestions,
+                        binding?.addEditTextLine as View,
+                        binding?.inputSuggestions as TextView,
                         requireContext()
                     )
                 }
@@ -337,10 +337,10 @@ class SignUpOrganizationFragment : BaseFragment() {
 
         savedStateHandle?.let { handle ->
             val formBundle = Bundle().apply {
-                putString(ORG_NAME_KEY, binding!!.organizationNameGroup.editTextField.text.toString())
-                putString(EMAIL_KEY, binding!!.emailOrganization.editTextField.text.toString())
-                putString(PASSWORD_KEY, binding!!.passwordOrganization.editTextField.text.toString())
-                putString(BIO_KEY, binding!!.bioGroup.editTextField.text.toString())
+                putString(ORG_NAME_KEY, binding?.organizationNameGroup?.editTextField?.text.toString())
+                putString(EMAIL_KEY, binding?.emailOrganization?.editTextField?.text.toString())
+                putString(PASSWORD_KEY, binding?.passwordOrganization?.editTextField?.text.toString())
+                putString(BIO_KEY, binding?.bioGroup?.editTextField?.text.toString())
             }
 
             handle[FORM_STATE_KEY] = formBundle

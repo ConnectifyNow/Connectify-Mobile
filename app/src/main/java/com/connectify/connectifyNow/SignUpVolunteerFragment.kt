@@ -103,13 +103,13 @@ class SignUpVolunteerFragment : Fragment() {
         volunteerViewModel = VolunteerViewModel()
 
         signUpBtn.setOnClickListener {
-            val email = binding!!.emailVolunteer
-            val password = binding!!.passwordVolunteer
-            val name = binding!!.nameVolunteer
-            val institution = binding!!.institution
-            val bio = binding!!.bioVolunteer
+            val email = binding?.emailVolunteer
+            val password = binding?.passwordVolunteer
+            val name = binding?.nameVolunteer
+            val institution = binding?.institution
+            val bio = binding?.bioVolunteer
             val logo = imageHelper.getImageUrl() ?: "test"
-            if (isValidInputs(
+            if (email!=null && password!=null && name!=null && institution!=null && bio!=null && logo!=null && isValidInputs(
                     email,
                     password,
                     name,

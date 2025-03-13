@@ -84,15 +84,15 @@ class SignInFragment : BaseFragment() {
         emailLabel = emailLayout?.findViewById(R.id.edit_text_label)
         passwordLabel = passwordLayout?.findViewById(R.id.edit_text_label)
 
-        emailLabel!!.text = "Email"
-        passwordLabel!!.text = "Password"
+        emailLabel?.text = "Email"
+        passwordLabel?.text = "Password"
     }
 
     private fun signInUser() {
-        binding!!.signInButton.setOnClickListener {
-            val email = binding!!.emailLogIn
-            val password = binding!!.passwordLogIn
-            if (isValidInputs(email, password)) {
+        binding?.signInButton?.setOnClickListener {
+            val email = binding?.emailLogIn
+            val password = binding?.passwordLogIn
+            if (email!= null && password!= null &&  isValidInputs(email, password)) {
 
                 val emailTextField = email.editTextField.text.toString()
                 val passwordTextField = password.editTextField.text.toString()

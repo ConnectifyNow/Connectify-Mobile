@@ -115,10 +115,10 @@ class EditOrganizationProfileFragment : Fragment() {
         }
 
         saveBtn.setOnClickListener {
-            val oragnizationName = binding!!.oragnizationName
-            val oragnizationBio = binding!!.oragnizationBio
+            val oragnizationName = binding?.oragnizationName
+            val oragnizationBio = binding?.oragnizationBio
 
-            if (isValidInputs(oragnizationName,oragnizationBio)) {
+            if (oragnizationName != null && oragnizationBio != null && isValidInputs(oragnizationName,oragnizationBio)) {
                 val name = oragnizationName.editTextField.text.toString()
                 val bio = oragnizationBio.editTextField.text.toString()
 
@@ -174,8 +174,8 @@ class EditOrganizationProfileFragment : Fragment() {
     private fun setUserData() {
         val userId = userAuthViewModel.getUserId().toString()
         compViewModel.getOrganization(userId) { oragnization ->
-            binding!!.oragnizationName.editTextField.setText(oragnization.name)
-            binding!!.oragnizationBio.editTextField.setText(oragnization.bio)
+            binding?.oragnizationName?.editTextField?.setText(oragnization.name)
+            binding?.oragnizationBio?.editTextField?.setText(oragnization.bio)
             email_address = oragnization.email
             oragnizationLocation = oragnization.location
             profileImageUrl = oragnization.logo

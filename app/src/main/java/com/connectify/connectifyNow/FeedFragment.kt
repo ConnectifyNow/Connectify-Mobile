@@ -43,15 +43,15 @@ class FeedFragment : Fragment() {
         binding = FragmentFeedBinding.inflate(inflater, container, false)
         val view = binding?.root as View
 
-        postsRecyclerView = binding!!.postsRecyclerView
-        swipeRefreshLayout = binding!!.pullToRefresh
+        postsRecyclerView = binding?.postsRecyclerView as RecyclerView
+        swipeRefreshLayout = binding?.pullToRefresh as SwipeRefreshLayout
         postAdapter = PostAdapter(mutableListOf(), true)
         viewModel = ViewModelProvider(this)[PostViewModel::class.java]
 
         postsRecyclerView.setPadding(0, 0, 0, 250)
 
         postAdapter.posts = viewModel.posts.value?.toMutableList() ?: mutableListOf()
-        progressBar = binding!!.progressBar
+        progressBar = binding?.progressBar as ProgressBar
         progressBar.visibility = View.VISIBLE
 
 

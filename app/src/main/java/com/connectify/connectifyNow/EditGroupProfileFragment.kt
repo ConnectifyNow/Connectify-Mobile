@@ -115,12 +115,12 @@ class EditGroupProfileFragment : Fragment() {
         }
 
         saveBtn.setOnClickListener {
-            val groupName = binding!!.groupName
-            val groupInstitution = binding!!.groupInstitution
-            val groupBio = binding!!.groupBio
+            val groupName = binding?.groupName
+            val groupInstitution = binding?.groupInstitution
+            val groupBio = binding?.groupBio
 
 
-            if (isValidInputs(groupName, groupInstitution,groupBio)) {
+            if (groupName!= null && groupInstitution!= null && groupBio!= null&&  isValidInputs(groupName, groupInstitution,groupBio)) {
                 val name = groupName.editTextField.text.toString()
                 val institution = groupInstitution.editTextField.text.toString()
                 val bio = groupBio.editTextField.text.toString()
@@ -178,9 +178,9 @@ class EditGroupProfileFragment : Fragment() {
     private fun setUserData() {
         val userId = userAuthViewModel.getUserId().toString()
         volunteerViewModel.getVolunteer(userId) { volunteer ->
-            binding!!.groupName.editTextField.setText(volunteer.name)
-            binding!!.groupInstitution.editTextField.setText(volunteer.institution)
-            binding!!.groupBio.editTextField.setText(volunteer.bio)
+            binding?.groupName?.editTextField?.setText(volunteer.name)
+            binding?.groupInstitution?.editTextField?.setText(volunteer.institution)
+            binding?.groupBio?.editTextField?.setText(volunteer.bio)
 
             emailAddress = volunteer.email
             profileImageUrl = volunteer.image

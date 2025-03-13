@@ -31,12 +31,12 @@ class LandingPageFragment : BaseFragment() {
 
     private fun setEventListeners() {
 
-        binding!!.buttonSignIn.setOnClickListener {
+        binding?.buttonSignIn?.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_landingPageFragment_to_signInFragment)
         }
 
-        binding!!.buttonSignUp.setOnClickListener {
+        binding?.buttonSignUp?.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_landingPageFragment_to_pickUserTypeFragment)
         }

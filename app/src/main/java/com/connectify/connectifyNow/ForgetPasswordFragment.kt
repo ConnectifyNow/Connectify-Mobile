@@ -69,7 +69,7 @@ class ForgetPasswordFragment : BaseFragment() {
         }
 
         if (emailLayout != null) {
-            email = emailLayout!!.findViewById(R.id.edit_text_field)
+            email = emailLayout?.findViewById(R.id.edit_text_field)
 
             resetPassword?.apply {
                 isEnabled = false
