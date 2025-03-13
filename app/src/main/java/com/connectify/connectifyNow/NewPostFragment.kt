@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.viewModel.PostViewModel
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
@@ -46,6 +47,10 @@ class NewPostFragment : Fragment() {
         imageHelper = ImageHelper(this, imageView,  object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
                 loadingOverlay.visibility = View.INVISIBLE
+            }
+
+            override fun onUploadFailed(error: String) {
+                TODO("Not yet implemented")
             }
         })
         imageHelper.setImageViewClickListener {
@@ -97,6 +102,10 @@ class NewPostFragment : Fragment() {
         )
 
         addPost(post)
+
+        Navigation.findNavController(view).navigate(
+            R.id.action_newPostFragment_to_feedFragment,
+        )
     }
 
     private fun addPost(post: Post) {

@@ -77,6 +77,10 @@ class ProfileFragment : Fragment() {
         val args = arguments
         val userId = args?.getString("userId") ?: authViewModel.getUserId()
 
+        if (args?.getString("userId") !== null) {
+            ActionBarHelpers.hideActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
+        }
+
         val isFromArgs = args != null
         postAdapter = PostAdapter(mutableListOf(), false, isFromArgs)
 
@@ -106,13 +110,16 @@ class ProfileFragment : Fragment() {
             backButton?.setVisibility(View.VISIBLE)
 
             backButton?.setOnClickListener {
+                ActionBarHelpers.showActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
+
                 requireActivity().supportFragmentManager.popBackStack(
                     "profileBackStack",
                     FragmentManager.POP_BACK_STACK_INCLUSIVE
                 )
             }
         }
-        val mapButton = view.findViewById<TextView>(R.id.explore_organizations)
+
+        val mapButton = binding.exploreOrganizations
 
         if(args?.getString("userId") != null) {
             mapButton.visibility = View.GONE
@@ -203,7 +210,6 @@ class ProfileFragment : Fragment() {
             additionalInfoTV?.text = additionalInfo;
 
             profileImage = view.findViewById(R.id.profile_image)
-            profileImageBackgroundElement = view.findViewById(R.id.profile_background_image);
 
             if (profileImage != null && profileImageBackgroundElement != null) {
                 val imageUrl = if (image.isEmpty())
@@ -212,13 +218,6 @@ class ProfileFragment : Fragment() {
 
                 Picasso.get().load(imageUrl).into(profileImage)
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    profileImageBackgroundElement?.setRenderEffect(
-                        RenderEffect.createBlurEffect(
-                            50f, 50f, Shader.TileMode.CLAMP
-                        )
-                    )
-                }
             }
 
         isProfileDataLoaded = true;
