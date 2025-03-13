@@ -29,8 +29,7 @@ class EditGroupProfileFragment : Fragment() {
     private val userAuthViewModel: AuthViewModel by activityViewModels()
     private val volunteerViewModel: VolunteerViewModel by activityViewModels()
 
-    private var _binding: FragmentEditGroupProfileBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentEditGroupProfileBinding? = null
 
     private lateinit var view: View
     private lateinit var saveBtn: Button
@@ -48,8 +47,9 @@ class EditGroupProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEditGroupProfileBinding.inflate(layoutInflater, container, false)
-        view = binding.root
+        binding = FragmentEditGroupProfileBinding.inflate(layoutInflater, container, false)
+        view = binding?.root as View
+
         dynamicTextHelper = DynamicTextHelper(view)
 
 
@@ -76,7 +76,7 @@ class EditGroupProfileFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 
     private fun setHints() {
@@ -103,7 +103,10 @@ class EditGroupProfileFragment : Fragment() {
             }
 
             override fun onUploadFailed(error: String) {
-                TODO("Not yet implemented")
+                // Handle the error (e.g., show an error message or log it)
+                loadingOverlay?.visibility = View.INVISIBLE
+                // You can also show a message to the user here
+                Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -112,12 +115,12 @@ class EditGroupProfileFragment : Fragment() {
         }
 
         saveBtn.setOnClickListener {
-            val groupName = binding.groupName
-            val groupInstitution = binding.groupInstitution
-            val groupBio = binding.groupBio
+            val groupName = binding?.groupName
+            val groupInstitution = binding?.groupInstitution
+            val groupBio = binding?.groupBio
 
 
-            if (isValidInputs(groupName, groupInstitution,groupBio)) {
+            if (groupName!= null && groupInstitution!= null && groupBio!= null&&  isValidInputs(groupName, groupInstitution,groupBio)) {
                 val name = groupName.editTextField.text.toString()
                 val institution = groupInstitution.editTextField.text.toString()
                 val bio = groupBio.editTextField.text.toString()
@@ -175,9 +178,9 @@ class EditGroupProfileFragment : Fragment() {
     private fun setUserData() {
         val userId = userAuthViewModel.getUserId().toString()
         volunteerViewModel.getVolunteer(userId) { volunteer ->
-            binding.groupName.editTextField.setText(volunteer.name)
-            binding.groupInstitution.editTextField.setText(volunteer.institution)
-            binding.groupBio.editTextField.setText(volunteer.bio)
+            binding?.groupName?.editTextField?.setText(volunteer.name)
+            binding?.groupInstitution?.editTextField?.setText(volunteer.institution)
+            binding?.groupBio?.editTextField?.setText(volunteer.bio)
 
             emailAddress = volunteer.email
             profileImageUrl = volunteer.image

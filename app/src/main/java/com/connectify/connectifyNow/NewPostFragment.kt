@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.viewModel.PostViewModel
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
+import com.connectify.connectifyNow.databinding.FragmentMapBinding
 import com.connectify.connectifyNow.databinding.FragmentNewPostBinding
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
@@ -27,18 +28,17 @@ class NewPostFragment : Fragment() {
     private lateinit var imageHelper: ImageHelper
     private lateinit var dynamicTextHelper: DynamicTextHelper
     private  lateinit var loadingOverlay: LinearLayout
+    private var binding: FragmentNewPostBinding? = null
 
-    private var _binding: FragmentNewPostBinding? = null
-    private val binding get() = _binding!!
     private val userAuthViewModel: AuthViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNewPostBinding.inflate(layoutInflater, container, false)
-        view = binding.root
-        imageView = binding.imageToUpload
+        binding = FragmentNewPostBinding.inflate(layoutInflater, container, false)
+        view = binding?.root as View
+        imageView = binding?.imageToUpload as ImageView
         dynamicTextHelper = DynamicTextHelper(view)
 
         loadingOverlay = view.findViewById(R.id.new_post_loading_overlay);
@@ -50,9 +50,13 @@ class NewPostFragment : Fragment() {
             }
 
             override fun onUploadFailed(error: String) {
-                TODO("Not yet implemented")
+                // Handle the error (e.g., show an error message or log it)
+                loadingOverlay?.visibility = View.INVISIBLE
+                // You can also show a message to the user here
+                Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
             }
         })
+
         imageHelper.setImageViewClickListener {
             loadingOverlay.visibility = View.VISIBLE
         }
@@ -72,15 +76,15 @@ class NewPostFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 
     private fun setEventListeners() {
-        binding.postButton.setOnClickListener {
-            val titleGroup = binding.postTitleGroup
-            val contentGroup = binding.postDescriptionGroup
+        binding?.postButton?.setOnClickListener {
+            val titleGroup = binding?.postTitleGroup
+            val contentGroup = binding?.postDescriptionGroup
 
-            if (isValidInputs(titleGroup, contentGroup)) {
+            if (titleGroup != null && contentGroup != null &&  isValidInputs(titleGroup, contentGroup)) {
                 val title = titleGroup.editTextField.text.toString()
                 val content = contentGroup.editTextField.text.toString()
 
@@ -92,6 +96,7 @@ class NewPostFragment : Fragment() {
             }
         }
     }
+
 
     private fun createPost(title: String, content: String, imageUrl: String?) {
         val post = Post(
@@ -109,9 +114,9 @@ class NewPostFragment : Fragment() {
         postViewModel.addPost(post) { success ->
             if (success) {
                 Toast.makeText(requireContext(), "Post added successfully", Toast.LENGTH_SHORT).show()
-                binding.postTitleGroup.editTextField.text = null
-                binding.postDescriptionGroup.editTextField.text = null
-                binding.imageToUpload.setImageResource(R.drawable.default_post)
+                binding?.postTitleGroup?.editTextField?.text = null
+                binding?.postDescriptionGroup?.editTextField?.text = null
+                binding?.imageToUpload?.setImageResource(R.drawable.default_post)
             } else Toast.makeText(requireContext(), "Failed to add post", Toast.LENGTH_SHORT).show()
         }
     }

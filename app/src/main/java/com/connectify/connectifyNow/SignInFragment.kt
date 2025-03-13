@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
+import com.connectify.connectifyNow.databinding.FragmentProfileBinding
 import com.connectify.connectifyNow.databinding.FragmentSignInBinding
 import com.connectify.connectifyNow.helpers.ValidationHelper
 import com.connectify.connectifyNow.viewModel.AuthViewModel
@@ -19,8 +20,7 @@ import com.connectify.connectifyNow.viewModel.AuthViewModel
 
 class SignInFragment : BaseFragment() {
     private lateinit var view: View
-    private var _binding: FragmentSignInBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentSignInBinding? = null
 
     private val userAuthViewModel: AuthViewModel by activityViewModels()
     private var errorMessage: TextView? = null
@@ -36,8 +36,8 @@ class SignInFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSignInBinding.inflate(layoutInflater, container, false)
-        view = binding.root
+        binding = FragmentSignInBinding.inflate(layoutInflater, container, false)
+        view = binding?.root as View
 
         setUpDynamicTextFields()
         signInUser()
@@ -59,7 +59,7 @@ class SignInFragment : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 
     private fun setEventsListeners() {
@@ -84,15 +84,15 @@ class SignInFragment : BaseFragment() {
         emailLabel = emailLayout?.findViewById(R.id.edit_text_label)
         passwordLabel = passwordLayout?.findViewById(R.id.edit_text_label)
 
-        emailLabel!!.text = "Email"
-        passwordLabel!!.text = "Password"
+        emailLabel?.text = "Email"
+        passwordLabel?.text = "Password"
     }
 
     private fun signInUser() {
-        binding.signInButton.setOnClickListener {
-            val email = binding.emailLogIn
-            val password = binding.passwordLogIn
-            if (isValidInputs(email, password)) {
+        binding?.signInButton?.setOnClickListener {
+            val email = binding?.emailLogIn
+            val password = binding?.passwordLogIn
+            if (email!= null && password!= null &&  isValidInputs(email, password)) {
 
                 val emailTextField = email.editTextField.text.toString()
                 val passwordTextField = password.editTextField.text.toString()

@@ -37,8 +37,8 @@ class ProfileFragment : Fragment() {
 
     private lateinit var postViewModel: PostViewModel
 
-    private var _binding: FragmentProfileBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentProfileBinding? = null
+
     private lateinit var view: View
 
     private lateinit var postsRecyclerView: RecyclerView
@@ -69,8 +69,8 @@ class ProfileFragment : Fragment() {
         volunteerViewModel = VolunteerViewModel()
         postViewModel = PostViewModel()
 
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        view  = binding.root
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        view  = binding?.root as View
 
         ActionBarHelpers.showActionBarAndBottomNavigationView(requireActivity() as? AppCompatActivity)
 
@@ -119,13 +119,13 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        val mapButton = binding.exploreOrganizations
+        val mapButton = binding?.exploreOrganizations
 
         if(args?.getString("userId") != null) {
-            mapButton.visibility = View.GONE
+            mapButton?.visibility = View.GONE
         } else {
-            mapButton.visibility = View.VISIBLE
-            mapButton.setOnClickListener {
+            mapButton?.visibility = View.VISIBLE
+            mapButton?.setOnClickListener {
                 val args = Bundle()
                 args.putBoolean("editMode", false)
                 Navigation.findNavController(it)
@@ -259,6 +259,6 @@ class ProfileFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 }

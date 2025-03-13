@@ -48,9 +48,8 @@ class MapFragment : BaseFragment(), LocationListener {
     private var addressApiCall: AddressApiCall = AddressApiCall()
 
     private val timer = Timer()
-    private val binding get() = _binding!!
+    private var binding: FragmentMapBinding? = null
 
-    private var _binding: FragmentMapBinding? = null
     private var locationUpdatesRequested = false
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
@@ -65,8 +64,8 @@ class MapFragment : BaseFragment(), LocationListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMapBinding.inflate(layoutInflater, container, false)
-        view = binding.root
+        binding = FragmentMapBinding.inflate(layoutInflater, container, false)
+        view = binding?.root as View
 
         viewModel = ViewModelProvider(this)[OrganizationViewModel::class.java]
 
@@ -89,14 +88,14 @@ class MapFragment : BaseFragment(), LocationListener {
         val isEditMode = args?.getBoolean("editMode", true) ?: true
 
         if (isEditMode) {
-            binding.backPageButton.visibility = View.GONE
+            binding?.backPageButton?.visibility = View.GONE
         } else {
-            binding.backPageButton.text = getString(R.string.back_to_profile)
-            binding.backButton.visibility = View.GONE
-            binding.doneButton.visibility = View.GONE
+            binding?.backPageButton?.text = getString(R.string.back_to_profile)
+            binding?.backButton?.visibility = View.GONE
+            binding?.doneButton?.visibility = View.GONE
         }
 
-        binding.backPageButton.setOnClickListener {
+        binding?.backPageButton?.setOnClickListener {
             clearMapOverlays()
             if (isEditMode) {
                 view.navigate(R.id.action_mapViewFragment_to_feedFragment)
@@ -115,12 +114,12 @@ class MapFragment : BaseFragment(), LocationListener {
         }
 
 
-        binding.backButton.setOnClickListener {
+        binding?.backButton?.setOnClickListener {
             clearMapOverlays()
             findNavController().navigateUp()
         }
 
-        binding.doneButton.setOnClickListener {
+        binding?.doneButton?.setOnClickListener {
             clearMapOverlays()
 
             chosenLocation?.let { location ->
@@ -219,7 +218,7 @@ class MapFragment : BaseFragment(), LocationListener {
 
     private fun initializeMap() {
         val context = context ?: return
-        aMap = binding.map
+        aMap = binding?.map as MapView
         aMap.setTileSource(TileSourceFactory.MAPNIK)
         aMap.controller.setZoom(17.0)
 
@@ -320,7 +319,7 @@ class MapFragment : BaseFragment(), LocationListener {
         super.onDestroyView()
         clearMapOverlays()
         removeLocationUpdates()
-        _binding = null
+        binding = null
     }
 
     private fun clearMapOverlays() {
@@ -378,6 +377,6 @@ class MapFragment : BaseFragment(), LocationListener {
     override fun onDestroy() {
         super.onDestroy()
         timer.cancel()
-        _binding = null
+        binding = null
     }
 }

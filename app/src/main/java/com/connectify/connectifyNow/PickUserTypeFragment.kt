@@ -14,14 +14,14 @@ class PickUserTypeFragment : BaseFragment() {
     private lateinit var volunteerCard: CardView
 
     private lateinit var view: View
-    private var _binding: FragmentPickUserTypeBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentPickUserTypeBinding? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPickUserTypeBinding.inflate(inflater, container, false)
-        view = binding.root
+        binding = FragmentPickUserTypeBinding.inflate(inflater, container, false)
+        view = binding?.root as View
         setEventListeners()
 
         return view
@@ -39,7 +39,7 @@ class PickUserTypeFragment : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 
     private fun setEventListeners() {

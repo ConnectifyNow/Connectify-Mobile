@@ -29,8 +29,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class editPost : Fragment() {
-    private var _binding: FragmentEditPostBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentEditPostBinding? = null
+
     private lateinit var view: View
     private lateinit var dynamicTextHelper: DynamicTextHelper
     private lateinit var postViewModel: PostViewModel
@@ -53,8 +53,8 @@ class editPost : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEditPostBinding.inflate(layoutInflater, container, false)
-        view = binding.root
+        binding = FragmentEditPostBinding.inflate(layoutInflater, container, false)
+        view = binding?.root as View
         dynamicTextHelper = DynamicTextHelper(view)
 
         postViewModel = PostViewModel()
@@ -77,7 +77,10 @@ class editPost : Fragment() {
             }
 
             override fun onUploadFailed(error: String) {
-                TODO("Not yet implemented")
+                // Handle the error (e.g., show an error message or log it)
+                loadingOverlay?.visibility = View.INVISIBLE
+                // You can also show a message to the user here
+                Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
             }
         })
         imageHelper.setImageViewClickListener {
@@ -150,7 +153,7 @@ class editPost : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 
 }

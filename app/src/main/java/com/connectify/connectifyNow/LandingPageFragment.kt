@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.connectify.connectifyNow.databinding.FragmentForgetPasswordBinding
 import com.connectify.connectifyNow.databinding.FragmentLandingPageBinding
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -13,15 +14,15 @@ class LandingPageFragment : BaseFragment() {
 
     private var userAuthViewModel: AuthViewModel? = null
 
-    private var _binding: FragmentLandingPageBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentLandingPageBinding? = null
+
     private lateinit var view: View
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLandingPageBinding.inflate(inflater, container, false)
-        view = binding.root
+        binding = FragmentLandingPageBinding.inflate(inflater, container, false)
+        view = binding?.root as View
         userAuthViewModel = AuthViewModel()
 
         setEventListeners()
@@ -30,12 +31,12 @@ class LandingPageFragment : BaseFragment() {
 
     private fun setEventListeners() {
 
-        binding.buttonSignIn.setOnClickListener {
+        binding?.buttonSignIn?.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_landingPageFragment_to_signInFragment)
         }
 
-        binding.buttonSignUp.setOnClickListener {
+        binding?.buttonSignUp?.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_landingPageFragment_to_pickUserTypeFragment)
         }
@@ -53,6 +54,6 @@ class LandingPageFragment : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 }

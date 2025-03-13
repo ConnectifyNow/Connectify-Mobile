@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
+import com.connectify.connectifyNow.databinding.FragmentSignUpOrganizationBinding
 import com.connectify.connectifyNow.databinding.FragmentSignUpVolunteerBinding
 import com.connectify.connectifyNow.helpers.ActionBarHelpers
 import com.connectify.connectifyNow.helpers.DialogHelper
@@ -25,8 +26,7 @@ import com.connectify.connectifyNow.viewModel.VolunteerViewModel
 
 
 class SignUpVolunteerFragment : Fragment() {
-    private var _binding: FragmentSignUpVolunteerBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentSignUpVolunteerBinding? = null
 
     private lateinit var view: View
     private lateinit var signUpBtn: Button
@@ -41,8 +41,8 @@ class SignUpVolunteerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSignUpVolunteerBinding.inflate(layoutInflater, container, false)
-        view = binding.root
+        binding = FragmentSignUpVolunteerBinding.inflate(layoutInflater, container, false)
+        view = binding?.root as View
         dynamicTextHelper = DynamicTextHelper(view)
 
         loadingOverlay = view.findViewById(R.id.signup_volunteer_loading_overlay);
@@ -68,7 +68,7 @@ class SignUpVolunteerFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 
     private fun setHints() {
@@ -91,6 +91,13 @@ class SignUpVolunteerFragment : Fragment() {
             override fun onUploadFailed(error: String) {
                 TODO("Not yet implemented")
             }
+
+            override fun onUploadFailed(error: String) {
+                // Handle the error (e.g., show an error message or log it)
+                loadingOverlay?.visibility = View.INVISIBLE
+                // You can also show a message to the user here
+                Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
+            }
         })
 
         imageHelper.setImageViewClickListener {
@@ -100,13 +107,13 @@ class SignUpVolunteerFragment : Fragment() {
         volunteerViewModel = VolunteerViewModel()
 
         signUpBtn.setOnClickListener {
-            val email = binding.emailVolunteer
-            val password = binding.passwordVolunteer
-            val name = binding.nameVolunteer
-            val institution = binding.institution
-            val bio = binding.bioVolunteer
+            val email = binding?.emailVolunteer
+            val password = binding?.passwordVolunteer
+            val name = binding?.nameVolunteer
+            val institution = binding?.institution
+            val bio = binding?.bioVolunteer
             val logo = imageHelper.getImageUrl() ?: "test"
-            if (isValidInputs(
+            if (email!=null && password!=null && name!=null && institution!=null && bio!=null && logo!=null && isValidInputs(
                     email,
                     password,
                     name,
