@@ -1,14 +1,18 @@
 package com.connectify.connectifyNow
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navOptions
 import androidx.navigation.ui.NavigationUI
 import com.connectify.connectifyNow.helpers.ActionBarHelpers
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.logger.Logger
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         userTypeProfile = userType
         invalidateOptionsMenu()
     }
+    
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

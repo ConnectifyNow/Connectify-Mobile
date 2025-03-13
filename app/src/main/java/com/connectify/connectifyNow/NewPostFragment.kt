@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.viewModel.PostViewModel
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
@@ -49,10 +50,14 @@ class NewPostFragment : Fragment() {
             }
 
             override fun onUploadFailed(error: String) {
+<<<<<<< HEAD
                 // Handle the error (e.g., show an error message or log it)
                 loadingOverlay?.visibility = View.INVISIBLE
                 // You can also show a message to the user here
                 Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
+=======
+                TODO("Not yet implemented")
+>>>>>>> d0b54333181f4298b2dcbdde9546ffafdc61f09a
             }
         })
 
@@ -106,6 +111,10 @@ class NewPostFragment : Fragment() {
         )
 
         addPost(post)
+
+        Navigation.findNavController(view).navigate(
+            R.id.action_newPostFragment_to_feedFragment,
+        )
     }
 
     private fun addPost(post: Post) {

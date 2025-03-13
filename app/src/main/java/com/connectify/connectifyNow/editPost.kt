@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.databinding.FragmentEditPostBinding
@@ -76,10 +77,14 @@ class editPost : Fragment() {
             }
 
             override fun onUploadFailed(error: String) {
+<<<<<<< HEAD
                 // Handle the error (e.g., show an error message or log it)
                 loadingOverlay?.visibility = View.INVISIBLE
                 // You can also show a message to the user here
                 Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
+=======
+                TODO("Not yet implemented")
+>>>>>>> d0b54333181f4298b2dcbdde9546ffafdc61f09a
             }
         })
         imageHelper.setImageViewClickListener {
@@ -124,6 +129,10 @@ class editPost : Fragment() {
                     Toast.makeText(requireContext(), "Failed to update post", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            Navigation.findNavController(view).navigate(
+                R.id.action_editPost_to_profileFragment,
+            )
         }
     }
 
