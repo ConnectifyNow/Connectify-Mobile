@@ -32,8 +32,7 @@ class EditOrganizationProfileFragment : Fragment() {
     private val userAuthViewModel: AuthViewModel by activityViewModels()
     private val compViewModel: OrganizationViewModel by activityViewModels()
 
-    private var _binding: FragmentEditOrganizationProfileBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentEditOrganizationProfileBinding? = null
 
     private lateinit var view: View
     private lateinit var saveBtn: Button
@@ -53,8 +52,8 @@ class EditOrganizationProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentEditOrganizationProfileBinding.inflate(layoutInflater, container, false)
-        view = binding.root
+        binding = FragmentEditOrganizationProfileBinding.inflate(layoutInflater, container, false)
+        view = binding?.root
         dynamicTextHelper = DynamicTextHelper(view)
 
 
@@ -82,7 +81,7 @@ class EditOrganizationProfileFragment : Fragment() {
     }
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
+        binding = null
     }
 
     private fun setHints() {

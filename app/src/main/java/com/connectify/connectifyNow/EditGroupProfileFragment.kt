@@ -31,7 +31,6 @@ class EditGroupProfileFragment : Fragment() {
 
     private var binding: FragmentEditGroupProfileBinding? = null
 
-
     private lateinit var view: View
     private lateinit var saveBtn: Button
     private lateinit var groupViewModel: VolunteerViewModel
