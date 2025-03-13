@@ -112,7 +112,8 @@ class ProfileFragment : Fragment() {
                 )
             }
         }
-        val mapButton = view.findViewById<TextView>(R.id.explore_organizations)
+
+        val mapButton = binding.exploreOrganizations
 
         if(args?.getString("userId") != null) {
             mapButton.visibility = View.GONE
@@ -203,7 +204,7 @@ class ProfileFragment : Fragment() {
             additionalInfoTV?.text = additionalInfo;
 
             profileImage = view.findViewById(R.id.profile_image)
-            profileImageBackgroundElement = view.findViewById(R.id.profile_background_image);
+//            profileImageBackgroundElement = view.findViewById(R.id.profile_background_image);
 
             if (profileImage != null && profileImageBackgroundElement != null) {
                 val imageUrl = if (image.isEmpty())
@@ -212,13 +213,13 @@ class ProfileFragment : Fragment() {
 
                 Picasso.get().load(imageUrl).into(profileImage)
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    profileImageBackgroundElement?.setRenderEffect(
-                        RenderEffect.createBlurEffect(
-                            50f, 50f, Shader.TileMode.CLAMP
-                        )
-                    )
-                }
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//                    profileImageBackgroundElement?.setRenderEffect(
+//                        RenderEffect.createBlurEffect(
+//                            50f, 50f, Shader.TileMode.CLAMP
+//                        )
+//                    )
+//                }
             }
 
         isProfileDataLoaded = true;
