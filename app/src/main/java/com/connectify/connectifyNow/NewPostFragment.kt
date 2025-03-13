@@ -108,9 +108,6 @@ class NewPostFragment : Fragment() {
 
         addPost(post)
 
-        Navigation.findNavController(view).navigate(
-            R.id.action_newPostFragment_to_feedFragment,
-        )
     }
 
     private fun addPost(post: Post) {
