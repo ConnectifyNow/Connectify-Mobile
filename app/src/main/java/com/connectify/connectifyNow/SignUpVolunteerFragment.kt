@@ -85,12 +85,16 @@ class SignUpVolunteerFragment : Fragment() {
 
         imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
-                loadingOverlay?.visibility = View.INVISIBLE
+                loadingOverlay.visibility = View.INVISIBLE
+            }
+
+            override fun onUploadFailed(error: String) {
+                TODO("Not yet implemented")
             }
         })
 
         imageHelper.setImageViewClickListener {
-            loadingOverlay?.visibility = View.VISIBLE
+            loadingOverlay.visibility = View.VISIBLE
         }
 
         volunteerViewModel = VolunteerViewModel()

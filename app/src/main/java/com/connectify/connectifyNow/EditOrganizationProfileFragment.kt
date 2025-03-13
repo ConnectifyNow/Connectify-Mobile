@@ -102,6 +102,10 @@ class EditOrganizationProfileFragment : Fragment() {
             override fun onImageUploaded(imageUrl: String) {
                 loadingOverlay.visibility = View.INVISIBLE
             }
+
+            override fun onUploadFailed(error: String) {
+                TODO("Not yet implemented")
+            }
         })
 
         imageHelper.setImageViewClickListener {
