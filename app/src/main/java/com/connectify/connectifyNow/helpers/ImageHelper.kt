@@ -10,10 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.connectify.connectifyNow.models.CloudinaryModel
 import com.connectify.connectifyNow.models.CloudinaryUploadListener
-import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import java.util.UUID
-
 
 interface ImageUploadListener {
     fun onImageUploaded(imageUrl: String)
