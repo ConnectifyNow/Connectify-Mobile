@@ -211,14 +211,12 @@ class SignUpOrganizationFragment : BaseFragment() {
             val passwordOrganization = binding?.passwordOrganization
             val address = binding?.organizationSuggestion?.text
             val logo = imageHelper.getImageUrl()
-            Log.d("Signup","before if")
             if (organizationNameGroup!=null && emailOrganization!=null && bioOrganization!=null &&passwordOrganization!=null && address!=null &&  isValidInputs(emailOrganization, passwordOrganization, organizationNameGroup, address, bioOrganization)) {
                 val email = emailOrganization.editTextField.text.toString()
                 val password = passwordOrganization.editTextField.text.toString()
                 val name = organizationNameGroup.editTextField.text.toString()
                 val bio = bioOrganization.editTextField.text.toString()
 
-                Log.d("Signup","inside if")
                 organization = Organization(
                     id = userAuthViewModel.getUserId().toString(),
                     name = name,
@@ -329,7 +327,6 @@ class SignUpOrganizationFragment : BaseFragment() {
             }
 
             handle[FORM_STATE_KEY] = formBundle
-            Log.d("SignUpFragment", "Form state saved")
         }
     }
 
@@ -357,7 +354,6 @@ class SignUpOrganizationFragment : BaseFragment() {
                         binding.bioOrganization.editTextField.setText(bio)
                     }
 
-                    Log.d("SignUpFragment", "Form state restoration complete")
                 } ?: Log.e("SignUpFragment", "Binding is null during restore")
             }
         } ?: Log.d("SignUpFragment", "No saved form state found")
