@@ -119,16 +119,22 @@ class editPost : Fragment() {
             lifecycleScope.launch {
                 val result = postViewModel.update(postId, updatedPost.json)
                 if (result) {
-                    delay(2000)
-                    Toast.makeText(requireContext(), "Post updated successfully", Toast.LENGTH_SHORT).show()
+                    postViewModel.refreshPosts()
+
+                    delay(500) // Short delay to ensure data is refreshed
+                    Toast.makeText(
+                        requireContext(),
+                        "Post updated successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    Navigation.findNavController(view).navigate(
+                        R.id.action_editPost_to_profileFragment,
+                    )
                 } else {
                     Toast.makeText(requireContext(), "Failed to update post", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            Navigation.findNavController(view).navigate(
-                R.id.action_editPost_to_profileFragment,
-            )
         }
     }
 

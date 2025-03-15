@@ -142,6 +142,14 @@ class ProfileFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    override fun onResume() {
+        super.onResume()
+        val userId = arguments?.getString("userId") ?: authViewModel.getUserId()
+        if (userId != null) {
+            postViewModel.refreshPosts() // This will reload the posts data
+        }
+    }
+
     private fun getOrganization(organizationId: String): Unit {
         organizationViewModel.getOrganization(organizationId) {
             fillProfileDetails(it.name, it.bio, it.location.address, it.logo);
@@ -247,6 +255,8 @@ class ProfileFragment : Fragment() {
             isPostsLoaded = true;
             handleLoading();
         }
+        postViewModel.getPostsByOwnerId(userId) { /* This will trigger the observer */ }
+
     }
 
     private fun handleLoading(): Unit {

@@ -65,6 +65,8 @@ class PostViewModel: ViewModel() {
     fun refreshPosts() {
         viewModelScope.launch(Dispatchers.IO) {
             postDomain.refreshPosts()
+
+            _posts.postValue(postDomain.posts.value?.toMutableList())
         }
     }
 
