@@ -5,6 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:background="@color/primary"
   android:fillViewport="true"
   tools:context=".SignUpOrganizationFragment">
 
@@ -207,22 +208,20 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <Button
-      android:id="@+id/sign_up_organization_btn"
-      style="@style/AppTextStyle"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginHorizontal="80dp"
-      android:layout_marginTop="32dp"
-      android:background="@drawable/submit_form_btn"
-      android:gravity="center"
-      android:text="@string/sign_up"
-      android:textAppearance="@style/log_in_button"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/password_organization"
-      app:layout_constraintVertical_bias="0.841" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sign_up_organization_btn"
+        android:layout_width="256dp"
+        android:layout_height="43dp"
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/dark_blue"
+        android:gravity="center"
+        android:text="@string/sign_up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_organization"
+        app:layout_constraintVertical_bias="0.841" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/choose_on_map_button"
@@ -236,9 +235,9 @@
         app:iconGravity="textStart"
         app:iconPadding="8dp"
         app:iconTint="@color/Dark_Gray"
+        android:backgroundTint="@color/light_blue"
         app:strokeColor="@color/Light_Gray"
         app:strokeWidth="1dp"
-        android:backgroundTint="#E0CFEF"
         android:textColor="@color/Dark_Gray"
         app:layout_constraintBaseline_toBaselineOf="@+id/input_suggestions"
         app:layout_constraintEnd_toEndOf="parent"
