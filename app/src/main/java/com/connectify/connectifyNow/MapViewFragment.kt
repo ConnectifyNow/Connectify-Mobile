@@ -112,9 +112,7 @@ class MapFragment : BaseFragment(), LocationListener {
         }
 
         if (isLocationSelectionMode) {
-            // Clear any existing organizations from the map
             clearMapOverlays()
-            // Only show the user's current location initially
             requestLocationUpdates()
 
             aMap.setOnTouchListener { view, event ->
@@ -152,10 +150,8 @@ class MapFragment : BaseFragment(), LocationListener {
 
                         val navController = findNavController()
 
-                        // Set the fragment result to be received by the previous fragment
                         navController.previousBackStackEntry?.savedStateHandle?.set("location_data", result)
 
-                        // Navigate back to the previous fragment
                         navController.popBackStack()
                      } else {
                         Log.d("MapFragment", "Failed to fetch address")
