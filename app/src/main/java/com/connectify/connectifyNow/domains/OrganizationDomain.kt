@@ -17,7 +17,7 @@ class OrganizationDomain {
         fireStoreOrganizationRepository.getOrganization(id, callback);
     }
 
-    fun refreshOragnizations() {
+    fun refreshOrganizations() {
 
         val lastUpdated: Long = Organization.lastUpdated
 
@@ -42,7 +42,7 @@ class OrganizationDomain {
     suspend fun addOrganization(organization: Organization) {
         fireStoreOrganizationRepository.addOrganization(organization) { id ->
             fireStoreOrganizationRepository.setOrganizationUserType(id)
-            refreshOragnizations()
+            refreshOrganizations()
         }
     }
 

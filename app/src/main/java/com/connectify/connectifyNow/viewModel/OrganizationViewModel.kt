@@ -28,7 +28,7 @@ class OrganizationViewModel: ViewModel() {
     }
 
     fun refreshOrganizations() = viewModelScope.launch(Dispatchers.IO) {
-        organizationDomain.refreshOragnizations()
+        organizationDomain.refreshOrganizations()
     }
 
     fun setOrganizationsOnMap(callback: (Organization) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
