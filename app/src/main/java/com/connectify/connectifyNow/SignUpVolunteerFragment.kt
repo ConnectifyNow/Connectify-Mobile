@@ -89,10 +89,6 @@ class SignUpVolunteerFragment : Fragment() {
             }
 
             override fun onUploadFailed(error: String) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onUploadFailed(error: String) {
                 // Handle the error (e.g., show an error message or log it)
                 loadingOverlay?.visibility = View.INVISIBLE
                 // You can also show a message to the user here
