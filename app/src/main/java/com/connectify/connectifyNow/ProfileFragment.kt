@@ -1,7 +1,5 @@
 package com.connectify.connectifyNow
 
-import android.graphics.RenderEffect
-import android.graphics.Shader
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -179,7 +177,7 @@ class ProfileFragment : Fragment() {
                     when (userInfo) {
                         is UserInfo.UserVolunteer -> {
                             Navigation.findNavController(view).navigate(
-                                R.id.action_profileFragment_to_editGroupProfileFragment,
+                                R.id.action_profileFragment_to_editVolunteerProfileFragment,
                                 args
                             )
                         }

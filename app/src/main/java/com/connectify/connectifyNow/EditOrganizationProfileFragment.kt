@@ -90,7 +90,7 @@ class EditOrganizationProfileFragment : Fragment() {
     }
 
     private fun setEventListeners() {
-        saveBtn = view.findViewById(R.id.save_group_btn)
+        saveBtn = view.findViewById(R.id.save_organization_btn)
 
         oragnizationViewModel = OrganizationViewModel()
 

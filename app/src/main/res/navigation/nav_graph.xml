@@ -79,8 +79,8 @@
       android:id="@+id/action_profileFragment_to_mapViewFragment"
       app:destination="@id/mapViewFragment" />
     <action
-      android:id="@+id/action_profileFragment_to_editGroupProfileFragment"
-      app:destination="@id/editGroupProfileFragment" />
+      android:id="@+id/action_profileFragment_to_editVolunteerProfileFragment"
+      app:destination="@id/editVolunteerProfileFragment" />
   </fragment>
   <fragment
     android:id="@+id/signUpOrganizationFragment"
@@ -163,14 +163,14 @@
   </fragment>
 
   <fragment
-    android:id="@+id/editGroupProfileFragment"
-    android:name="com.connectify.connectifyNow.EditGroupProfileFragment"
-    android:label="fragment_edit_group_profile"
-    tools:layout="@layout/fragment_edit_group_profile">
+      android:id="@+id/editVolunteerProfileFragment"
+      android:name="com.connectify.connectifyNow.EditVolunteerProfileFragment"
+      android:label="fragment_edit_volunteer_profile"
+      tools:layout="@layout/fragment_edit_volunteer_profile">
 
     <action
-      android:id="@+id/action_editGroupProfileFragment_to_ProfileFragment"
-      app:destination="@id/profileFragment" />
+        android:id="@+id/action_editVolunteerProfileFragment_to_ProfileFragment"
+        app:destination="@id/profileFragment" />
   </fragment>
 
   <fragment

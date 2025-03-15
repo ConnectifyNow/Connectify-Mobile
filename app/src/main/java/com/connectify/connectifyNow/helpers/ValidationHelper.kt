@@ -112,10 +112,10 @@ object ValidationHelper {
                     -> {
                     inputGroup.errorMessage.text = "Field must be at least 6 characters long and contain only letters"
                 }
-                context.getString(R.string.project_name_title),
+                context.getString(R.string.post_title),
                 context.getString(R.string.bio_title),
                 context.getString(R.string.institution_title),
-                context.getString(R.string.project_description) -> {
+                context.getString(R.string.post_description) -> {
                     inputGroup.errorMessage.text = "Field must be at least 3 characters long"
                 }
                 else -> {

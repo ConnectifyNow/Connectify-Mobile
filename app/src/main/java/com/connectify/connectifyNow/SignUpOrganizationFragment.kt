@@ -109,7 +109,7 @@ class SignUpOrganizationFragment : BaseFragment() {
     }
 
     private fun initLocationsAutoComplete() {
-        addressAutoComplete = view.findViewById(R.id.organizationSuggestion)
+        addressAutoComplete = view.findViewById(R.id.organization_suggestion)
 
         locationsAdapter = ArrayAdapter(
             requireContext(),
@@ -219,17 +219,19 @@ class SignUpOrganizationFragment : BaseFragment() {
 
         signUpOrganization.setOnClickListener {
             val organizationNameGroup = binding?.organizationNameGroup
-            val emailGroup = binding?.emailOrganization
-            val bioGroup = binding?.bioGroup
-            val passwordGroup = binding?.passwordOrganization
+            val emailOrganization = binding?.emailOrganization
+            val bioOrganization = binding?.bioOrganization
+            val passwordOrganization = binding?.passwordOrganization
             val address = binding?.organizationSuggestion?.text
             val logo = imageHelper.getImageUrl()
-            if (organizationNameGroup!=null && emailGroup!=null && bioGroup!=null &&passwordGroup!=null && address!=null && logo!=null &&  isValidInputs(emailGroup, passwordGroup, organizationNameGroup, address, bioGroup)) {
-                val email = emailGroup.editTextField.text.toString()
-                val password = passwordGroup.editTextField.text.toString()
+            Log.d("Signup","before if")
+            if (organizationNameGroup!=null && emailOrganization!=null && bioOrganization!=null &&passwordOrganization!=null && address!=null &&  isValidInputs(emailOrganization, passwordOrganization, organizationNameGroup, address, bioOrganization)) {
+                val email = emailOrganization.editTextField.text.toString()
+                val password = passwordOrganization.editTextField.text.toString()
                 val name = organizationNameGroup.editTextField.text.toString()
-                val bio = bioGroup.editTextField.text.toString()
+                val bio = bioOrganization.editTextField.text.toString()
 
+                Log.d("Signup","inside if")
                 organization = Organization(
                     id = userAuthViewModel.getUserId().toString(),
                     name = name,
@@ -249,7 +251,7 @@ class SignUpOrganizationFragment : BaseFragment() {
         dynamicTextHelper.setTextViewText(R.id.organization_name_group, R.string.organization_name_title)
         dynamicTextHelper.setTextViewText(R.id.email_organization, R.string.email)
         dynamicTextHelper.setTextViewText(R.id.password_organization, R.string.password)
-        dynamicTextHelper.setTextViewText(R.id.bio_group, R.string.bio_title)
+        dynamicTextHelper.setTextViewText(R.id.bio_organization, R.string.bio_title)
     }
 
     @RequiresApi(Build.VERSION_CODES.O_MR1)
@@ -340,7 +342,7 @@ class SignUpOrganizationFragment : BaseFragment() {
                 putString(ORG_NAME_KEY, binding?.organizationNameGroup?.editTextField?.text.toString())
                 putString(EMAIL_KEY, binding?.emailOrganization?.editTextField?.text.toString())
                 putString(PASSWORD_KEY, binding?.passwordOrganization?.editTextField?.text.toString())
-                putString(BIO_KEY, binding?.bioGroup?.editTextField?.text.toString())
+                putString(BIO_KEY, binding?.bioOrganization?.editTextField?.text.toString())
             }
 
             handle[FORM_STATE_KEY] = formBundle
@@ -370,7 +372,7 @@ class SignUpOrganizationFragment : BaseFragment() {
                     }
 
                     formBundle.getString(BIO_KEY)?.let { bio ->
-                        binding.bioGroup.editTextField.setText(bio)
+                        binding.bioOrganization.editTextField.setText(bio)
                     }
 
                     Log.d("SignUpFragment", "Form state restoration complete")
