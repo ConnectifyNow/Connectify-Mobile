@@ -46,7 +46,7 @@ class OrganizationDomain {
         }
     }
 
-    suspend fun updateOrganization(organization: Organization, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) {
+    fun updateOrganization(organization: Organization, data: Map<String, Any>, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit) {
         fireStoreOrganizationRepository.updateOrganization(organization, data, onSuccessCallBack, onFailureCallBack)
     }
 

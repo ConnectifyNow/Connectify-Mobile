@@ -1,4 +1,4 @@
-package com.connectify.connectifyNow.models;
+package com.connectify.connectifyNow.models
 
 enum class Type {
     VOLUNTEER,

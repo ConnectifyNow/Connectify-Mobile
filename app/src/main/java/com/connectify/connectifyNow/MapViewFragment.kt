@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.FragmentMapBinding
+import com.connectify.connectifyNow.helpers.navigate
 import com.connectify.connectifyNow.viewModel.OrganizationViewModel
 import com.connectify.connectifyNow.models.Organization
 import com.connectify.connectifyNow.services.AddressApiCall
@@ -129,7 +130,6 @@ class MapFragment : BaseFragment(), LocationListener {
                 addressApiCall.getAddressByLocation(requireContext(), latitude, longitude) { address ->
                     if (address != null) {
                         // Create a bundle to hold the address data
-
                         val result = Bundle().apply {
                             putDouble("latitude", latitude)
                             putDouble("longitude", longitude)
@@ -245,18 +245,6 @@ class MapFragment : BaseFragment(), LocationListener {
             }
         }
     }
-
-//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        if (requestCode == LOCATIONS_PERMISSIONS_CODE) {
-//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                initializeMap()
-//                requestLocationUpdates()
-//            } else {
-//                Log.d("MapFragment", "Location permission denied")
-//            }
-//        }
-//    }
 
     private fun addMarker(geoPoint: GeoPoint, data: HashMap<String, String>, snippet: String, showOrganizationDialog: Boolean = true) {
         val markerIcon: Drawable? = ContextCompat.getDrawable(requireContext(), R.drawable.custom_marker_icon)

@@ -18,9 +18,9 @@ import com.connectify.connectifyNow.domains.UserDomain
 import com.connectify.connectifyNow.viewModel.PostViewModel
 import com.squareup.picasso.Picasso
 
-class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var containArgs: Boolean = false) : RecyclerView.Adapter<PostAdapter.PostHolder>() {
+class PostAdapter(var posts: MutableList<Post>, private var isFromFeed: Boolean, private var containArgs: Boolean = false) : RecyclerView.Adapter<PostAdapter.PostHolder>() {
 
-    var listener: FeedFragment.OnPostClickListener? = null
+    private var listener: FeedFragment.OnPostClickListener? = null
     fun setOnPostClickListener(listener: FeedFragment.OnPostClickListener) {
         this.listener = listener
     }
@@ -28,20 +28,20 @@ class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var con
     class PostHolder(
         itemView: View,
         private val posts: List<Post>,
-        val listener: FeedFragment.OnPostClickListener?,
+        private val listener: FeedFragment.OnPostClickListener?,
         isFromFeed: Boolean
     ) : RecyclerView.ViewHolder(itemView) {
         val ownerNameLabel: TextView = itemView.findViewById(R.id.ownerName)
         val contentLabel: TextView = itemView.findViewById(R.id.content)
-        val image = itemView.findViewById<ImageView>(R.id.imagePost)
+        val image: ImageView = itemView.findViewById(R.id.imagePost)
 
-        val editPostButton = itemView.findViewById<ImageView>(R.id.post_edit_button)
-        val deletePostButton = itemView.findViewById<ImageView>(R.id.deletePostButton)
-        val actionsToolbar = itemView.findViewById<LinearLayout>(R.id.post_actions_toolbar);
+        val editPostButton: ImageView = itemView.findViewById(R.id.post_edit_button)
+        val deletePostButton: ImageView = itemView.findViewById(R.id.deletePostButton)
+        val actionsToolbar: LinearLayout = itemView.findViewById(R.id.post_actions_toolbar);
 
         init {
             itemView.setOnClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION && isFromFeed) {
                     listener?.onPostClicked(posts[position])
                     Log.d("onClickPost", posts[position].ownerId)
@@ -70,7 +70,7 @@ class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var con
             holder.actionsToolbar.visibility = View.VISIBLE;
 
             holder.editPostButton.setOnClickListener {
-                if (holder.adapterPosition != RecyclerView.NO_POSITION) {
+                if (holder.bindingAdapterPosition != RecyclerView.NO_POSITION) {
                     val args = Bundle()
                     args.putString("postId", posts[position].id)
 
@@ -87,7 +87,7 @@ class PostAdapter(var posts: MutableList<Post>, var isFromFeed: Boolean, var con
         }
 
         if (post.imagePath.isNotBlank()) {
-            holder.image.setVisibility(View.VISIBLE)
+            holder.image.visibility = View.VISIBLE
             val imageUri = Uri.parse(post.imagePath)
             loadImage(imageUri, holder.image)
         } else {

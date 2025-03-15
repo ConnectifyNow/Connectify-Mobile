@@ -1,6 +1,5 @@
 package com.connectify.connectifyNow
 
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -28,7 +26,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class editPost : Fragment() {
+class EditPost : Fragment() {
     private var binding: FragmentEditPostBinding? = null
 
     private lateinit var view: View
@@ -39,16 +37,15 @@ class editPost : Fragment() {
     private  lateinit var loadingOverlay: LinearLayout
 
     private val userAuthViewModel: AuthViewModel by activityViewModels()
-    var titleConstraintLayout: ConstraintLayout? = null
-    var detailsConstraintlayout: ConstraintLayout? = null
+    private var titleConstraintLayout: ConstraintLayout? = null
+    private var detailsConstraintlayout: ConstraintLayout? = null
 
-    var postId = ""
+    private var postId = ""
     var title: TextView? = null
-    var details: TextView? = null
-    var updatePost: Button? = null
-    var imagePost = ""
+    private var details: TextView? = null
+    private var updatePost: Button? = null
+    private var imagePost = ""
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,7 +64,7 @@ class editPost : Fragment() {
         imageView = view.findViewById(R.id.edit_image_to_upload)
         updatePost = view.findViewById(R.id.save_post)
 
-        loadingOverlay = view.findViewById(R.id.edit_post_loading_overlay);
+        loadingOverlay = view.findViewById(R.id.edit_post_loading_overlay)
         loadingOverlay.visibility = View.INVISIBLE
 
         imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
@@ -78,7 +75,7 @@ class editPost : Fragment() {
 
             override fun onUploadFailed(error: String) {
                 // Handle the error (e.g., show an error message or log it)
-                loadingOverlay?.visibility = View.INVISIBLE
+                loadingOverlay.visibility = View.INVISIBLE
                 // You can also show a message to the user here
                 Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
             }
@@ -103,7 +100,6 @@ class editPost : Fragment() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun addEventListeners() {
         updatePost?.setOnClickListener {
             val updatedPost =  Post(

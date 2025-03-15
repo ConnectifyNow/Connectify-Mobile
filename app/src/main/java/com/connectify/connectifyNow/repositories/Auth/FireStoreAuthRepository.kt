@@ -3,13 +3,12 @@ package com.connectify.connectifyNow.repositories.Auth
 import com.connectify.connectifyNow.repositories.ApiManager
 
 class FireStoreAuthRepository {
-
     companion object {
         const val USER_TYPE_COLLECTION_PATH = "userType"
     }
 
     val firebaseAuth = ApiManager().firebaseAuth
-    val apiManager = ApiManager()
+    private val apiManager = ApiManager()
 
     fun createUser(email: String, password: String, onSuccessCallBack: (String?) -> Unit, onFailureCallBack: (String?) -> Unit) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -49,6 +48,4 @@ class FireStoreAuthRepository {
             }
 
     }
-
-
 }

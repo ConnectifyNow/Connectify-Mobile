@@ -1,4 +1,4 @@
-package com.connectify.connectifyNow.models;
+package com.connectify.connectifyNow.models
 
 
 sealed class UserInfo {

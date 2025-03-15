@@ -7,7 +7,6 @@ import com.connectify.connectifyNow.repositories.Auth.FireStoreAuthRepository
 
 class UserDomain {
     private val organizationDomain: OrganizationDomain = OrganizationDomain()
-    private val postDomain: PostDomain = PostDomain()
     private val fireStoreAuthRepository: FireStoreAuthRepository = FireStoreAuthRepository()
     private val volunteerDomain: VolunteerDomain = VolunteerDomain()
 

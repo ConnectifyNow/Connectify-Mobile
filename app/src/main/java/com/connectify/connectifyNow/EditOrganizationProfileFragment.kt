@@ -1,6 +1,5 @@
 package com.connectify.connectifyNow
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -38,7 +37,7 @@ class EditOrganizationProfileFragment : Fragment() {
     private lateinit var saveBtn: Button
     private lateinit var organizationViewModel: OrganizationViewModel
     private lateinit var dynamicTextHelper: DynamicTextHelper
-    private lateinit var email_address: String
+    private lateinit var emailAddress: String
     private lateinit var organizationLocation: OrganizationLocation
 
     private lateinit var profileImageUrl: String
@@ -51,13 +50,13 @@ class EditOrganizationProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEditOrganizationProfileBinding.inflate(layoutInflater, container, false)
         view = binding?.root as View
         dynamicTextHelper = DynamicTextHelper(view)
 
 
-        loadingOverlay = view.findViewById(R.id.edit_image_loading_overlay);
+        loadingOverlay = view.findViewById(R.id.edit_image_loading_overlay)
         loadingOverlay.visibility = View.INVISIBLE
 
         setHints()
@@ -94,7 +93,6 @@ class EditOrganizationProfileFragment : Fragment() {
 
         organizationViewModel = OrganizationViewModel()
 
-        //allow update image
         imageView = view.findViewById(R.id.organizationImage)
 
         imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
@@ -103,9 +101,7 @@ class EditOrganizationProfileFragment : Fragment() {
             }
 
             override fun onUploadFailed(error: String) {
-                // Handle the error (e.g., show an error message or log it)
-                loadingOverlay?.visibility = View.INVISIBLE
-                // You can also show a message to the user here
+                loadingOverlay.visibility = View.INVISIBLE
                 Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
             }
         })
@@ -122,16 +118,16 @@ class EditOrganizationProfileFragment : Fragment() {
                 val name = organizationName.editTextField.text.toString()
                 val bio = organizationBio.editTextField.text.toString()
 
-                val updatedorganization = Organization(
+                val updatedOrganization = Organization(
                     id = userAuthViewModel.getUserId().toString(),
                     name = name,
                     location = organizationLocation,
                     bio = bio,
-                    email = email_address,
+                    email = emailAddress,
                     logo = imageHelper.getImageUrl() ?:profileImageUrl
                 )
 
-                organizationViewModel.update(updatedorganization,updatedorganization.json,
+                organizationViewModel.update(updatedOrganization,updatedOrganization.json,
                     onSuccessCallBack = {
                         Toast.makeText(context, "organization Details have been updated successfully", Toast.LENGTH_SHORT).show()
                         Log.d("EditProfilePage", "Success in update")
@@ -176,7 +172,7 @@ class EditOrganizationProfileFragment : Fragment() {
         compViewModel.getOrganization(userId) { organization ->
             binding?.organizationName?.editTextField?.setText(organization.name)
             binding?.organizationBio?.editTextField?.setText(organization.bio)
-            email_address = organization.email
+            emailAddress = organization.email
             organizationLocation = organization.location
             profileImageUrl = organization.logo
 
