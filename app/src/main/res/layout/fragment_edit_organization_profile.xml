@@ -17,7 +17,7 @@
         android:contentDescription="Back" />
 
     <TextView
-        android:id="@+id/edit_oragnization_profile_title"
+        android:id="@+id/edit_organization_profile_title"
         style="@style/AppTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/oragnization_name"
+        android:id="@+id/organization_name"
         layout="@layout/custom_input_field_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -40,10 +40,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_oragnization_profile_title" />
+        app:layout_constraintTop_toBottomOf="@id/edit_organization_profile_title" />
 
     <include
-        android:id="@+id/oragnization_bio"
+        android:id="@+id/organization_bio"
         layout="@layout/custom_input_field_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/oragnization_name" />
+        app:layout_constraintTop_toBottomOf="@id/organization_name" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -59,10 +59,10 @@
         app:layout_constraintBottom_toTopOf="@+id/save_organization_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/oragnization_bio">
+        app:layout_constraintTop_toBottomOf="@+id/organization_bio">
 
         <ImageView
-            android:id="@+id/oragnizationImage"
+            android:id="@+id/organizationImage"
             android:src="@drawable/user_avatar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +124,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/oragnization_bio"
+        app:layout_constraintTop_toBottomOf="@id/organization_bio"
         app:layout_constraintVertical_bias="0.805" />
 
 

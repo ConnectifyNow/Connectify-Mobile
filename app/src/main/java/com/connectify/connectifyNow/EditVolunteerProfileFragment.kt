@@ -52,8 +52,8 @@ class EditVolunteerProfileFragment : Fragment() {
         dynamicTextHelper = DynamicTextHelper(view)
 
 
-        loadingOverlay = view.findViewById(R.id.edit_image_loading_overlay);
-        loadingOverlay?.visibility = View.INVISIBLE
+        loadingOverlay = view.findViewById(R.id.edit_image_loading_overlay)
+        loadingOverlay.visibility = View.INVISIBLE
 
 
 
@@ -96,19 +96,17 @@ class EditVolunteerProfileFragment : Fragment() {
 
         imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
-                loadingOverlay?.visibility = View.INVISIBLE
+                loadingOverlay.visibility = View.INVISIBLE
             }
 
             override fun onUploadFailed(error: String) {
-                // Handle the error (e.g., show an error message or log it)
-                loadingOverlay?.visibility = View.INVISIBLE
-                // You can also show a message to the user here
+                loadingOverlay.visibility = View.INVISIBLE
                 Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
             }
         })
 
         imageHelper.setImageViewClickListener {
-            loadingOverlay?.visibility = View.VISIBLE
+            loadingOverlay.visibility = View.VISIBLE
         }
 
         saveBtn.setOnClickListener {

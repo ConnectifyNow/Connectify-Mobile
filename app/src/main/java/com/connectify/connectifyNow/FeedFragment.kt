@@ -1,13 +1,11 @@
 package com.connectify.connectifyNow
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -35,7 +33,6 @@ class FeedFragment : Fragment() {
 
     private var binding: FragmentFeedBinding? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +52,7 @@ class FeedFragment : Fragment() {
         progressBar.visibility = View.VISIBLE
 
 
-        userAuthViewModel.getInfoOnUser(userAuthViewModel.getUserId().toString()) { userInfo, error ->
+        userAuthViewModel.getInfoOnUser(userAuthViewModel.getUserId().toString()) { userInfo, _ ->
             when (userInfo) {
                 is UserInfo.UserVolunteer -> {
                     (activity as MainActivity).setProfile("USER")
@@ -175,7 +172,6 @@ class FeedFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun reloadData() {
         swipeRefreshLayout.isRefreshing = false
         progressBar.visibility = View.VISIBLE
@@ -189,7 +185,6 @@ class FeedFragment : Fragment() {
         binding = null
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
         reloadData()

@@ -3,10 +3,8 @@ package com.connectify.connectifyNow
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
-import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,18 +16,17 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
-import com.connectify.connectifyNow.databinding.FragmentSignInBinding
 import com.connectify.connectifyNow.databinding.FragmentSignUpOrganizationBinding
 import com.connectify.connectifyNow.helpers.DialogHelper
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
 import com.connectify.connectifyNow.helpers.ImageUploadListener
 import com.connectify.connectifyNow.helpers.ValidationHelper
+import com.connectify.connectifyNow.helpers.navigate
 import com.connectify.connectifyNow.models.Location
 import com.connectify.connectifyNow.models.Organization
 import com.connectify.connectifyNow.models.OrganizationLocation
@@ -63,16 +60,11 @@ class SignUpOrganizationFragment : BaseFragment() {
         GeoHash(0.0, 0.0)
     )
 
-    // Form state keys
     private val FORM_STATE_KEY = "form_state"
     private val ORG_NAME_KEY = "org_name"
     private val EMAIL_KEY = "email"
     private val PASSWORD_KEY = "password"
     private val BIO_KEY = "bio"
-    private val LOGO_URL_KEY = "logo_url"
-    private val ADDRESS_KEY = "address"
-    private val LAT_KEY = "latitude"
-    private val LON_KEY = "longitude"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,8 +83,6 @@ class SignUpOrganizationFragment : BaseFragment() {
 
         setHints()
         setEventListeners()
-
-        // Restore saved form data if available
         restoreFormState()
 
         return view
@@ -190,13 +180,11 @@ class SignUpOrganizationFragment : BaseFragment() {
         imageHelper = ImageHelper(this, imageView, object : ImageUploadListener {
             override fun onImageUploaded(imageUrl: String) {
                 loadingOverlay.visibility = View.INVISIBLE
-                // Save the imageUrl to your data model or wherever needed
                 Log.d("YourFragment", "Image uploaded: $imageUrl")
             }
 
             override fun onUploadFailed(error: String) {
                 loadingOverlay.visibility = View.INVISIBLE
-                // Show error message to user
                 Log.e("YourFragment", "Upload failed: $error")
             }
         })
@@ -208,7 +196,6 @@ class SignUpOrganizationFragment : BaseFragment() {
         chooseOnMap = view.findViewById(R.id.choose_on_map_button)
 
         chooseOnMap.setOnClickListener {
-            // Save form state before navigating
             saveFormState()
 
             val args = Bundle()
@@ -245,7 +232,6 @@ class SignUpOrganizationFragment : BaseFragment() {
         }
     }
 
-    private fun String.toEditable(): Editable = SpannableStringBuilder(this)
 
     private fun setHints() {
         dynamicTextHelper.setTextViewText(R.id.organization_name_group, R.string.organization_name_title)
@@ -256,7 +242,7 @@ class SignUpOrganizationFragment : BaseFragment() {
 
     @RequiresApi(Build.VERSION_CODES.O_MR1)
     fun searchLocations(query: String) {
-        context?.let {
+        context?.let { it ->
             LocationsApiCall().getLocationsByQuery(it, query) { locations ->
 
                 locationsAdapter.clear()
@@ -264,10 +250,8 @@ class SignUpOrganizationFragment : BaseFragment() {
 
                 val filteredLocationsArray = ArrayList<String>()
                 locations.forEach {
-                    if (it.address != null && it.longitude != null && it.latitude != null) {
-                        filteredLocationsArray.add(it.title.plus(" - ").plus(it.address))
-                        locationsSuggestions.add(it)
-                    }
+                    filteredLocationsArray.add(it.title.plus(" - ").plus(it.address))
+                    locationsSuggestions.add(it)
                 }
 
                 locationsAdapter = ArrayAdapter(
@@ -331,7 +315,6 @@ class SignUpOrganizationFragment : BaseFragment() {
         return validationResults.all { it }
     }
 
-    // Save form state to saved state handle
     private fun saveFormState() {
         val navController = findNavController()
         val currentBackStackEntry = navController.currentBackStackEntry
@@ -350,7 +333,6 @@ class SignUpOrganizationFragment : BaseFragment() {
         }
     }
 
-    // Restore form state from saved state handle
     private fun restoreFormState() {
         val navController = findNavController()
         val currentBackStackEntry = navController.currentBackStackEntry

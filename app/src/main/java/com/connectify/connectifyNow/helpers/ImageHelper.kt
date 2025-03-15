@@ -10,9 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.connectify.connectifyNow.models.CloudinaryModel
 import com.connectify.connectifyNow.models.CloudinaryUploadListener
-import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import java.util.UUID
 
 
 interface ImageUploadListener {
@@ -30,7 +28,6 @@ class ImageHelper(val fragment: Fragment, private val imageView: ImageView, priv
                 val selectedImageUri = result.data?.data
                 selectedImageUri?.let { uri ->
                     displayImage(uri)
-                    // Upload it to Cloudinary
                     cloudinaryModel.uploadImage(
                         uri,
                         "image_${System.currentTimeMillis()}",
@@ -38,7 +35,6 @@ class ImageHelper(val fragment: Fragment, private val imageView: ImageView, priv
                             override fun onImageUploaded(imageUrl: String) {
                                 this@ImageHelper.imageUrl = imageUrl
 
-                                // Notify the fragment through the callback
                                 Handler(Looper.getMainLooper()).post {
                                     uploadListener.onImageUploaded(imageUrl)
                                 }
@@ -77,8 +73,6 @@ class ImageHelper(val fragment: Fragment, private val imageView: ImageView, priv
         }
     }
 
-
-    // Display image in ImageView
     private fun displayImage(uri: Uri) {
         try {
             Picasso.get()

@@ -1,4 +1,4 @@
-package com.connectify.connectifyNow.models;
+package com.connectify.connectifyNow.models
 
 import android.content.Context
 import androidx.room.Entity
@@ -44,7 +44,7 @@ data class Organization(
         const val BIO_KEY = "bio"
         const val LOCATION_KEY = "location"
         const val LAST_UPDATED = "lastUpdated"
-        const val GET_LAST_UPDATED = "get_last_updated"
+        private const val GET_LAST_UPDATED = "get_last_updated"
 
         fun fromJSON(json: Map<String, Any>): Organization {
             val name = json[NAME_KEY] as? String ?: ""

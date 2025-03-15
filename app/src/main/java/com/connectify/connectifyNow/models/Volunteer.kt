@@ -1,10 +1,9 @@
-package com.connectify.connectifyNow.models;
+package com.connectify.connectifyNow.models
 
 import android.content.Context
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.connectify.connectifyNow.base.MyApplication
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
 import java.util.UUID
 
@@ -41,30 +40,7 @@ data class Volunteer(
         const val IMAGE_KEY = "image"
         const val BIO_KEY = "bio"
         const val LAST_UPDATED = "lastUpdated"
-        const val GET_LAST_UPDATED = "get_last_updated"
-
-        fun fromJSON(json: Map<String, Any>): Volunteer{
-            val name = json[NAME_KEY] as? String ?: ""
-            val email = json[EMAIL_KEY] as? String ?: ""
-            val institution = json[INSTITUTION_KEY] as? String ?: ""
-            val bio = json[BIO_KEY] as? String ?: ""
-            val image = json[IMAGE_KEY] as? String ?: ""
-
-            val volunteer = Volunteer(
-                name = name,
-                email = email,
-                institution = institution,
-                image = image,
-                bio = bio
-            )
-
-            val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
-            timestamp?.let {
-                volunteer.lastUpdated = it.seconds
-            }
-
-            return volunteer
-        }
+        private const val GET_LAST_UPDATED = "get_last_updated"
     }
 
     val json: Map<String, Any>
