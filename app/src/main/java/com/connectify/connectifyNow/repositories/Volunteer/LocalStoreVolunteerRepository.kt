@@ -11,17 +11,13 @@ class LocalStoreVolunteerRepository {
     val volunteer: LiveData<MutableList<Volunteer>> = volunteerDao.getAllVolunteers()
 
     @WorkerThread
-    suspend fun addVolunteer(volunteer: Volunteer) {
+    fun addVolunteer(volunteer: Volunteer) {
         volunteerDao.addVolunteer(volunteer)
     }
 
     @WorkerThread
-    suspend fun updateVolunteer(volunteer: Volunteer) {
+    fun updateVolunteer(volunteer: Volunteer) {
         volunteerDao.updateVolunteer(volunteer)
     }
 
-    @WorkerThread
-    suspend fun deleteAllVolunteers() {
-        volunteerDao.deleteAllVolunteers()
-    }
 }

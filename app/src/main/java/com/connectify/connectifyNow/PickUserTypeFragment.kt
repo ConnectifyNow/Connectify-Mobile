@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
 import com.connectify.connectifyNow.databinding.FragmentPickUserTypeBinding
+import com.connectify.connectifyNow.helpers.navigate
 
 class PickUserTypeFragment : BaseFragment() {
     private lateinit var organizationCard: CardView

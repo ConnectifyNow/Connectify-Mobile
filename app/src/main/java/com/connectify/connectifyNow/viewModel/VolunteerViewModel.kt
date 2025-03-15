@@ -8,7 +8,7 @@ import com.connectify.connectifyNow.models.Volunteer
 import com.connectify.connectifyNow.domains.VolunteerDomain
 
 class VolunteerViewModel: ViewModel() {
-    val volunteerDomain: VolunteerDomain = VolunteerDomain()
+    private val volunteerDomain: VolunteerDomain = VolunteerDomain()
 
     fun createUserAsVolunteer(email: String,password:String, onSuccessCallBack: (String?) -> Unit, onFailureCallBack: (String?) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
         volunteerDomain.fireStoreAuthRepository.createUser(email, password, { userId ->
@@ -16,12 +16,8 @@ class VolunteerViewModel: ViewModel() {
         }, onFailureCallBack)
     }
 
-    fun getAllVolunteers() = viewModelScope.launch(Dispatchers.IO) {
-        volunteerDomain.getVolunteers()
-    }
-
     fun getVolunteer(volunteerId: String, callback: (volunteer: Volunteer) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        volunteerDomain.getVolunteerById(volunteerId, callback);
+        volunteerDomain.getVolunteerById(volunteerId, callback)
     }
 
     fun addVolunteer(volunteer: Volunteer) = viewModelScope.launch(Dispatchers.IO) {

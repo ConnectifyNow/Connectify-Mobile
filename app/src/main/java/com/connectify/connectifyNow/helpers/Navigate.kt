@@ -1,4 +1,4 @@
-package com.connectify.connectifyNow
+package com.connectify.connectifyNow.helpers
 
 import android.view.View
 import androidx.navigation.findNavController

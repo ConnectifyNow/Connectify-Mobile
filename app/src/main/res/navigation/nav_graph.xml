@@ -154,7 +154,7 @@
     android:label="PostFragment" />
   <fragment
     android:id="@+id/editPost"
-    android:name="com.connectify.connectifyNow.editPost"
+    android:name="com.connectify.connectifyNow.EditPost"
     android:label="fragment_edit_post"
     tools:layout="@layout/fragment_edit_post">
     <action

@@ -14,7 +14,7 @@ class FireStoreVolunteerRepository {
         const val USERS_COLLECTION_PATH = "users"
     }
 
-    val apiManager = ApiManager()
+    private val apiManager = ApiManager()
 
     suspend fun addVolunteer(volunteer: Volunteer, onSuccess: (String) -> Unit): String {
 
@@ -32,7 +32,7 @@ class FireStoreVolunteerRepository {
         volunteerDocument.whereEqualTo("id", volunteerId).get()
             .addOnSuccessListener { documentSnapshot ->
                 if (!documentSnapshot.isEmpty) {
-                    val data = documentSnapshot.documents[0].data;
+                    val data = documentSnapshot.documents[0].data
 
                     if (data != null) {
                         if (data.isNotEmpty()) {
@@ -57,7 +57,7 @@ class FireStoreVolunteerRepository {
                 }
             }
             .addOnFailureListener { locationException ->
-                Log.e("Firestore", "Error getting volunteer: $locationException")
+                Log.e("FireStore", "Error getting volunteer: $locationException")
             }
     }
 
@@ -73,11 +73,4 @@ class FireStoreVolunteerRepository {
                 .addOnFailureListener { onFailureCallBack() }
         }
     }
-
-    fun deleteVolunteer(volunteer: Volunteer, onSuccessCallBack: () -> Unit, onFailureCallBack: () -> Unit){
-        apiManager.db.collection(USERS_COLLECTION_PATH).document(volunteer.id).delete()
-            .addOnSuccessListener { onSuccessCallBack() }
-            .addOnFailureListener { onFailureCallBack() }
-    }
-    
 }

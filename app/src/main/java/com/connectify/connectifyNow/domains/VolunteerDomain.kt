@@ -8,8 +8,8 @@ import com.connectify.connectifyNow.repositories.Volunteer.LocalStoreVolunteerRe
 
 class VolunteerDomain {
 
-    val localStoreVolunteerRepository: LocalStoreVolunteerRepository = LocalStoreVolunteerRepository()
-    val fireStoreVolunteerRepository: FireStoreVolunteerRepository = FireStoreVolunteerRepository()
+    private val localStoreVolunteerRepository: LocalStoreVolunteerRepository = LocalStoreVolunteerRepository()
+    private val fireStoreVolunteerRepository: FireStoreVolunteerRepository = FireStoreVolunteerRepository()
     val fireStoreAuthRepository: FireStoreAuthRepository = FireStoreAuthRepository()
 
     val volunteerLiveData: LiveData<MutableList<Volunteer>> get() = localStoreVolunteerRepository.volunteer
