@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditGroupProfileFragment">
+    tools:context=".EditVolunteerProfileFragment">
 
     <ImageView
         android:id="@+id/back_button"
@@ -17,13 +17,13 @@
         android:contentDescription="Back" />
 
     <TextView
-        android:id="@+id/edit_group_profile_title"
+        android:id="@+id/edit_volunteer_profile_title"
         style="@style/AppTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center_horizontal|top"
-        android:text="@string/edit_group_profile_title"
+        android:text="@string/edit_volunteer_profile_title"
         android:textAppearance="@style/log_in_text"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/group_name"
+        android:id="@+id/volunteer_name"
         layout="@layout/custom_input_field_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -40,10 +40,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_group_profile_title" />
+        app:layout_constraintTop_toBottomOf="@id/edit_volunteer_profile_title" />
 
     <include
-        android:id="@+id/group_institution"
+        android:id="@+id/volunteer_institution"
         layout="@layout/custom_input_field_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,10 +51,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/group_name" />
+        app:layout_constraintTop_toBottomOf="@id/volunteer_name" />
 
     <include
-        android:id="@+id/group_bio"
+        android:id="@+id/volunteer_bio"
         layout="@layout/custom_input_field_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,16 +62,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/group_institution" />
+        app:layout_constraintTop_toBottomOf="@id/volunteer_institution" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/save_group_btn"
+        app:layout_constraintBottom_toTopOf="@+id/save_volunteer_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/group_bio">
+        app:layout_constraintTop_toBottomOf="@+id/volunteer_bio">
 
         <ImageView
             android:id="@+id/volunteerImage"
@@ -124,19 +124,19 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/save_group_btn"
+        android:id="@+id/save_volunteer_btn"
         style="@style/AppTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="80dp"
         android:background="@drawable/submit_form_btn"
         android:gravity="center"
-        android:text="@string/group_profile"
+        android:text="@string/volunteer_profile"
         android:textAppearance="@style/log_in_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/group_bio"
+        app:layout_constraintTop_toBottomOf="@id/volunteer_bio"
         app:layout_constraintVertical_bias="0.805" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

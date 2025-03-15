@@ -17,12 +17,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/edit_project_details"
+        android:id="@+id/edit_post_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center_horizontal|top"
-        android:text="@string/edit_project_details"
+        android:text="@string/edit_post_details"
         android:textAppearance="@style/log_in_text"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
         />
 
     <TextView
-        android:id="@+id/info_project"
+        android:id="@+id/info_post"
         style="@style/AppTextStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -45,10 +45,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_project_details" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_post_details" />
 
     <include
-        android:id="@+id/edit_project_name"
+        android:id="@+id/edit_post_title"
         layout="@layout/custom_input_field_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -57,11 +57,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_project"
+        app:layout_constraintTop_toBottomOf="@+id/info_post"
         app:layout_constraintVertical_bias="0.0" />
 
     <include
-        android:id="@+id/edit_multi_line_project_description"
+        android:id="@+id/edit_multi_line_post_description"
         layout="@layout/custom_multi_line_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
         app:layout_constraintBottom_toTopOf="@+id/save_post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_project_name"
+        app:layout_constraintTop_toBottomOf="@+id/edit_post_title"
         app:layout_constraintVertical_bias="0.0" />
 
 
@@ -83,7 +83,7 @@
         app:layout_constraintBottom_toTopOf="@+id/save_post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_multi_line_project_description"
+        app:layout_constraintTop_toBottomOf="@+id/edit_multi_line_post_description"
         app:layout_constraintVertical_bias="0.129">
 
         <ImageView

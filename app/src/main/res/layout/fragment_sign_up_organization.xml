@@ -29,7 +29,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="30dp"
       android:gravity="center_horizontal|top"
-      android:text="@string/sign_up_group_title"
+      android:text="@string/sign_up_title"
       android:textAppearance="@style/log_in_text"
       android:textStyle="bold"
       app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="0dp"
       android:gravity="center_horizontal|top"
-      android:text="@string/sign_up_group_sub_title"
+      android:text="@string/sign_up_sub_title"
       android:textAppearance="@style/sign_in_description"
       android:textStyle="bold"
       app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +94,7 @@
 
 
     <AutoCompleteTextView
-      android:id="@+id/organizationSuggestion"
+      android:id="@+id/organization_suggestion"
       style="@style/AppTextStyle"
       android:layout_width="match_parent"
       android:layout_height="50dp"
@@ -116,7 +116,7 @@
       android:background="@color/Light_Gray"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/organizationSuggestion" />
+      app:layout_constraintTop_toBottomOf="@+id/organization_suggestion" />
     <TextView
       android:id="@+id/add_error_message"
       android:layout_width="0dp"
@@ -130,7 +130,7 @@
       app:layout_constraintTop_toBottomOf="@+id/add_edit_text_line" />
 
     <include
-      android:id="@+id/bio_group"
+      android:id="@+id/bio_organization"
       layout="@layout/custom_input_field_text"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/bio_group" />
+      app:layout_constraintTop_toBottomOf="@id/bio_organization" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="189dp"
@@ -160,7 +160,7 @@
         app:layout_constraintBottom_toTopOf="@+id/sign_up_organization_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bio_group"
+        app:layout_constraintTop_toBottomOf="@+id/bio_organization"
         app:layout_constraintVertical_bias="0.821">
 
       <ImageView

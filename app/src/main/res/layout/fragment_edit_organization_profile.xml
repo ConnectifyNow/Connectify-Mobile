@@ -56,7 +56,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/save_group_btn"
+        app:layout_constraintBottom_toTopOf="@+id/save_organization_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/organization_bio">
@@ -112,7 +112,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/save_group_btn"
+        android:id="@+id/save_organization_btn"
         style="@style/AppTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

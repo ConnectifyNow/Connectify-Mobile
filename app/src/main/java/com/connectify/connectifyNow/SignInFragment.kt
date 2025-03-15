@@ -69,7 +69,7 @@ class SignInFragment : BaseFragment() {
                 .navigate(R.id.action_signInFragment_to_forgetPasswordFragment)
         }
 
-        register = view.findViewById(R.id.register_group)
+        register = view.findViewById(R.id.register_volunteer)
         register?.setOnClickListener {
             Navigation.findNavController(it)
                 .navigate(R.id.action_signInFragment_to_pickUserTypeFragment)

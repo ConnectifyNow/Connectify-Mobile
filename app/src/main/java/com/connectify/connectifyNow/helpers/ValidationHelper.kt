@@ -110,12 +110,12 @@ object ValidationHelper {
                     inputGroup.errorMessage.text =
                         context.getString(R.string.field_must_be_at_least_6_characters_long_and_contain_only_letters)
                 }
-                context.getString(R.string.project_name_title),
+                context.getString(R.string.post_title),
                 context.getString(R.string.bio_title),
                 context.getString(R.string.institution_title),
-                context.getString(R.string.project_description) -> {
-                    inputGroup.errorMessage.text =
-                        context.getString(R.string.field_must_be_at_least_3_characters_long)
+                context.getString(R.string.post_description) -> {
+                    inputGroup.errorMessage.text = context.getString(R.string.field_must_be_at_least_3_characters_long)
+
                 }
                 else -> {
                     inputGroup.errorMessage.text =

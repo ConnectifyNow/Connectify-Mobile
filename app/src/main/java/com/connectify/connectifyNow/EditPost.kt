@@ -59,8 +59,8 @@ class EditPost : Fragment() {
         val args = arguments
         postId = args?.getString("postId").toString()
 
-        titleConstraintLayout = view.findViewById(R.id.edit_project_name)
-        detailsConstraintlayout = view.findViewById(R.id.edit_multi_line_project_description)
+        titleConstraintLayout = view.findViewById(R.id.edit_post_title)
+        detailsConstraintlayout = view.findViewById(R.id.edit_multi_line_post_description)
         imageView = view.findViewById(R.id.edit_image_to_upload)
         updatePost = view.findViewById(R.id.save_post)
 
@@ -135,8 +135,8 @@ class EditPost : Fragment() {
     }
 
     private fun setHints() {
-        dynamicTextHelper.setHintForEditText(R.id.edit_project_name, R.string.project_name_hint, R.string.project_name_title)
-        dynamicTextHelper.setHintForEditText(R.id.edit_multi_line_project_description, R.string.project_description_hint, R.string.project_description)
+        dynamicTextHelper.setHintForEditText(R.id.edit_post_title, R.string.post_title_hint, R.string.post_title)
+        dynamicTextHelper.setHintForEditText(R.id.edit_multi_line_post_description, R.string.post_description_hint, R.string.post_description)
     }
 
 

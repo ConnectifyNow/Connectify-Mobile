@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
-import com.connectify.connectifyNow.databinding.FragmentEditGroupProfileBinding
+import com.connectify.connectifyNow.databinding.FragmentEditVolunteerProfileBinding
 import com.connectify.connectifyNow.helpers.ActionBarHelpers
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
@@ -25,15 +25,14 @@ import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.viewModel.VolunteerViewModel
 import com.squareup.picasso.Picasso
 
-class EditGroupProfileFragment : Fragment() {
+class EditVolunteerProfileFragment : Fragment() {
     private val userAuthViewModel: AuthViewModel by activityViewModels()
     private val volunteerViewModel: VolunteerViewModel by activityViewModels()
 
-    private var binding: FragmentEditGroupProfileBinding? = null
+    private var binding: FragmentEditVolunteerProfileBinding? = null
 
     private lateinit var view: View
     private lateinit var saveBtn: Button
-    private lateinit var groupViewModel: VolunteerViewModel
     private lateinit var dynamicTextHelper: DynamicTextHelper
     private lateinit var emailAddress: String
 
@@ -47,7 +46,7 @@ class EditGroupProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentEditGroupProfileBinding.inflate(layoutInflater, container, false)
+        binding = FragmentEditVolunteerProfileBinding.inflate(layoutInflater, container, false)
         view = binding?.root as View
 
         dynamicTextHelper = DynamicTextHelper(view)
@@ -67,7 +66,7 @@ class EditGroupProfileFragment : Fragment() {
         val backButton = view.findViewById<ImageView>(R.id.back_button)
         backButton.setOnClickListener {
             Navigation.findNavController(it)
-                .navigate(R.id.action_editGroupProfileFragment_to_ProfileFragment)
+                .navigate(R.id.action_editVolunteerProfileFragment_to_ProfileFragment)
         }
 
         return view
@@ -80,9 +79,9 @@ class EditGroupProfileFragment : Fragment() {
     }
 
     private fun setHints() {
-        dynamicTextHelper.setTextViewText(R.id.group_institution, R.string.institution_title)
-        dynamicTextHelper.setTextViewText(R.id.group_name, R.string.user_name_title)
-        dynamicTextHelper.setTextViewText(R.id.group_bio, R.string.bio_title)
+        dynamicTextHelper.setTextViewText(R.id.volunteer_institution, R.string.institution_title)
+        dynamicTextHelper.setTextViewText(R.id.volunteer_name, R.string.user_name_title)
+        dynamicTextHelper.setTextViewText(R.id.volunteer_bio, R.string.bio_title)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,9 +90,7 @@ class EditGroupProfileFragment : Fragment() {
     }
 
     private fun setEventListeners() {
-        saveBtn = view.findViewById(R.id.save_group_btn)
-
-        groupViewModel = VolunteerViewModel()
+        saveBtn = view.findViewById(R.id.save_volunteer_btn)
 
         imageView = view.findViewById(R.id.volunteerImage)
 
@@ -113,15 +110,15 @@ class EditGroupProfileFragment : Fragment() {
         }
 
         saveBtn.setOnClickListener {
-            val groupName = binding?.groupName
-            val groupInstitution = binding?.groupInstitution
-            val groupBio = binding?.groupBio
+            val volunteerName = binding?.volunteerName
+            val volunteerInstitution = binding?.volunteerInstitution
+            val volunteerBio = binding?.volunteerBio
 
 
-            if (groupName!= null && groupInstitution!= null && groupBio!= null&&  isValidInputs(groupName, groupInstitution,groupBio)) {
-                val name = groupName.editTextField.text.toString()
-                val institution = groupInstitution.editTextField.text.toString()
-                val bio = groupBio.editTextField.text.toString()
+            if (volunteerName!= null && volunteerInstitution!= null && volunteerBio!= null&&  isValidInputs(volunteerName, volunteerInstitution,volunteerBio)) {
+                val name = volunteerName.editTextField.text.toString()
+                val institution = volunteerInstitution.editTextField.text.toString()
+                val bio = volunteerBio.editTextField.text.toString()
 
                 val userId = userAuthViewModel.getUserId().toString()
                 val updatedVolunteer = Volunteer(
@@ -133,7 +130,7 @@ class EditGroupProfileFragment : Fragment() {
                     image = imageHelper.getImageUrl() ?:profileImageUrl
                 )
 
-                groupViewModel.update(updatedVolunteer,updatedVolunteer.json,
+                volunteerViewModel.update(updatedVolunteer,updatedVolunteer.json,
                     onSuccessCallBack = {
                         Toast.makeText(context, "The data has been successfully updated", Toast.LENGTH_SHORT).show()
                         Log.d("EditProfilePage", "Success in update")
@@ -148,25 +145,25 @@ class EditGroupProfileFragment : Fragment() {
     }
 
     private fun isValidInputs(
-        groupName: CustomInputFieldTextBinding,
-        groupInstitution: CustomInputFieldTextBinding,
-        groupBio: CustomInputFieldTextBinding
+        volunteerName: CustomInputFieldTextBinding,
+        volunteerInstitution: CustomInputFieldTextBinding,
+        volunteerBio: CustomInputFieldTextBinding
     ): Boolean {
         val validationResults = mutableListOf<Boolean>()
         validationResults.add(
-            ValidationHelper.isValidString(groupName.editTextField.text.toString()).also { isValid ->
-                ValidationHelper.handleValidationResult(isValid, groupName, requireContext())
+            ValidationHelper.isValidString(volunteerName.editTextField.text.toString()).also { isValid ->
+                ValidationHelper.handleValidationResult(isValid, volunteerName, requireContext())
             }
         )
 
         validationResults.add(
-            ValidationHelper.isValidField(groupInstitution.editTextField.text.toString()).also { isValid ->
-                ValidationHelper.handleValidationResult(isValid, groupInstitution, requireContext())
+            ValidationHelper.isValidField(volunteerInstitution.editTextField.text.toString()).also { isValid ->
+                ValidationHelper.handleValidationResult(isValid, volunteerInstitution, requireContext())
             }
         )
         validationResults.add(
-            ValidationHelper.isValidField(groupBio.editTextField.text.toString()).also { isValid ->
-                ValidationHelper.handleValidationResult(isValid, groupBio, requireContext())
+            ValidationHelper.isValidField(volunteerBio.editTextField.text.toString()).also { isValid ->
+                ValidationHelper.handleValidationResult(isValid, volunteerBio, requireContext())
             }
         )
 
@@ -176,9 +173,9 @@ class EditGroupProfileFragment : Fragment() {
     private fun setUserData() {
         val userId = userAuthViewModel.getUserId().toString()
         volunteerViewModel.getVolunteer(userId) { volunteer ->
-            binding?.groupName?.editTextField?.setText(volunteer.name)
-            binding?.groupInstitution?.editTextField?.setText(volunteer.institution)
-            binding?.groupBio?.editTextField?.setText(volunteer.bio)
+            binding?.volunteerName?.editTextField?.setText(volunteer.name)
+            binding?.volunteerInstitution?.editTextField?.setText(volunteer.institution)
+            binding?.volunteerBio?.editTextField?.setText(volunteer.bio)
 
             emailAddress = volunteer.email
             profileImageUrl = volunteer.image
