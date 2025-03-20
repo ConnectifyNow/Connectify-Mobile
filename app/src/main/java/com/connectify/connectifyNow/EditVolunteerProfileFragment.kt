@@ -182,11 +182,11 @@ class EditVolunteerProfileFragment : Fragment() {
 
             profileImage = view.findViewById(R.id.volunteerImage)
 
-            if (profileImage != null) {
-                if (volunteer.image.isEmpty())
-                    Picasso.get().load(R.drawable.user_avatar).into(profileImage)
-                else
-                    Picasso.get().load(volunteer.image).into(profileImage)
+            if (profileImage != null && !volunteer.image.isEmpty()) {
+                Picasso.get()
+                    .load(volunteer.image)
+                    .error(R.drawable.user_avatar)
+                    .into(profileImage)
             }
         }
     }
