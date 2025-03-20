@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTextStyle">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="log_in_button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="log_in_text">
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">@color/dark_blue</item>
+    </style>
+
+    <style name="sign_in_description">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/silver</item>
+    </style>
+
+    <style name="email">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/silver</item>
+    </style>
+
+    <style name="default_email">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="sign_up_edit_text_title">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/silver</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">15dp</item>
+    </style>
+
+</resources>
