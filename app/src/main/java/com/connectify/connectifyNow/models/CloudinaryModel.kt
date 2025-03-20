@@ -6,7 +6,6 @@ import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
 import com.cloudinary.android.policy.GlobalUploadPolicy
-import com.connectify.connectifyNow.BuildConfig
 import com.connectify.connectifyNow.base.MyApplication
 import com.connectify.connectifyNow.utils.extensions.toFile
 import java.io.File

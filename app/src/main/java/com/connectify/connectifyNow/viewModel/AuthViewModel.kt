@@ -8,9 +8,9 @@ import com.connectify.connectifyNow.domains.UserDomain
 import com.connectify.connectifyNow.models.UserInfo
 
 class AuthViewModel: ViewModel() {
-    val firebaseAuth = FirebaseAuth.getInstance()
+    private val firebaseAuth = FirebaseAuth.getInstance()
 
-    val userDomain: UserDomain = UserDomain()
+    private val userDomain: UserDomain = UserDomain()
     private val _userId = MutableLiveData<String?>()
     val userId: LiveData<String?> get() = _userId
 

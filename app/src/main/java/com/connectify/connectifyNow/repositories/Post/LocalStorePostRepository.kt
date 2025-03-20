@@ -9,8 +9,8 @@ import kotlinx.coroutines.withContext
 
 class LocalStorePostRepository {
 
-    val appLocalDB = AppLocalDatabase
-    val postDao = appLocalDB.db.getPostDao()
+    private val appLocalDB = AppLocalDatabase
+    private val postDao = appLocalDB.db.getPostDao()
 
     @WorkerThread
     fun insert(post: Post) {
@@ -25,13 +25,8 @@ class LocalStorePostRepository {
     }
 
     @WorkerThread
-    suspend fun delete(post: Post) {
+    fun delete(post: Post) {
         postDao.deletePost(post)
-    }
-
-    @WorkerThread
-    fun deleteAllPosts() {
-        postDao.deleteAllPosts()
     }
 
     @WorkerThread

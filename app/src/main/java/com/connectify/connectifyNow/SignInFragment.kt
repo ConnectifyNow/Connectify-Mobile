@@ -12,9 +12,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
-import com.connectify.connectifyNow.databinding.FragmentProfileBinding
 import com.connectify.connectifyNow.databinding.FragmentSignInBinding
 import com.connectify.connectifyNow.helpers.ValidationHelper
+import com.connectify.connectifyNow.helpers.navigate
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 
 
@@ -69,7 +69,7 @@ class SignInFragment : BaseFragment() {
                 .navigate(R.id.action_signInFragment_to_forgetPasswordFragment)
         }
 
-        register = view.findViewById(R.id.register_group)
+        register = view.findViewById(R.id.register_volunteer)
         register?.setOnClickListener {
             Navigation.findNavController(it)
                 .navigate(R.id.action_signInFragment_to_pickUserTypeFragment)
@@ -107,7 +107,8 @@ class SignInFragment : BaseFragment() {
     }
 
     private val onError: (String?) -> Unit = {
-        errorMessage?.text = "One or more of the credentials you entered are incorrect. Please try again."
+        errorMessage?.text =
+            getString(R.string.one_or_more_of_the_credentials_you_entered_are_incorrect_please_try_again)
         errorMessage?.visibility = View.VISIBLE
     }
 

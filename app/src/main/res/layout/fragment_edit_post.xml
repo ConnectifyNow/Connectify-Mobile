@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".editPost">
+    tools:context=".EditPost">
 
     <ImageView
         android:id="@+id/back_button"
@@ -17,12 +18,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/edit_project_details"
+        android:id="@+id/edit_post_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center_horizontal|top"
-        android:text="@string/edit_project_details"
+        android:text="@string/edit_post_details"
         android:textAppearance="@style/log_in_text"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +34,7 @@
         />
 
     <TextView
-        android:id="@+id/info_project"
+        android:id="@+id/info_post"
         style="@style/AppTextStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -45,10 +46,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_project_details" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_post_details" />
 
     <include
-        android:id="@+id/edit_project_name"
+        android:id="@+id/edit_post_title"
         layout="@layout/custom_input_field_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -57,11 +58,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_project"
+        app:layout_constraintTop_toBottomOf="@+id/info_post"
         app:layout_constraintVertical_bias="0.0" />
 
     <include
-        android:id="@+id/edit_multi_line_project_description"
+        android:id="@+id/edit_multi_line_post_description"
         layout="@layout/custom_multi_line_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -70,31 +71,34 @@
         app:layout_constraintBottom_toTopOf="@+id/save_post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_project_name"
+        app:layout_constraintTop_toBottomOf="@+id/edit_post_title"
         app:layout_constraintVertical_bias="0.0" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="407dp"
+        android:layout_width="0dp"
         android:layout_height="130dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toTopOf="@+id/save_post"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_multi_line_project_description"
+        app:layout_constraintTop_toBottomOf="@+id/edit_multi_line_post_description"
         app:layout_constraintVertical_bias="0.129">
 
         <ImageView
             android:id="@+id/edit_image_to_upload"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:adjustViewBounds="false"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/image_s_post"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/default_post"
-            tools:layout_editor_absoluteX="20dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/default_post" />
 
         <LinearLayout
             android:id="@+id/edit_post_loading_overlay"
@@ -103,8 +107,10 @@
             android:background="#fff7ff"
             android:gravity="center"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="20dp"
             tools:visibility="visible">
 
             <com.airbnb.lottie.LottieAnimationView
@@ -131,17 +137,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/save_post"
-        style="@style/AppTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="46dp"
         android:layout_marginHorizontal="80dp"
         android:layout_marginBottom="92dp"
-        android:background="@drawable/log_in_btn"
+        android:backgroundTint="@color/dark_blue"
         android:gravity="center"
         android:text="@string/edit_post"
-        android:textAppearance="@style/log_in_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import com.connectify.connectifyNow.databinding.FragmentForgetPasswordBinding
 import com.connectify.connectifyNow.databinding.FragmentLandingPageBinding
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.google.firebase.auth.FirebaseAuth

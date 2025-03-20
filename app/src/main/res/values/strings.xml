@@ -12,17 +12,15 @@
     <string name="sign_up">Sign up</string>
     <string name="Sign_in">Sign in</string>
 
-    <string name="post_new_project_title">Share a post</string>
-    <string name="post_new_project_text">Add the information about the project that you want to create</string>
+    <string name="post_new_title">Share a post</string>
     <string name="post">Post</string>
-    <string name="project_name_title">Post Title</string>
-    <string name="project_description">Post Description</string>
-    <string name="project_name_hint">Enter the post title here</string>
-    <string name="project_description_hint">Enter the description here</string>
-    <string name="project_deadline_title">Set the expected deadline</string>
-    <string name="project__availability_title">What is your availability?</string>
+    <string name="post_title">Post Title</string>
+    <string name="post_description">Post Description</string>
+    <string name="post_title_hint">Enter the post title here</string>
+    <string name="post_description_hint">Enter the description here</string>
+    <string name="post_deadline_title">Set the expected deadline</string>
+    <string name="post_availability_title">What is your availability?</string>
 
-    <string name="develop_group">Develop Group</string>
     <string name="collage_of_management">Collage Of Management</string>
     <string name="forget_password">Forget Password?</string>
     <string name="sign_out">Sign out</string>
@@ -34,8 +32,8 @@
     <string name="reset_password">Reset Password</string>
     <string name="back_to_sign_in">Back to Sign in</string>
 
-    <string name="sign_up_group_title">Get Started</string>
-    <string name="sign_up_group_sub_title">By creating a free account</string>
+    <string name="sign_up_title">Get Started</string>
+    <string name="sign_up_sub_title">By creating a free account</string>
     <string name="user_email_title">User Email</string>
 
     <string name="user_name_title">user Name</string>
@@ -55,7 +53,7 @@
     <string name="address">Address</string>
     <string name="create_a_free_account">create a free account</string>
     <string name="get_started">Get Started</string>
-    <string name="i_m_a_group">Volunteers Group</string>
+    <string name="i_m_a_volunteer">Volunteer</string>
     <string name="i_m_a_organization">Organization</string>
 
     <string name="sign_up_as">Sign up as</string>
@@ -68,17 +66,17 @@
     <string name="profile">Profile</string>
     <string name="edit_button">edit_button</string>
     <string name="about_us">About Us</string>
-    <string name="about_project">About Project</string>
-    <string name="edit_project_details">Edit Project Details</string>
-    <string name="add_the_information_about_the_project_that_you_want_to_create">Add the information
-    about the project that you want to create</string>
+    <string name="about_post">About Post</string>
+    <string name="edit_post_details">Edit Post Details</string>
+    <string name="add_the_information_about_the_post_that_you_want_to_create">Add the information
+    about the post that you want to create</string>
     <string name="edit_post">Update</string>
-    <string name="project_name">Project Name</string>
+    <string name="post_name">Post Name</string>
 
     <string name="error_msg">One or more of the credentials you entered are incorrect. Please try
     again.</string>
-    <string name="edit_group_profile_title">Edit User Details</string>
-    <string name="group_profile">Update Profile</string>
+    <string name="edit_volunteer_profile_title">Edit User Details</string>
+    <string name="volunteer_profile">Update Profile</string>
 
     <string name="edit_organization_profile_title">Edit Organization Details</string>
     <string name="organization_profile">Update Organization</string>
@@ -89,4 +87,10 @@
     <string name="done">Done</string>
     <string name="searching_around_you">Searching around you…</string>
     <string name="back_to_profile">Back to Profile</string>
+    <string name="invalid_email_address">Invalid Email Address</string>
+    <string name="password_must_be_at_least_6_characters_long_and_contain_at_least_one_letter_and_one_number">Password must be at least 6 characters long and contain at least one letter and one number</string>
+    <string name="field_must_be_at_least_6_characters_long_and_contain_only_letters">Field must be at least 6 characters long and contain only letters</string>
+    <string name="field_must_be_at_least_3_characters_long">Field must be at least 3 characters long</string>
+    <string name="invalid">Invalid %1$s</string>
+    <string name="one_or_more_of_the_credentials_you_entered_are_incorrect_please_try_again">One or more of the credentials you entered are incorrect. Please try again.</string>
 </resources>

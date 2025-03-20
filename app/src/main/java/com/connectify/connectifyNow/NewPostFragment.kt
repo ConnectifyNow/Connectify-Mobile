@@ -9,11 +9,9 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
 import com.connectify.connectifyNow.viewModel.AuthViewModel
 import com.connectify.connectifyNow.viewModel.PostViewModel
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
-import com.connectify.connectifyNow.databinding.FragmentMapBinding
 import com.connectify.connectifyNow.databinding.FragmentNewPostBinding
 import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
@@ -41,7 +39,7 @@ class NewPostFragment : Fragment() {
         imageView = binding?.imageToUpload as ImageView
         dynamicTextHelper = DynamicTextHelper(view)
 
-        loadingOverlay = view.findViewById(R.id.new_post_loading_overlay);
+        loadingOverlay = view.findViewById(R.id.new_post_loading_overlay)
         loadingOverlay.visibility = View.INVISIBLE
 
         imageHelper = ImageHelper(this, imageView,  object : ImageUploadListener {
@@ -50,9 +48,7 @@ class NewPostFragment : Fragment() {
             }
 
             override fun onUploadFailed(error: String) {
-                // Handle the error (e.g., show an error message or log it)
-                loadingOverlay?.visibility = View.INVISIBLE
-                // You can also show a message to the user here
+                loadingOverlay.visibility = View.INVISIBLE
                 Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
             }
         })
@@ -70,8 +66,8 @@ class NewPostFragment : Fragment() {
     }
 
     private fun setHints() {
-        dynamicTextHelper.setHintForEditText(R.id.post_title_group, R.string.project_name_hint, R.string.project_name_title)
-        dynamicTextHelper.setHintForEditText(R.id.post_description_group, R.string.project_description_hint, R.string.project_description)
+        dynamicTextHelper.setHintForEditText(R.id.post_title_group, R.string.post_title_hint, R.string.post_title)
+        dynamicTextHelper.setHintForEditText(R.id.post_description_group, R.string.post_description_hint, R.string.post_description)
     }
 
     override fun onDestroy() {

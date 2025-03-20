@@ -1,7 +1,5 @@
 package com.connectify.connectifyNow.viewModel
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,7 +28,7 @@ class PostViewModel: ViewModel() {
     }
 
     fun getPostsByOwnerId(ownerId: String, callback: (posts: List<Post>) -> Unit) = viewModelScope.launch (Dispatchers.IO) {
-        postDomain.getPostsByUserId(ownerId, callback);
+        postDomain.getPostsByUserId(ownerId, callback)
     }
 
     fun getPostById(id: String, callback: (Post?) -> Unit) {
@@ -61,15 +59,15 @@ class PostViewModel: ViewModel() {
         postDomain.deletePost(post)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun refreshPosts() {
         viewModelScope.launch(Dispatchers.IO) {
             postDomain.refreshPosts()
+
+            _posts.postValue(postDomain.posts.value?.toMutableList())
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun update(postId: String, data: Map<String, Any>): Boolean {
+    fun update(postId: String, data: Map<String, Any>): Boolean {
         return try {
             postDomain.updatePost(postId, data)
             true

@@ -1,4 +1,4 @@
-package com.connectify.connectifyNow.models;
+package com.connectify.connectifyNow.models
 
 import android.content.Context
 import androidx.room.Entity
@@ -39,7 +39,7 @@ data class Post(
         const val CONTENT_KEY = "content"
         const val IMAGE_PATH_KEY = "imagePath"
         const val LAST_UPDATED = "lastUpdated"
-        const val GET_LAST_UPDATED = "get_last_updated"
+        private const val GET_LAST_UPDATED = "get_last_updated"
 
         fun fromJSON(json: Map<String, Any>): Post {
             val ownerId = json[OWNER_ID_KEY] as? String ?: ""

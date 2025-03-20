@@ -1,8 +1,6 @@
 package com.connectify.connectifyNow.domains
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
@@ -45,8 +43,6 @@ class PostDomain {
         fireStorePostRepository.addPost(post)
     }
 
-
-    @RequiresApi(Build.VERSION_CODES.O)
     fun refreshPosts() {
         val lastUpdated: Long = Post.lastUpdated
 
@@ -67,11 +63,6 @@ class PostDomain {
         localStorePostRepository.delete(post)
     }
 
-    fun deleteAllPosts() {
-        localStorePostRepository.deleteAllPosts()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
     fun updatePost(id: String, data: Map<String, Any>) {
         fireStorePostRepository.updatePost(id, data) { updatedPost ->
             if (updatedPost != null) {
@@ -82,7 +73,6 @@ class PostDomain {
 
     private var isUpdatingCache = false
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun updateLocalCache(updatedPost: Post) {
         if (isUpdatingCache) {
             return

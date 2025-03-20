@@ -6,7 +6,7 @@ import com.google.firebase.Timestamp
 
 class FireStorePostRepository {
 
-    val apiManager = ApiManager()
+    private val apiManager = ApiManager()
 
     companion object {
         const val POSTS_COLLECTION_PATH = "posts"

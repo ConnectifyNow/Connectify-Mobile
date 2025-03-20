@@ -18,7 +18,7 @@ class FireStoreOrganizationRepository {
         const val ORGANIZATIONS_COLLECTION_PATH = "organizations"
     }
 
-    val apiManager = ApiManager()
+    private val apiManager = ApiManager()
 
     fun getOrganization(organizationId: String, callback: (organization: Organization) -> Unit) {
         val organizationDocument = apiManager.db.collection(ORGANIZATIONS_COLLECTION_PATH)
@@ -26,7 +26,7 @@ class FireStoreOrganizationRepository {
         organizationDocument.whereEqualTo("id", organizationId).get()
             .addOnSuccessListener { documentSnapshot ->
                 if (!documentSnapshot.isEmpty) {
-                    val data = documentSnapshot.documents[0].data;
+                    val data = documentSnapshot.documents[0].data
 
                     if (data != null) {
                         if (data.isNotEmpty()) {
@@ -65,7 +65,7 @@ class FireStoreOrganizationRepository {
                 }
             }
             .addOnFailureListener { locationException ->
-                Log.e("Firestore", "Error getting organization: $locationException")
+                Log.e("FireStore", "Error getting organization: $locationException")
             }
     }
 
@@ -141,7 +141,7 @@ class FireStoreOrganizationRepository {
                 }
             }
             .addOnFailureListener { locationException ->
-                Log.e("Firestore", "Error getting location documents: $locationException")
+                Log.e("FireStore", "Error getting location documents: $locationException")
             }
     }
 

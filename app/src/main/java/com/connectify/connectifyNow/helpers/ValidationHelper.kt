@@ -12,7 +12,6 @@ import com.connectify.connectifyNow.databinding.CustomInputFieldPasswordBinding
 import com.connectify.connectifyNow.databinding.CustomInputFieldTextBinding
 
 object ValidationHelper {
-
     fun handleValidationResult(
         isValid: Boolean,
         inputGroup: ViewBinding,
@@ -60,10 +59,9 @@ object ValidationHelper {
 
 
     fun isValidString(input: String): Boolean {
-        val pattern = Regex("^[a-zA-Z,\\. ]+\$")
+        val pattern = Regex("^[a-zA-Z,. ]+$")
         val isLengthValid = input.length >= 3
         return pattern.matches(input) && isLengthValid && input.isNotBlank()
-
     }
 
     fun isValidField(input: String): Boolean {
@@ -96,30 +94,32 @@ object ValidationHelper {
         )
     }
 
-
-    @SuppressLint("SetTextI18n")
     private fun showTextError(inputGroup: CustomInputFieldTextBinding, context: Context, s:String? = null ) {
         if(s.isNullOrEmpty()) {
             when (inputGroup.editTextLabel.text) {
                 context.getString(R.string.email),context.getString(R.string.user_email_title) -> {
-                    inputGroup.errorMessage.text = "Invalid Email Address"
+                    inputGroup.errorMessage.text = context.getString(R.string.invalid_email_address)
                 }
                 context.getString(R.string.password) -> {
-                    inputGroup.errorMessage.text = "Password must be at least 6 characters long and contain at least one letter and one number"
+                    inputGroup.errorMessage.text =
+                        context.getString(R.string.password_must_be_at_least_6_characters_long_and_contain_at_least_one_letter_and_one_number)
                 }
                 context.getString(R.string.organization_name_title),
                 context.getString(R.string.user_name_title)
                     -> {
-                    inputGroup.errorMessage.text = "Field must be at least 6 characters long and contain only letters"
+                    inputGroup.errorMessage.text =
+                        context.getString(R.string.field_must_be_at_least_6_characters_long_and_contain_only_letters)
                 }
-                context.getString(R.string.project_name_title),
+                context.getString(R.string.post_title),
                 context.getString(R.string.bio_title),
                 context.getString(R.string.institution_title),
-                context.getString(R.string.project_description) -> {
-                    inputGroup.errorMessage.text = "Field must be at least 3 characters long"
+                context.getString(R.string.post_description) -> {
+                    inputGroup.errorMessage.text = context.getString(R.string.field_must_be_at_least_3_characters_long)
+
                 }
                 else -> {
-                    inputGroup.errorMessage.text = "Invalid ${inputGroup.editTextLabel.text}"
+                    inputGroup.errorMessage.text =
+                        context.getString(R.string.invalid, inputGroup.editTextLabel.text)
                 }
             }
         }

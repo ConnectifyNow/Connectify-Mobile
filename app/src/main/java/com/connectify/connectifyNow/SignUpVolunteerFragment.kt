@@ -21,6 +21,7 @@ import com.connectify.connectifyNow.helpers.DynamicTextHelper
 import com.connectify.connectifyNow.helpers.ImageHelper
 import com.connectify.connectifyNow.helpers.ImageUploadListener
 import com.connectify.connectifyNow.helpers.ValidationHelper
+import com.connectify.connectifyNow.helpers.navigate
 import com.connectify.connectifyNow.models.Volunteer
 import com.connectify.connectifyNow.viewModel.VolunteerViewModel
 
@@ -89,13 +90,7 @@ class SignUpVolunteerFragment : Fragment() {
             }
 
             override fun onUploadFailed(error: String) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onUploadFailed(error: String) {
-                // Handle the error (e.g., show an error message or log it)
                 loadingOverlay?.visibility = View.INVISIBLE
-                // You can also show a message to the user here
                 Toast.makeText(context, "Upload failed: $error", Toast.LENGTH_SHORT).show()
             }
         })
@@ -158,7 +153,6 @@ class SignUpVolunteerFragment : Fragment() {
                 ).show()
                 view.navigate(R.id.action_signUpVolunteerFragment_to_signInFragment)
             }
-
         }
     }
 

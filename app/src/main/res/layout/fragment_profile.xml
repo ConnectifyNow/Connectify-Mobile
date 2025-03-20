@@ -136,11 +136,11 @@
       app:icon="@drawable/ic_map_marker"
       app:iconGravity="textStart"
       app:iconPadding="8dp"
-      app:iconTint="@color/Dark_Gray"
+      app:iconTint="@color/white"
       app:strokeColor="@color/Light_Gray"
       app:strokeWidth="1dp"
-      android:backgroundTint="#E0CFEF"
-      android:textColor="@color/Dark_Gray"
+      android:backgroundTint="@color/dark_blue"
+      android:textColor="@color/white"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/profile_bio" />
@@ -189,21 +189,21 @@
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="411dp"
-        android:layout_marginBottom="731dp"
-        android:contentDescription="@string/back"
-        android:padding="16dp"
-        android:src="@drawable/back_arrow_icon"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+      android:id="@+id/back_button"
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:layout_marginEnd="411dp"
+      android:layout_marginBottom="731dp"
+      android:contentDescription="@string/back"
+      android:padding="16dp"
+      android:src="@drawable/back_arrow_icon"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <LinearLayout

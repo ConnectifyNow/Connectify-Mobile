@@ -1,7 +1,5 @@
 package com.connectify.connectifyNow
 
-import android.graphics.RenderEffect
-import android.graphics.Shader
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -55,10 +53,10 @@ class ProfileFragment : Fragment() {
     private var logoutButton: ImageView? = null
     private var backButton: ImageView? = null
 
-    private var loadingOverlay: LinearLayout? = null;
+    private var loadingOverlay: LinearLayout? = null
 
-    private var isPostsLoaded: Boolean = false;
-    private var isProfileDataLoaded: Boolean = false;
+    private var isPostsLoaded: Boolean = false
+    private var isProfileDataLoaded: Boolean = false
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreateView(
@@ -84,17 +82,17 @@ class ProfileFragment : Fragment() {
         val isFromArgs = args != null
         postAdapter = PostAdapter(mutableListOf(), false, isFromArgs)
 
-        loadingOverlay = view.findViewById(R.id.profile_loading_overlay);
-        handleLoading();
+        loadingOverlay = view.findViewById(R.id.profile_loading_overlay)
+        handleLoading()
 
         if (userId !== null) {
-            authViewModel.getInfoOnUser(userId) { userInfo, error ->
+            authViewModel.getInfoOnUser(userId) { userInfo, _ ->
                 when (userInfo) {
                     is UserInfo.UserVolunteer -> {
                         getGroup(userId)
                     }
                     is UserInfo.UserOrganization -> {
-                        getOrganization(userId);
+                        getOrganization(userId)
                     }
 
                     null -> Log.d("UserInfo", "we have identify unknown user")
@@ -107,7 +105,7 @@ class ProfileFragment : Fragment() {
 
         if(args?.getString("userId")?.isNotEmpty() == true) {
             backButton = view.findViewById(R.id.back_button)
-            backButton?.setVisibility(View.VISIBLE)
+            backButton?.visibility = View.VISIBLE
 
             backButton?.setOnClickListener {
                 ActionBarHelpers.showActionBarAndBottomNavigationView((requireActivity() as? AppCompatActivity))
@@ -142,36 +140,44 @@ class ProfileFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    private fun getOrganization(organizationId: String): Unit {
-        organizationViewModel.getOrganization(organizationId) {
-            fillProfileDetails(it.name, it.bio, it.location.address, it.logo);
+    override fun onResume() {
+        super.onResume()
+        val userId = arguments?.getString("userId") ?: authViewModel.getUserId()
+        if (userId != null) {
+            postViewModel.refreshPosts()
         }
     }
 
-    private fun getGroup(groupId: String): Unit {
+    private fun getOrganization(organizationId: String) {
+        organizationViewModel.getOrganization(organizationId) {
+            fillProfileDetails(it.name, it.bio, it.location.address, it.logo)
+        }
+    }
+
+    private fun getGroup(groupId: String) {
         volunteerViewModel.getVolunteer(groupId) {
-            fillProfileDetails(it.name, it.bio, it.institution, it.image);
+            fillProfileDetails(it.name, it.bio, it.institution, it.image)
         }
     }
 
     private fun handleProfileActionButtons(userId: String) {
-        val connectedUserId = authViewModel.getUserId();
-        editButton = view.findViewById(R.id.profile_edit_button);
-        logoutButton = view.findViewById(R.id.logout_button);
+        val connectedUserId = authViewModel.getUserId()
+        editButton = view.findViewById(R.id.profile_edit_button)
+        logoutButton = view.findViewById(R.id.logout_button)
 
         if (userId === connectedUserId) {
-            editButton?.visibility = View.VISIBLE;
-            logoutButton?.visibility = View.VISIBLE;
+            editButton?.visibility = View.VISIBLE
+            logoutButton?.visibility = View.VISIBLE
 
             editButton?.setOnClickListener {
                 val args = Bundle()
                 args.putString("userId", userId)
 
-                authViewModel.getInfoOnUser(userId) { userInfo, error ->
+                authViewModel.getInfoOnUser(userId) { userInfo, _ ->
                     when (userInfo) {
                         is UserInfo.UserVolunteer -> {
                             Navigation.findNavController(view).navigate(
-                                R.id.action_profileFragment_to_editGroupProfileFragment,
+                                R.id.action_profileFragment_to_editVolunteerProfileFragment,
                                 args
                             )
                         }
@@ -188,18 +194,18 @@ class ProfileFragment : Fragment() {
             }
 
             logoutButton?.setOnClickListener {
-                authViewModel.logOutUser();
+                authViewModel.logOutUser()
                 Navigation.findNavController(it)
                     .navigate(R.id.action_profileFragment_to_landingPageFragment)
             }
 
         } else {
-            editButton?.visibility = View.GONE;
-            logoutButton?.visibility = View.GONE;
+            editButton?.visibility = View.GONE
+            logoutButton?.visibility = View.GONE
         }
     }
 
-    private fun fillProfileDetails(name: String, bio: String, additionalInfo: String, image: String): Unit {
+    private fun fillProfileDetails(name: String, bio: String, additionalInfo: String, image: String) {
             nameTV = view.findViewById(R.id.profile_name)
             nameTV?.text = name
 
@@ -207,53 +213,53 @@ class ProfileFragment : Fragment() {
             bioTV?.text = bio
 
             additionalInfoTV = view.findViewById(R.id.profile_additional_info)
-            additionalInfoTV?.text = additionalInfo;
+            additionalInfoTV?.text = additionalInfo
 
             profileImage = view.findViewById(R.id.profile_image)
 
-            if (profileImage != null && profileImageBackgroundElement != null) {
-                val imageUrl = if (image.isEmpty())
-                    "https://firebasestorage.googleapis.com/v0/b/skills-e4dc8.appspot.com/o/images%2FuserAvater.png?alt=media&token=1fa189ff-b5df-4b1a-8673-2f8e11638acc"
-                else image
+        if (profileImage != null && !image.isEmpty()) {
+            Picasso.get()
+                .load(image)
+                .error(R.drawable.user_avatar)
+                .into(profileImage)
+        }
 
-                Picasso.get().load(imageUrl).into(profileImage)
-
-            }
-
-        isProfileDataLoaded = true;
-        handleLoading();
+        isProfileDataLoaded = true
+        handleLoading()
     }
 
 
-    private fun fillPosts(userId: String): Unit {
+    private fun fillPosts(userId: String) {
         postsRecyclerView = view.findViewById(R.id.profile_posts_recycler_view)
         noPostsWarningTV = view.findViewById(R.id.profile_no_posts_text)
 
         postViewModel.getPostsByOwnerId(userId) {
             if (it.isEmpty()) {
-                postsRecyclerView.visibility = View.GONE;
-                noPostsWarningTV?.visibility = View.VISIBLE;
+                postsRecyclerView.visibility = View.GONE
+                noPostsWarningTV?.visibility = View.VISIBLE
             } else {
-                postsRecyclerView.visibility = View.VISIBLE;
-                noPostsWarningTV?.visibility = View.GONE;
+                postsRecyclerView.visibility = View.VISIBLE
+                noPostsWarningTV?.visibility = View.GONE
 
                 postsRecyclerView.setPadding(0, 0, 0, 250)
                 postAdapter.clear()
-                postAdapter.addAll(it.toMutableList());
+                postAdapter.addAll(it.toMutableList())
                 postsRecyclerView.layoutManager = LinearLayoutManager(context)
                 postsRecyclerView.adapter = postAdapter
             }
 
-            isPostsLoaded = true;
-            handleLoading();
+            isPostsLoaded = true
+            handleLoading()
         }
+        postViewModel.getPostsByOwnerId(userId) { /* This will trigger the observer */ }
+
     }
 
-    private fun handleLoading(): Unit {
+    private fun handleLoading() {
         if (isPostsLoaded && isProfileDataLoaded) {
-            loadingOverlay?.visibility = View.INVISIBLE;
+            loadingOverlay?.visibility = View.INVISIBLE
         } else {
-            loadingOverlay?.visibility = View.VISIBLE;
+            loadingOverlay?.visibility = View.VISIBLE
         }
     }
 
